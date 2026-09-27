@@ -1,14 +1,13 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import GuestLayout from '@/Layouts/GuestLayout';
+import { useState, FormEventHandler } from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
 
 export default function Register() {
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
+        username: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -23,99 +22,427 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Register" />
+        <div className="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen selection:bg-teal-500 selection:text-white">
+            <Head title="Daftar Akun Baru - HC Course" />
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
+            {/* Main Container */}
+            <main className="min-h-screen flex flex-col lg:flex-row p-3 md:p-6 lg:p-8 max-w-[1600px] mx-auto gap-6 lg:gap-8 justify-between items-stretch">
+                {/* Left Auth Column */}
+                <div className="flex-1 flex flex-col justify-between max-w-xl mx-auto w-full py-4 px-2 sm:px-6">
+                    {/* Top Section */}
+                    <div>
+                        {/* Brand Logo & Back Navigation */}
+                        <div className="flex items-center justify-between mb-8">
+                            <Link
+                                href="/"
+                                className="inline-flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-lg p-1"
+                                title="Kembali ke Beranda"
+                            >
+                                <div className="w-11 h-11 rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-md shadow-teal-600/20 group-hover:scale-105 transition-transform duration-200">
+                                    <span className="font-bold text-base tracking-tight select-none font-sans">
+                                        HC
+                                    </span>
+                                </div>
+                                <div>
+                                    <span className="text-xl font-extrabold tracking-tight text-slate-900 flex items-center gap-1">
+                                        HC <span className="text-teal-600 font-bold">Course</span>
+                                    </span>
+                                    <span className="text-[10px] font-semibold text-slate-400 tracking-wider uppercase block">
+                                        LMS Platform
+                                    </span>
+                                </div>
+                            </Link>
 
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                    />
+                            <Link
+                                href="/"
+                                className="text-xs font-semibold text-slate-500 hover:text-teal-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-full transition-all inline-flex items-center gap-1.5"
+                            >
+                                <span className="material-symbols-outlined text-[16px]">
+                                    arrow_back
+                                </span>
+                                <span>Kembali</span>
+                            </Link>
+                        </div>
 
-                    <InputError message={errors.name} className="mt-2" />
+                        {/* Heading Group */}
+                        <div className="mb-6">
+                            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                                Buat Akun Baru
+                            </h1>
+                            <p className="text-slate-500 text-sm sm:text-base mt-2 font-medium">
+                                Bergabunglah bersama 150.000+ developer untuk mulai belajar coding hari ini.
+                            </p>
+                        </div>
+
+                        {/* Register Form */}
+                        <form onSubmit={submit} className="space-y-4" id="registerForm">
+                            {/* Full Name Input Group */}
+                            <div>
+                                <label
+                                    className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
+                                    htmlFor="name"
+                                >
+                                    Nama Lengkap
+                                </label>
+                                <div className="relative rounded-xl shadow-xs">
+                                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <span className="material-symbols-outlined text-lg">
+                                            badge
+                                        </span>
+                                    </div>
+                                    <input
+                                        id="name"
+                                        type="text"
+                                        name="name"
+                                        value={data.name}
+                                        autoComplete="name"
+                                        autoFocus
+                                        required
+                                        placeholder="cth: Sandhika Galih"
+                                        onChange={(e) => setData('name', e.target.value)}
+                                        className={`block w-full pl-10 pr-4 py-3 bg-white border ${
+                                            errors.name ? 'border-rose-400 focus:ring-rose-500/20' : 'border-slate-200 focus:ring-teal-500/20 focus:border-teal-600'
+                                        } rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                                    />
+                                </div>
+                                {errors.name && (
+                                    <p className="mt-1.5 text-xs font-medium text-rose-600 flex items-center gap-1">
+                                        <span className="material-symbols-outlined text-sm">error</span>
+                                        <span>{errors.name}</span>
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Username Input Group */}
+                            <div>
+                                <label
+                                    className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
+                                    htmlFor="username"
+                                >
+                                    Username
+                                </label>
+                                <div className="relative rounded-xl shadow-xs">
+                                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <span className="material-symbols-outlined text-lg">
+                                            alternate_email
+                                        </span>
+                                    </div>
+                                    <input
+                                        id="username"
+                                        type="text"
+                                        name="username"
+                                        value={data.username}
+                                        autoComplete="username"
+                                        required
+                                        placeholder="cth: sandhikagalih"
+                                        onChange={(e) => setData('username', e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, ''))}
+                                        className={`block w-full pl-10 pr-4 py-3 bg-white border ${
+                                            errors.username ? 'border-rose-400 focus:ring-rose-500/20' : 'border-slate-200 focus:ring-teal-500/20 focus:border-teal-600'
+                                        } rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                                    />
+                                </div>
+                                {errors.username && (
+                                    <p className="mt-1.5 text-xs font-medium text-rose-600 flex items-center gap-1">
+                                        <span className="material-symbols-outlined text-sm">error</span>
+                                        <span>{errors.username}</span>
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Email Input Group */}
+                            <div>
+                                <label
+                                    className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
+                                    htmlFor="email"
+                                >
+                                    Alamat Email
+                                </label>
+                                <div className="relative rounded-xl shadow-xs">
+                                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                        <span className="material-symbols-outlined text-lg">
+                                            mail
+                                        </span>
+                                    </div>
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        value={data.email}
+                                        autoComplete="email"
+                                        required
+                                        placeholder="nama@email.com"
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        className={`block w-full pl-10 pr-4 py-3 bg-white border ${
+                                            errors.email ? 'border-rose-400 focus:ring-rose-500/20' : 'border-slate-200 focus:ring-teal-500/20 focus:border-teal-600'
+                                        } rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                                    />
+                                </div>
+                                {errors.email && (
+                                    <p className="mt-1.5 text-xs font-medium text-rose-600 flex items-center gap-1">
+                                        <span className="material-symbols-outlined text-sm">error</span>
+                                        <span>{errors.email}</span>
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Password & Password Confirmation Row */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {/* Password */}
+                                <div>
+                                    <label
+                                        className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
+                                        htmlFor="password"
+                                    >
+                                        Password
+                                    </label>
+                                    <div className="relative rounded-xl shadow-xs">
+                                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <span className="material-symbols-outlined text-lg">
+                                                lock
+                                            </span>
+                                        </div>
+                                        <input
+                                            id="password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            name="password"
+                                            value={data.password}
+                                            autoComplete="new-password"
+                                            required
+                                            placeholder="Minimal 8 karakter"
+                                            onChange={(e) => setData('password', e.target.value)}
+                                            className={`block w-full pl-10 pr-11 py-3 bg-white border ${
+                                                errors.password ? 'border-rose-400 focus:ring-rose-500/20' : 'border-slate-200 focus:ring-teal-500/20 focus:border-teal-600'
+                                            } rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                                        />
+                                        <button
+                                            type="button"
+                                            aria-label="Tampilkan atau sembunyikan password"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
+                                        >
+                                            <span className="material-symbols-outlined text-lg">
+                                                {showPassword ? 'visibility_off' : 'visibility'}
+                                            </span>
+                                        </button>
+                                    </div>
+                                    {errors.password && (
+                                        <p className="mt-1.5 text-xs font-medium text-rose-600 flex items-center gap-1">
+                                            <span className="material-symbols-outlined text-sm">error</span>
+                                            <span>{errors.password}</span>
+                                        </p>
+                                    )}
+                                </div>
+
+                                {/* Password Confirmation */}
+                                <div>
+                                    <label
+                                        className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5"
+                                        htmlFor="password_confirmation"
+                                    >
+                                        Ulangi Password
+                                    </label>
+                                    <div className="relative rounded-xl shadow-xs">
+                                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                            <span className="material-symbols-outlined text-lg">
+                                                lock_reset
+                                            </span>
+                                        </div>
+                                        <input
+                                            id="password_confirmation"
+                                            type={showConfirmPassword ? 'text' : 'password'}
+                                            name="password_confirmation"
+                                            value={data.password_confirmation}
+                                            autoComplete="new-password"
+                                            required
+                                            placeholder="Ulangi kata sandi"
+                                            onChange={(e) => setData('password_confirmation', e.target.value)}
+                                            className={`block w-full pl-10 pr-11 py-3 bg-white border ${
+                                                errors.password_confirmation ? 'border-rose-400 focus:ring-rose-500/20' : 'border-slate-200 focus:ring-teal-500/20 focus:border-teal-600'
+                                            } rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+                                        />
+                                        <button
+                                            type="button"
+                                            aria-label="Tampilkan atau sembunyikan konfirmasi password"
+                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
+                                        >
+                                            <span className="material-symbols-outlined text-lg">
+                                                {showConfirmPassword ? 'visibility_off' : 'visibility'}
+                                            </span>
+                                        </button>
+                                    </div>
+                                    {errors.password_confirmation && (
+                                        <p className="mt-1.5 text-xs font-medium text-rose-600 flex items-center gap-1">
+                                            <span className="material-symbols-outlined text-sm">error</span>
+                                            <span>{errors.password_confirmation}</span>
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Terms Notice */}
+                            <p className="text-xs text-slate-500 leading-relaxed pt-1">
+                                Dengan mendaftar, Anda menyetujui Ketentuan Layanan, Kebijakan Privasi, dan pembaruan materi pembelajaran di HC Course.
+                            </p>
+
+                            {/* Submit Button */}
+                            <div className="pt-2">
+                                <button
+                                    type="submit"
+                                    disabled={processing}
+                                    className="w-full py-3.5 px-4 bg-teal-600 hover:bg-teal-700 active:bg-teal-800 disabled:opacity-70 text-white font-bold text-sm sm:text-base rounded-xl shadow-md shadow-teal-600/25 hover:shadow-lg hover:shadow-teal-600/30 active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                >
+                                    <span>{processing ? 'Mendaftarkan Akun...' : 'Daftar Akun Sekarang'}</span>
+                                    <span className="material-symbols-outlined text-base">
+                                        arrow_forward
+                                    </span>
+                                </button>
+                            </div>
+
+                            {/* Login Switch Link */}
+                            <div className="text-center pt-2 pb-3">
+                                <p className="text-sm font-medium text-slate-600">
+                                    Sudah memiliki akun?{' '}
+                                    <Link
+                                        href={route('login')}
+                                        className="font-bold text-teal-600 hover:text-teal-800 hover:underline"
+                                    >
+                                        Masuk di Sini
+                                    </Link>
+                                </p>
+                            </div>
+                        </form>
+
+                        {/* Info Alert Cards */}
+                        <div className="mt-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 p-4 sm:p-5 space-y-4">
+                            <div className="flex items-start gap-3">
+                                <div className="w-6 h-6 rounded-full bg-amber-200/80 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                                    <span className="material-symbols-outlined text-xs">
+                                        verified_user
+                                    </span>
+                                </div>
+                                <div>
+                                    <h2 className="text-xs sm:text-sm font-bold text-amber-900 leading-snug">
+                                        Email Aktif Diperlukan
+                                    </h2>
+                                    <p className="text-xs text-amber-800/90 leading-relaxed mt-1">
+                                        Pastikan alamat email yang Anda masukkan aktif untuk menerima bukti pembelian kursus, sertifikat kelulusan, dan tautan reset password.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom Support Widget */}
+                    <div className="pt-8 pb-2 flex items-center justify-between">
+                        {/* Support Trigger Button */}
+                        <a
+                            href="https://discord.gg/wpu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2.5 px-4 py-2 bg-teal-800 hover:bg-teal-900 text-white rounded-full font-semibold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+                            title="Butuh bantuan seputar akun atau akses course?"
+                        >
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
+                            </span>
+                            <span className="material-symbols-outlined text-base">
+                                support_agent
+                            </span>
+                            <span>Bantuan</span>
+                        </a>
+
+                        {/* Copyright Note */}
+                        <p className="text-[11px] text-slate-400 font-medium">
+                            © 2026 HC Course. Hak Cipta Dilindungi.
+                        </p>
+                    </div>
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
+                {/* Right Hero Column */}
+                <div className="hidden lg:flex flex-1 rounded-[2.5rem] bg-gradient-to-br from-teal-700 via-teal-800 to-teal-950 p-10 xl:p-14 text-white relative overflow-hidden flex-col justify-between shadow-2xl">
+                    {/* Pattern Overlay */}
+                    <div
+                        className="absolute inset-0 opacity-40 pointer-events-none"
+                        style={{
+                            backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px)',
+                            backgroundSize: '28px 28px',
+                        }}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    {/* Ambient Glows */}
+                    <div className="absolute -top-24 -right-24 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+
+                    {/* Top Row Badges */}
+                    <div className="relative z-10 flex items-center justify-between">
+                        <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold tracking-wide">
+                            <span className="material-symbols-outlined text-teal-300 text-sm">
+                                school
+                            </span>
+                            <span>HC Learning Experience</span>
+                        </span>
+                        <span className="text-xs font-medium text-teal-200/90 bg-teal-900/60 px-3 py-1 rounded-full border border-teal-500/30">
+                            v2.0 LMS
+                        </span>
+                    </div>
+
+                    {/* Center Feature / Emblem Graphic */}
+                    <div className="relative z-10 my-auto py-10 flex flex-col items-center text-center">
+                        <div className="relative mb-8 group cursor-default">
+                            <div className="w-40 h-40 xl:w-48 xl:h-48 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8 flex items-center justify-center shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                                <div className="flex flex-col items-center justify-center">
+                                    <span className="font-black text-6xl xl:text-7xl tracking-tighter text-white drop-shadow-md select-none font-sans">
+                                        HC
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-teal-400 text-teal-950 font-extrabold text-[11px] uppercase tracking-wider px-3.5 py-1 rounded-full shadow-lg whitespace-nowrap">
+                                Dev Studio &amp; Academy
+                            </div>
+                        </div>
+
+                        <h2 className="text-2xl xl:text-3xl font-extrabold text-white tracking-tight max-w-md leading-tight">
+                            Mulai Perjalanan Menjadi Software Engineer Profesional
+                        </h2>
+                        <p className="text-teal-100/80 text-sm mt-3.5 max-w-sm font-normal leading-relaxed">
+                            Nikmati materi video terstruktur, ribuan teman sefrekuensi di komunitas, dan dukungan mentor praktisi.
+                        </p>
+
+                        {/* Social Proof Stats Badges */}
+                        <div className="grid grid-cols-3 gap-3 w-full max-w-md mt-8">
+                            <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 text-center">
+                                <div className="text-lg xl:text-xl font-extrabold text-white">100%</div>
+                                <div className="text-[11px] text-teal-200/80 font-medium">Praktik Nyata</div>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 text-center">
+                                <div className="text-lg xl:text-xl font-extrabold text-white">40+</div>
+                                <div className="text-[11px] text-teal-200/80 font-medium">Kelas Premium</div>
+                            </div>
+                            <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 text-center">
+                                <div className="text-lg xl:text-xl font-extrabold text-white">24/7</div>
+                                <div className="text-[11px] text-teal-200/80 font-medium">Akses Materi</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Bottom Card: Instructor Banner */}
+                    <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 flex items-center gap-3.5">
+                        <div className="w-10 h-10 rounded-xl bg-teal-500/30 border border-teal-300/30 flex items-center justify-center text-teal-200 text-lg shrink-0">
+                            <span className="material-symbols-outlined text-xl">
+                                rocket_launch
+                            </span>
+                        </div>
+                        <div>
+                            <div className="text-xs font-semibold text-white">Portofolio &amp; Sertifikat Digital</div>
+                            <div className="text-[11px] text-teal-200/75 leading-tight">
+                                Selesaikan tugas akhir untuk membangun portofolio yang siap ditunjukkan ke recruiter.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        onChange={(e) =>
-                            setData('password_confirmation', e.target.value)
-                        }
-                        required
-                    />
-
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
-                </div>
-
-                <div className="mt-4 flex items-center justify-end">
-                    <Link
-                        href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
+            </main>
+        </div>
     );
 }
