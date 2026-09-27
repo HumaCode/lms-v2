@@ -9,6 +9,7 @@ export default function Topbar() {
     const { url } = usePage();
     const isHomePage = url === '/';
     const isAboutPage = url.startsWith('/tentang-kami');
+    const isCoursePage = url.startsWith('/kursus');
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/60">
@@ -61,6 +62,16 @@ export default function Topbar() {
                         Beranda
                     </Link>
                     <Link
+                        href="/kursus"
+                        className={`py-1 text-sm font-medium transition-colors ${
+                            isCoursePage
+                                ? 'text-teal-600 font-semibold border-b-2 border-teal-600'
+                                : 'text-slate-600 hover:text-slate-900'
+                        }`}
+                    >
+                        Katalog Kursus
+                    </Link>
+                    <Link
                         href="/tentang-kami"
                         className={`py-1 text-sm font-medium transition-colors ${
                             isAboutPage
@@ -91,8 +102,8 @@ export default function Topbar() {
                                 </h3>
                                 <div className="grid grid-cols-3 gap-x-6 gap-y-6">
                                     {/* Online Course */}
-                                    <a
-                                        href="/#katalog-kursus"
+                                    <Link
+                                        href="/kursus"
                                         className="flex items-start gap-3.5 p-2 rounded-xl hover:bg-slate-50 transition-colors group/item"
                                     >
                                         <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center text-teal-600 shrink-0 group-hover/item:bg-teal-600 group-hover/item:text-white transition-colors">
@@ -108,7 +119,7 @@ export default function Topbar() {
                                                 Belajar melalui video, akses selamanya dan dapatkan sertifikat
                                             </span>
                                         </div>
-                                    </a>
+                                    </Link>
 
                                     {/* Bootcamp */}
                                     <a
@@ -330,6 +341,17 @@ export default function Topbar() {
                             Beranda
                         </Link>
                         <Link
+                            href="/kursus"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                                isCoursePage
+                                    ? 'bg-teal-50 text-teal-700'
+                                    : 'text-slate-700 hover:bg-slate-50'
+                            }`}
+                        >
+                            Katalog Kursus
+                        </Link>
+                        <Link
                             href="/tentang-kami"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
@@ -354,13 +376,13 @@ export default function Topbar() {
                             </button>
                             {isProgramMenuOpen && (
                                 <div className="pl-4 pr-2 py-2 flex flex-col gap-2 bg-slate-50 rounded-lg my-1">
-                                    <a
-                                        href="/#katalog-kursus"
+                                    <Link
+                                        href="/kursus"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                         className="text-xs font-semibold text-teal-700 py-1"
                                     >
                                         Online Course
-                                    </a>
+                                    </Link>
                                     <a
                                         href="/#bootcamp"
                                         onClick={() => setIsMobileMenuOpen(false)}

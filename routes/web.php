@@ -2,5 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'welcome')->name('home');
-Route::inertia('/tentang-kami', 'about')->name('about');
+Route::inertia('/', 'frontend/welcome')->name('home');
+Route::inertia('/tentang-kami', 'frontend/about')->name('about');
+Route::inertia('/kursus', 'frontend/course')->name('course');
