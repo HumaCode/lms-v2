@@ -6,7 +6,8 @@ export default function Topbar() {
     const [isProgramMenuOpen, setIsProgramMenuOpen] = useState(false);
     const [isKomunitasMenuOpen, setIsKomunitasMenuOpen] = useState(false);
 
-    const { url } = usePage();
+    const { url, props } = usePage();
+    const user = (props as any)?.auth?.user;
     const isHomePage = url === '/';
     const isAboutPage = url.startsWith('/tentang-kami');
     const isCoursePage = url.startsWith('/kursus');
@@ -285,19 +286,31 @@ export default function Topbar() {
 
                 {/* Right Action Buttons (Daftar & Masuk) */}
                 <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-2">
-                        <button
-                            type="button"
-                            className="px-4 py-2 rounded-lg text-slate-700 hover:text-teal-700 hover:bg-slate-100/70 text-sm font-medium transition-colors"
-                        >
-                            Daftar
-                        </button>
-                        <button
-                            type="button"
-                            className="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium transition-colors shadow-xs"
-                        >
-                            Masuk
-                        </button>
+                    <div className="hidden sm:flex items-center gap-2">
+                        {user ? (
+                            <Link
+                                href="/dashboard"
+                                className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-teal-50 hover:bg-teal-100 text-teal-800 text-sm font-semibold transition-colors border border-teal-200/60"
+                            >
+                                <span className="material-symbols-outlined text-base">dashboard</span>
+                                <span>Dashboard</span>
+                            </Link>
+                        ) : (
+                            <>
+                                <Link
+                                    href="/register"
+                                    className="px-4 py-2 rounded-lg text-slate-700 hover:text-teal-700 hover:bg-slate-100/70 text-sm font-medium transition-colors"
+                                >
+                                    Daftar
+                                </Link>
+                                <Link
+                                    href="/login"
+                                    className="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium transition-colors shadow-xs"
+                                >
+                                    Masuk
+                                </Link>
+                            </>
+                        )}
                     </div>
 
                     {/* Mobile Hamburger Button */}
@@ -430,18 +443,32 @@ export default function Topbar() {
                     </div>
 
                     <div className="flex gap-2 pt-2 border-t border-slate-100">
-                        <button
-                            type="button"
-                            className="flex-1 py-2 rounded-lg border border-teal-600 text-teal-600 text-sm font-semibold text-center"
-                        >
-                            Daftar
-                        </button>
-                        <button
-                            type="button"
-                            className="flex-1 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold text-center"
-                        >
-                            Masuk
-                        </button>
+                        {user ? (
+                            <Link
+                                href="/dashboard"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="flex-1 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold text-center"
+                            >
+                                Ke Dashboard
+                            </Link>
+                        ) : (
+                            <>
+                                <Link
+                                    href="/register"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="flex-1 py-2 rounded-lg border border-teal-600 text-teal-600 text-sm font-semibold text-center"
+                                >
+                                    Daftar
+                                </Link>
+                                <Link
+                                    href="/login"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="flex-1 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold text-center"
+                                >
+                                    Masuk
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             )}

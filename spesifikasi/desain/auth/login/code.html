@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Masuk - WPU Course LMS</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Font Awesome for clean modern icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with forms & container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              200: '#99f6e4',
+              300: '#5eead4',
+              400: '#2dd4bf',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+              950: '#042f2e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-background">
+    /* Subtle geometric grid backdrop for the right branding panel */
+    .hero-grid-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+    }
+    
+    /* Smooth transitions */
+    .smooth-transition {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen selection:bg-teal-500 selection:text-white">
+<!-- BEGIN: MainContainer -->
+<main class="min-h-screen flex flex-col lg:flex-row p-3 md:p-6 lg:p-8 max-w-[1600px] mx-auto gap-6 lg:gap-8 justify-between items-stretch">
+<!-- BEGIN: LeftAuthColumn -->
+<div class="flex-1 flex flex-col justify-between max-w-xl mx-auto w-full py-4 px-2 sm:px-6">
+<!-- Top Section: Brand & Header -->
+<div>
+<!-- Brand Logo & Navigation -->
+<div class="flex items-center justify-between mb-8">
+<a class="inline-flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-teal-500 rounded-lg p-1" href="#" title="Kembali ke Beranda">
+<div class="w-11 h-11 rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-md shadow-teal-600/20 group-hover:scale-105 transition-transform duration-200">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24">
+<path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z"></path>
+</svg>
+</div>
+<div>
+<span class="text-xl font-extrabold tracking-tight text-slate-900 flex items-center gap-1">
+                WPU <span class="text-teal-600 font-bold">Course</span>
+</span>
+<span class="text-[10px] font-semibold text-slate-400 tracking-wider uppercase block">LMS Platform</span>
+</div>
+</a>
+<a class="text-xs font-semibold text-slate-500 hover:text-teal-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-full smooth-transition inline-flex items-center gap-1.5" href="#">
+<i class="fa-solid fa-arrow-left text-[11px]"></i>
+<span>Kembali</span>
+</a>
+</div>
+<!-- Heading Group -->
+<div class="mb-8">
+<h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Masuk</h1>
+<p class="text-slate-500 text-sm sm:text-base mt-2 font-medium">
+            Selamat datang di platform WPU Course. Belajar coding terstruktur dan modern.
+          </p>
+</div>
+<!-- BEGIN: LoginForm -->
+<form class="space-y-4" id="loginForm" onsubmit="event.preventDefault();">
+<!-- Email Input Group -->
+<div>
+<label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="email">
+              Alamat Email
+            </label>
+<div class="relative rounded-xl shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<i class="fa-regular fa-envelope text-base"></i>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 smooth-transition" id="email" name="email" placeholder="nama@email.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input Group -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block text-xs font-bold text-slate-700 uppercase tracking-wider" for="password">
+                Password
+              </label>
+</div>
+<div class="relative rounded-xl shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<i class="fa-solid fa-lock text-base"></i>
+</div>
+<input class="block w-full pl-10 pr-11 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 text-sm placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 smooth-transition" id="password" name="password" placeholder="Masukkan kata sandi akun Anda" required="" type="password"/>
+<!-- Show / Hide Password Toggle -->
+<button aria-label="Tampilkan atau sembunyikan password" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none" id="togglePassword" type="button">
+<i class="fa-regular fa-eye-slash text-base" id="toggleIcon"></i>
+</button>
+</div>
+</div>
+<!-- Helper Links -->
+<div class="flex items-center justify-end text-xs pt-0.5">
+<div class="text-slate-500 font-medium">
+<a class="hover:text-teal-700 hover:underline" href="#">Perlu aktivasi ulang</a>
+<span class="mx-1">atau</span>
+<a class="font-semibold text-teal-600 hover:text-teal-800 hover:underline" href="#">Lupa password?</a>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-2">
+<button class="w-full py-3.5 px-4 bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white font-bold text-sm sm:text-base rounded-xl shadow-md shadow-teal-600/25 hover:shadow-lg hover:shadow-teal-600/30 active:scale-[0.99] smooth-transition flex items-center justify-center gap-2" type="submit">
+<span>Masuk</span>
+<i class="fa-solid fa-arrow-right text-xs"></i>
+</button>
+</div>
+<!-- Registration Switch Link -->
+<div class="text-center pt-2 pb-3">
+<p class="text-sm font-medium text-slate-600">
+              Kamu belum memiliki akun? 
+              <a class="font-bold text-teal-600 hover:text-teal-800 hover:underline" href="#">
+                Registrasi Sekarang
+              </a>
+</p>
+</div>
+</form>
+<!-- END: LoginForm -->
+<!-- BEGIN: InfoAlertCards -->
+<!-- Card notice for activation and default course password -->
+<div class="mt-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 p-4 sm:p-5 space-y-4">
+<!-- Item 1: Activation Inquiry -->
+<div class="flex items-start gap-3">
+<div class="w-5 h-5 rounded-full bg-amber-200/80 text-amber-800 flex items-center justify-center text-xs shrink-0 mt-0.5">
+<i class="fa-solid fa-envelope-open-text"></i>
+</div>
+<div>
+<h2 class="text-xs sm:text-sm font-bold text-amber-900 leading-snug">
+                Sudah registrasi tapi tidak bisa login?
+              </h2>
+<p class="text-xs text-amber-800/90 leading-relaxed mt-1">
+                Cek email untuk aktivasi di <strong class="font-semibold">inbox</strong> atau tab <strong class="font-semibold">promotional</strong>. Jika masih terkendala, coba klik bantuan di pojok kiri bawah untuk panduan verifikasi akun.
+              </p>
+</div>
+</div>
+<div class="border-t border-amber-200/60"></div>
+<!-- Item 2: Course Buyer First-Time Access -->
+<div class="flex items-start gap-3">
+<div class="w-5 h-5 rounded-full bg-amber-200/80 text-amber-800 flex items-center justify-center text-xs shrink-0 mt-0.5">
+<i class="fa-solid fa-key"></i>
+</div>
+<div>
+<h2 class="text-xs sm:text-sm font-bold text-amber-900 leading-snug">
+                Sudah beli course tapi belum buat akun?
+              </h2>
+<p class="text-xs text-amber-800/90 leading-relaxed mt-1">
+                Cek di email yang dimasukkan saat melakukan pembelian, seharusnya terdapat <strong class="font-semibold">password default</strong> yang dikirim untuk login. Apabila tidak ada, silakan langsung hubungi admin.
+              </p>
+</div>
+</div>
+</div>
+<!-- END: InfoAlertCards -->
+</div>
+<!-- BEGIN: BottomSupportWidget -->
+<div class="pt-8 pb-2 flex items-center justify-between">
+<!-- AI/Admin Support Trigger Button -->
+<button class="inline-flex items-center gap-2.5 px-4 py-2.5 bg-teal-800 hover:bg-teal-900 text-white rounded-full font-semibold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer" title="Butuh bantuan seputar akun atau akses course?" type="button">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-400"></span>
+</span>
+<i class="fa-regular fa-comment-dots text-sm"></i>
+<span>Bantuan</span>
+</button>
+<!-- Copyright Note -->
+<p class="text-[11px] text-slate-400 font-medium">
+          © 2025 WPU Course. Hak Cipta Dilindungi.
+        </p>
+</div>
+<!-- END: BottomSupportWidget -->
+</div>
+<!-- END: LeftAuthColumn -->
+<!-- BEGIN: RightHeroColumn -->
+<div class="hidden lg:flex flex-1 rounded-[2.5rem] bg-gradient-to-br from-teal-700 via-teal-800 to-teal-950 p-10 xl:p-14 text-white relative overflow-hidden flex-col justify-between shadow-2xl">
+<!-- Pattern Overlay -->
+<div class="absolute inset-0 hero-grid-pattern opacity-40 pointer-events-none"></div>
+<!-- Subtle background ambient glowing elements -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top Row Badges -->
+<div class="relative z-10 flex items-center justify-between">
+<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-semibold tracking-wide">
+<i class="fa-solid fa-graduation-cap text-teal-300"></i>
+<span>WPU Learning Experience</span>
+</span>
+<span class="text-xs font-medium text-teal-200/80 bg-teal-900/60 px-3 py-1 rounded-full border border-teal-500/20">
+          v2.4 LMS
+        </span>
+</div>
+<!-- Center Feature / Emblem Graphic -->
+<div class="relative z-10 my-auto py-10 flex flex-col items-center text-center">
+<!-- Giant Stylized Graduation Cap Logo Silhouette -->
+<div class="relative mb-8 group cursor-default">
+<div class="w-40 h-40 xl:w-48 xl:h-48 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8 flex items-center justify-center shadow-2xl transition-transform duration-500 group-hover:scale-105">
+<!-- Graduation Cap Logo with Bookmark/Tail -->
+<svg class="w-full h-full text-white fill-current filter drop-shadow-md" viewbox="0 0 24 24">
+<path d="M12 2L1 8L5 10.18V16.18L12 20L19 16.18V10.18L21 9.09V16H23V8L12 2ZM18.82 8L12 11.72L5.18 8L12 4.28L18.82 8ZM17 14.99L12 17.72L7 14.99V11.27L12 14L17 11.27V14.99Z"></path>
+</svg>
+</div>
+<!-- Decorative Pill Tag -->
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-teal-500 text-teal-950 font-extrabold text-[11px] uppercase tracking-wider px-3.5 py-1 rounded-full shadow-lg whitespace-nowrap">
+            Web Programming UNPAS
+          </div>
+</div>
+<h2 class="text-2xl xl:text-3xl font-extrabold text-white tracking-tight max-w-md leading-tight">
+          Tingkatkan Karir Coding Kamu Dari Dasar Hingga Mahir
+        </h2>
+<p class="text-teal-100/80 text-sm mt-3.5 max-w-sm font-normal leading-relaxed">
+          Akses puluhan modul praktikal industri, video resolusi tinggi, quiz interaktif, dan sertifikat resmi.
+        </p>
+<!-- Social Proof Stats Badges -->
+<div class="grid grid-cols-3 gap-3 w-full max-w-md mt-8">
+<div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 text-center">
+<div class="text-lg xl:text-xl font-extrabold text-white">150K+</div>
+<div class="text-[11px] text-teal-200/80 font-medium">Siswa Aktif</div>
+</div>
+<div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 text-center">
+<div class="text-lg xl:text-xl font-extrabold text-white">40+</div>
+<div class="text-[11px] text-teal-200/80 font-medium">Kelas Premium</div>
+</div>
+<div class="bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-3 text-center">
+<div class="text-lg xl:text-xl font-extrabold text-white">4.9/5</div>
+<div class="text-[11px] text-teal-200/80 font-medium">Rating Course</div>
+</div>
+</div>
+</div>
+<!-- Bottom Card: Instructor / Community Banner -->
+<div class="relative z-10 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-teal-500/30 border border-teal-300/30 flex items-center justify-center text-teal-200 text-lg shrink-0">
+<i class="fa-solid fa-code"></i>
+</div>
+<div>
+<div class="text-xs font-semibold text-white">Mentor &amp; Komunitas Ramah</div>
+<div class="text-[11px] text-teal-200/75 leading-tight">
+            Didampingi langsung oleh Sandhika Galih dan tim praktisi expert.
+          </div>
+</div>
+</div>
+</div>
+<!-- END: RightHeroColumn -->
+</main>
+<!-- END: MainContainer -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="password-visibility-toggle">
+    // Toggle show/hide password functionality
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    if (togglePasswordBtn && passwordInput && toggleIcon) {
+      togglePasswordBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        
+        // Toggle icon classes
+        if (isPassword) {
+          toggleIcon.classList.remove('fa-eye-slash');
+          toggleIcon.classList.add('fa-eye');
+        } else {
+          toggleIcon.classList.remove('fa-eye');
+          toggleIcon.classList.add('fa-eye-slash');
+        }
+      });
+    }
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>
