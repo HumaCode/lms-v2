@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"error-container":"#93000a","surface-container":"#171f33","on-primary-fixed-variant":"#005049","secondary-fixed":"#e1e0ff","tertiary-container":"#b88900","surface-dim":"#0b1326","status-promo":"#F59E0B","outline":"#879391","surface-container-high":"#222a3d","tertiary-fixed":"#ffdf9f","primary-fixed":"#89f5e7","tertiary-fixed-dim":"#f9bd22","outline-variant":"#3d4947","on-tertiary-fixed":"#261a00","surface-container-lowest":"#060e20","text-muted":"#94A3B8","secondary-fixed-dim":"#c0c1ff","on-secondary-fixed-variant":"#2f2ebe","background":"#0b1326","on-surface-variant":"#bcc9c6","surface":"#0b1326","on-error-container":"#ffdad6","on-primary-container":"#00302b","surface-tint":"#6bd8cb","inverse-surface":"#dae2fd","on-tertiary":"#402d00","primary-container":"#29a195","on-secondary-container":"#b0b2ff","surface-bright":"#31394d","status-active":"#22C55E","on-background":"#dae2fd","text-primary":"#F8FAFC","surface-container-highest":"#2d3449","on-secondary":"#1000a9","on-error":"#690005","code-bg":"#070D18","surface-variant":"#2d3449","on-secondary-fixed":"#07006c","surface-container-low":"#131b2e","primary":"#6bd8cb","secondary-container":"#3131c0","on-surface":"#dae2fd","on-primary":"#003732","tertiary":"#f9bd22","inverse-on-surface":"#283044","inverse-primary":"#006a61","surface-border":"#1E293B","primary-fixed-dim":"#6bd8cb","surface-base":"#0B1120","on-tertiary-fixed-variant":"#5c4300","status-closed":"#94A3B8","error":"#ffb4ab","on-primary-fixed":"#00201d","surface-elevated":"#131D31","on-tertiary-container":"#372700","secondary":"#c0c1ff"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"2.5rem","gutter-sm":"1rem","space-xs":"0.25rem","space-sm":"0.5rem","space-lg":"1.5rem",margin:"2rem","margin-mobile":"1rem",gutter:"1.5rem","space-md":"1rem"},fontFamily:{"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-mono":["JetBrains Mono"],"headline-sm":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"code-block":["JetBrains Mono"],"code-inline":["JetBrains Mono"],"label-ui":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"display-hero-mobile":["Plus Jakarta Sans"]},fontSize:{"body-lg":["16px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-md":["14px",{lineHeight:"22px",fontWeight:"400"}],"label-mono":["11px",{lineHeight:"14px",letterSpacing:"0.04em",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-lg-mobile":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"700"}],"code-block":["14px",{lineHeight:"22px",fontWeight:"400"}],"code-inline":["13px",{lineHeight:"18px",fontWeight:"400"}],"label-ui":["13px",{lineHeight:"18px",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",fontWeight:"400"}],"display-hero":["48px",{lineHeight:"56px",letterSpacing:"-0.03em",fontWeight:"800"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary/20 selection:text-primary min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_12px_32px_-8px_rgba(0,0,0,0.45)]"><div class="h-16 max-w-[1280px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-gutter"><a class="flex items-center gap-space-sm group" data-path="beranda" href="#"><img alt="WPU Course Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U6rJ0EjmMYhprEkxpF_RIgxfiEMmU9jLb50evA_7y995OSlGP1HemeGJtk-voTiv9iW2_2Ap6ak8qL7B8kOZrQ5qhkzo4Zk2Tf_8W167sCuC4zBkj-0ZTLSNFBZ9iQfe0kVdV0Q7GqzATwqEbwvyhtxT5su9qmEslhPPasPcciaVgEY2s0M4GjlrC9emc0JVMN1RbKwTENaoX2sVZinBF0qfCpU8su7fzFrvWITiT0hmL8ifUfLrYDPjnw"/><span class="flex flex-col"><span class="font-headline-sm text-headline-sm text-text-primary tracking-tight group-hover:text-primary transition-colors">WPU<span class="text-primary">Course</span></span><span class="font-label-mono text-label-mono text-text-muted leading-none -mt-1">DEV STUDIO</span></span></a><div class="hidden xl:flex items-center relative w-64"><span class="material-symbols-outlined absolute left-3 text-text-muted text-lg pointer-events-none">search</span><input class="w-full bg-code-bg text-text-primary placeholder:text-text-muted font-body-sm text-body-sm pl-9 pr-3 py-1.5 rounded-lg border border-surface-border focus:outline-none focus:border-primary transition-all" placeholder="Cari materi coding, modul..." type="text"/></div></div><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="text-primary font-label-ui border-b-2 border-primary"><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="beranda" href="#">Beranda</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="katalog-kursus" href="#">Katalog Kursus</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="bootcamp-intensif" href="#">Bootcamp Intensif</a><a aria-current="page" class="transition-colors py-1 text-primary font-label-ui border-b-2 border-primary" data-path="tentang-kami" href="#">Tentang Kami</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="blog-artikel" href="#">Blog &amp; Artikel</a><a class="font-label-ui text-label-ui text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="kontak" href="#">Kontak</a></nav><div class="flex items-center gap-space-sm"><div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-elevated border border-surface-border"><span class="w-2 h-2 rounded-full bg-status-active animate-pulse"></span><span class="font-label-mono text-label-mono text-primary">CALM MODE</span></div><button aria-label="Notifikasi" class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-elevated rounded-lg transition-colors relative" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-2 right-2 w-2 h-2 bg-tertiary rounded-full"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex items-center gap-2 cursor-pointer group p-1 rounded-lg hover:bg-surface-elevated transition-colors"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDQYftQzmUJyhCkB7AbJ0eT28sUs4qvxbKqqYR4qgc1mHR8WBN7dGQTVlmdub5ms0CzeFmotfIXKRIym863E_UIcNN0lH5dYaVoK2pZDAvkMomzA_O5Nu8-Rroorr8wqpPfAdZb0iCzYlANzG4HH9Vocu0UUamANY2Y7ul7gZ7H3iaLIEtP-BV_SXVn7-LbesYag3N-jfbGNKCz-2KfExzKbkKMnEJpfZo3o9bbVbpS1CN91Nylre8nA"/><div class="hidden md:flex flex-col text-left"><span class="font-label-ui text-label-ui text-text-primary group-hover:text-primary transition-colors leading-tight">Sandhika G.</span><span class="font-label-mono text-label-mono text-primary-fixed-dim leading-none">Member Pro</span></div><span class="material-symbols-outlined text-text-muted text-base hidden md:inline">expand_more</span></div></div><button aria-label="Buka Menu Navigasi" class="lg:hidden p-2 text-on-surface-variant hover:text-on-surface rounded-lg hover:bg-surface-elevated transition-colors" type="button"><span class="material-symbols-outlined text-2xl">menu</span></button></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="flex flex-col w-full">
+<!-- Atmospheric Glow Backdrop -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"></div>
+<div class="absolute top-96 -left-32 w-80 h-80 bg-secondary/10 rounded-full blur-[110px] pointer-events-none"></div>
+<!-- Section 1: Hero Story -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin pt-12 pb-16 lg:pt-20 lg:pb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<!-- Left: Narrative & Typography -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-surface-container-high text-primary">
+<span class="w-2 h-2 rounded-full bg-status-active animate-ping"></span>
+<span class="font-label-mono text-label-mono uppercase tracking-widest">Tentang Kami — WPU Course</span>
+</div>
+<h1 class="font-display-hero text-display-hero-mobile lg:text-display-hero text-text-primary leading-tight">
+            Mendemokratisasi Akses Edukasi Teknologi Berkualitas di Seluruh <span class="text-primary italic">Indonesia</span>.
+          </h1>
+<p class="font-body-lg text-body-lg text-text-muted leading-relaxed">
+            Berawal pada tahun 2015 dari sebuah meja kerja sederhana dan hasrat murni seorang dosen muda, Sandhika Galih, untuk membagikan rekaman kuliah dasar pemrograman secara cuma-cuma melalui kanal YouTube <strong class="text-on-surface">Web Programming UNPAS</strong>. Tanpa studio mewah, namun dipandu gaya penyampaian ramah, hangat, dan analogi membumi.
+          </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Kini, inisiatif santai tersebut bermutasi menjadi rumah belajar bagi ratusan ribu calon engineer, software builder, serta career switchers dari Sabang hingga Merauke. Melalui WPU Course, kami menghadirkan kurikulum industri terstruktur, suasana belajar yang tenang, dan ekosistem coding yang saling merawat.
+          </p>
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-on-primary font-label-ui text-label-ui shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all" href="#filosofi">
+<span>Eksplor Filosofi Belajar</span>
+<span class="material-symbols-outlined text-base">arrow_downward</span>
+</a>
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-label-ui text-label-ui transition-colors" href="#mentor">
+<span class="material-symbols-outlined text-primary text-base">diversity_3</span>
+<span>Kenali Tim Mentor</span>
+</a>
+</div>
+</div>
+<!-- Right: Storytelling Visual Card Mosaic -->
+<div class="lg:col-span-5 relative mt-6 lg:mt-0">
+<div class="relative rounded-2xl overflow-hidden bg-surface-container shadow-2xl">
+<img class="w-full h-[420px] object-cover filter saturate-[0.9]" data-alt="A candid documentary style portrait of a passionate Indonesian software engineering lecturer teaching enthusiastically at a modern coding desk with twin displays glowing softly in muted dark teal tones, cozy room ambiance, soft ambient shadows, developer aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAqUTtYLIlTL3HvDYiosndI7yHk2t1pRiFHYbOVoBySOhaGq0k2fL71Nsq_E9rjDnhG-GDMQFBrBDujVYvNQsknfTQ_KXFO1fsL-yBlcrTPIsAvCw0XTbHe6dDe4fzSjowBZyx-L_lYk5QJPBtqi2eLZqzpm3vCC3IIG5qtlu18jIe0FgyZEN6Zitzjjmo_o828nAZUpHzZ5Mne-5iuePKiMqBH3XYezEJlky4UP08pWhN4HDz559mhA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container/30 to-transparent"></div>
+<!-- Floating Origin Badge -->
+<div class="absolute top-4 left-4 bg-surface-container-high/90 backdrop-blur-md px-3.5 py-2 rounded-xl flex items-center gap-2.5">
+<span class="material-symbols-outlined text-tertiary text-lg">play_circle</span>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Sejak 2015</span>
+<span class="font-label-ui text-label-ui text-text-primary">YT: Web Programming UNPAS</span>
+</div>
+</div>
+<!-- Overlaid Quote Card -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/90 backdrop-blur-xl p-4 rounded-xl shadow-xl">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-2xl flex-shrink-0">format_quote</span>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface italic">"Semua orang berhak belajar coding tanpa rasa takut akan istilah teknis yang rumit. Coding itu logika yang bisa dilatih siapa saja."</p>
+<p class="font-label-mono text-label-mono text-primary mt-1.5">— Sandhika Galih, Inisiator WPU</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative Code Pill -->
+<div class="hidden sm:flex absolute -bottom-5 -left-5 bg-surface-container-highest px-4 py-2.5 rounded-xl shadow-xl items-center gap-2 text-primary font-label-mono text-label-mono">
+<span class="w-2 h-2 rounded-full bg-status-active"></span>
+<span>console.log("Halo Teman-teman!")</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Milestone & Impact Counter -->
+<section class="w-full bg-surface-container-low py-16">
+<div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<span class="font-label-mono text-label-mono text-primary uppercase tracking-widest block mb-1">Jejak Dampak Nyata</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-text-primary">Angka di Balik Gerakan Belajar WPU</h2>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted max-w-md">
+            Konsistensi mengalirkan ilmu terapan dari Bandung ke seluruh penjuru Nusantara hingga diaspora di mancanegara.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Metric 1 -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between group">
+<div class="flex items-center justify-between mb-4">
+<span class="w-10 h-10 rounded-xl bg-error-container/20 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">smart_display</span>
+</span>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-base px-2 py-0.5 rounded">YT Community</span>
+</div>
+<div>
+<div class="font-display-hero text-display-hero text-text-primary tracking-tight font-extrabold group-hover:text-primary transition-colors">1.000K+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Subscribers YouTube</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">Komunitas pembelajar coding mandiri terbesar dan paling aktif di Indonesia.</p>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-1.5 text-primary font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>100% Organik &amp; Gratis</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between group">
+<div class="flex items-center justify-between mb-4">
+<span class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">school</span>
+</span>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-base px-2 py-0.5 rounded">LMS Portal</span>
+</div>
+<div>
+<div class="font-display-hero text-display-hero text-text-primary tracking-tight font-extrabold group-hover:text-primary transition-colors">150K+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Siswa Terdaftar</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">Menyelesaikan materi intensif, quiz terarah, serta mengunggah portfolio.</p>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-1.5 text-status-active font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span>Portfolio Ready</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between group">
+<div class="flex items-center justify-between mb-4">
+<span class="w-10 h-10 rounded-xl bg-tertiary/20 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">history_edu</span>
+</span>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-base px-2 py-0.5 rounded">Dedikasi</span>
+</div>
+<div>
+<div class="font-display-hero text-display-hero text-text-primary tracking-tight font-extrabold group-hover:text-primary transition-colors">10+ Th</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Membimbing Bangsa</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">Satu dekade konsisten meremajakan kurikulum sesuai dinamika industri web.</p>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-1.5 text-tertiary font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Berdiri Sejak 2015</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container rounded-2xl p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between group">
+<div class="flex items-center justify-between mb-4">
+<span class="w-10 h-10 rounded-xl bg-secondary/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">video_library</span>
+</span>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-base px-2 py-0.5 rounded">Knowledge Base</span>
+</div>
+<div>
+<div class="font-display-hero text-display-hero text-text-primary tracking-tight font-extrabold group-hover:text-primary transition-colors">500+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mt-1">Video Modul Lengkap</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">Dari syntax dasar variabel, DOM, framework modern, hingga cloud deployment.</p>
+</div>
+<div class="mt-4 pt-3 flex items-center gap-1.5 text-secondary font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-sm">auto_stories</span>
+<span>1.200+ Jam Pembelajaran</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Nilai & Filosofi Belajar Kami -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin py-20" id="filosofi">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="font-label-mono text-label-mono text-primary uppercase tracking-widest block mb-2">Pondasi Pedagogi</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-text-primary">Tiga Pilar Filosofi Belajar di WPU</h2>
+<p class="font-body-md text-body-md text-text-muted mt-3">
+          Kami menentang budaya belajar hafalan sintaks yang membuat frustrasi. Di WPU, kamu dibimbing menyelami cara berpikir computational thinker yang tenang dan sistematis.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Pilar 1 -->
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col justify-between relative overflow-hidden group hover:bg-surface-container transition-all">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">psychology_alt</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-mono text-label-mono text-primary font-semibold">PILAR 01</span>
+<span class="h-px w-6 bg-surface-container-high"></span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-3">Mudah Dipahami</h3>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+              Membongkar konsep abstrak seperti <span class="font-code-inline text-code-inline text-primary">Closure</span>, <span class="font-code-inline text-code-inline text-primary">Event Loop</span>, atau <span class="font-code-inline text-code-inline text-primary">Asynchronous</span> dengan perumpamaan kehidupan sehari-hari khas WPU. Bahasa yang hangat dan bebas istilah asing yang mengintimidasi.
+            </p>
+</div>
+<div class="mt-8 pt-4 bg-surface-container-lowest/60 -mx-8 -mb-8 p-6 flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">Zero Jargon Wall</span>
+<span class="material-symbols-outlined text-primary text-base">sentiment_satisfied</span>
+</div>
+</div>
+<!-- Pilar 2 -->
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col justify-between relative overflow-hidden group hover:bg-surface-container transition-all">
+<div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-mono text-label-mono text-tertiary font-semibold">PILAR 02</span>
+<span class="h-px w-6 bg-surface-container-high"></span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-3">Berorientasi Praktik</h3>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+              Coding tidak dipelajari dengan hanya menonton pasif. Setiap baris kode diuji lewat studi kasus aplikasi nyata: dari toko online berbasis payment gateway lokal, REST API scalable, hingga dashboard analitik modern siap deploy.
+            </p>
+</div>
+<div class="mt-8 pt-4 bg-surface-container-lowest/60 -mx-8 -mb-8 p-6 flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">Real-World Case Study</span>
+<span class="material-symbols-outlined text-tertiary text-base">construction</span>
+</div>
+</div>
+<!-- Pilar 3 -->
+<div class="bg-surface-container-low p-8 rounded-2xl flex flex-col justify-between relative overflow-hidden group hover:bg-surface-container transition-all">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">handshake</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-mono text-label-mono text-secondary font-semibold">PILAR 03</span>
+<span class="h-px w-6 bg-surface-container-high"></span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-3">Komunitas Gotong-Royong</h3>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+              Ruang interaksi inklusif di Discord dan forum belajar di mana senior, alumni, dan pemula saling berdiskusi tanpa penghakiman. Ketika kamu menghadapi bug rumit pukul 2 pagi, selalu ada kawan WPU yang siap mengulurkan solusi.
+            </p>
+</div>
+<div class="mt-8 pt-4 bg-surface-container-lowest/60 -mx-8 -mb-8 p-6 flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">Discord Active 24/7</span>
+<span class="material-symbols-outlined text-secondary text-base">diversity_1</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Interactive Spotlight: DNA Belajar WPU -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin mb-20">
+<div class="bg-surface-container-low rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-6 flex flex-col gap-4">
+<span class="font-label-mono text-label-mono text-primary uppercase tracking-widest">Studio Workflow</span>
+<h3 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-text-primary">Dirancang Khusus untuk Deep Work &amp; Late-Night Coding</h3>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+              Bukan hanya materi kuliah, tapi juga ritme visual yang kami perhitungkan. Palet warna berfokus pada saturasi rendah dengan kontras teks presisi untuk meminimalkan kelelahan mata bagi programmer yang tekun di malam hari.
+            </p>
+<div class="flex flex-col gap-3 pt-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Snippet kode dapat langsung disalin dengan struktur rapi</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Player video minim distraksi dengan kontrol kecepatan keyboard</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Akses modul seumur hidup tanpa tagihan langganan tersembunyi</span>
+</div>
+</div>
+</div>
+<!-- Code Snapshot Graphic -->
+<div class="lg:col-span-6 bg-code-bg rounded-2xl p-5 shadow-2xl relative">
+<div class="flex items-center justify-between border-b border-surface-border/40 pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error/70"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary/70"></span>
+<span class="w-3 h-3 rounded-full bg-status-active/70"></span>
+<span class="font-label-mono text-label-mono text-text-muted ml-2">wpu-mindset.js</span>
+</div>
+<span class="font-label-mono text-label-mono text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">code</span> ESNext
+              </span>
+</div>
+<pre class="font-code-block text-code-block text-on-surface-variant overflow-x-auto leading-relaxed"><code><span class="text-secondary">const</span> <span class="text-primary">belajarCoding</span> = <span class="text-secondary">async</span> (siswa) =&gt; {
+  <span class="text-text-muted">// Jangan takut error, error adalah teman belajar terbaik</span>
+  <span class="text-secondary">while</span> (!siswa.<span class="text-tertiary">pahamKonsep</span>) {
+    <span class="text-secondary">await</span> siswa.<span class="text-tertiary">nontonVideoWPU</span>({ mode: <span class="text-primary">'santai'</span> });
+    siswa.<span class="text-tertiary">ngodingSendiri</span>();
+    siswa.<span class="text-tertiary">tanyaDiDiscord</span>();
+  }
+
+  <span class="text-secondary">return</span> {
+    status: <span class="text-status-active">'Siap Bangun Proyek Riil'</span>,
+    mental: <span class="text-status-active">'Problem Solver Tangguh'</span>
+  };
+};</code></pre>
+<div class="mt-4 pt-3 flex items-center justify-between text-text-muted font-label-mono text-label-mono border-t border-surface-border/30">
+<span>OUTPUT: Success (0 Errors)</span>
+<span class="text-status-active">● Execution Verified</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Tim Mentor & Instruktur -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin py-16" id="mentor">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+<div>
+<span class="font-label-mono text-label-mono text-primary uppercase tracking-widest block mb-1">Fakultas &amp; Praktisi</span>
+<h2 class="font-headline-lg text-headline-lg-mobile lg:text-headline-lg text-text-primary">Instruktur yang Mendidik dari Hati</h2>
+</div>
+<p class="font-body-md text-body-md text-text-muted max-w-md">
+          Bukan sekadar pengajar teori, melainkan praktisi aktif dan tech lead yang bergulat dengan kode skala produksi setiap hari.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Mentor 1: Sandhika Galih -->
+<div class="bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
+<div class="relative h-64 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Professional studio headshot portrait of Sandhika Galih, Indonesian male lecturer and web developer in casual smart navy shirt, smiling warmly, soft studio rim lighting, neutral slate studio background, high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8AWgn_0kM9DcLj2g2E9NP5WSTBgO1yglLwiZVotzgSY1zKeWggBuvkG3yuSj4CcIfpMDuPsbGaahLZhHxb93OSHP_hb80iiH1lmzcoueq6gLQJLeNw9KUdaUYwYtg1bKLLyffBx__KKmkhz6KH3JEN28pcrsoVCs3VMGIUVI5Nz_O4ci0T6NcP42j-GKpjdnf1UKE9LS0RY3DQgTm92vLsQIFkN8e3F8cjB3Sb4smL5hhVbEqja5oSw"/>
+<div class="absolute top-3 right-3 bg-primary text-on-primary font-label-mono text-label-mono px-2.5 py-1 rounded-md font-bold shadow-md">
+              FOUNDER
+            </div>
+<div class="absolute bottom-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-full text-text-primary font-label-mono text-label-mono flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-status-active"></span>
+<span>10+ Th Pengajar</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary transition-colors">Sandhika Galih</h3>
+<p class="font-label-mono text-label-mono text-primary mt-1">Lead Web Instructor &amp; Academician</p>
+<p class="font-body-sm text-body-sm text-text-muted mt-3">
+                Dosen Teknik Informatika UNPAS, inisiator WPU, dan YouTube Creator Edukasi peraih Gold Play Button yang telah menginspirasi generasi coder Indonesia.
+              </p>
+</div>
+<div class="pt-5 mt-4 border-t border-surface-border/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<a aria-label="YouTube Channel" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">smart_display</span>
+</a>
+<a aria-label="GitHub Profile" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">code</span>
+</a>
+<a aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">share</span>
+</a>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">JS / PHP / Architecture</span>
+</div>
+</div>
+</div>
+<!-- Mentor 2: Frontend Specialist -->
+<div class="bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
+<div class="relative h-64 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Creative female Indonesian software engineer portrait in cozy modern dev workspace, wearing glasses and headset around neck, soft teal and amber ambient lighting, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtQk0E5gfc4_Py79o34CLwKyt93bAEFwm8ebRo9SZTQNdWZilhlfqEkeXO5D30fT_JeeaXG_bp-Xvy3NBXlFqZ488Ly6XPh-u6rndzrEuR__mTOPzVaGBba_N4fkHEhTkooT9T9S1GlRYGBQ7-QtOQ-a7r48O_MSLHPasOLy7ZFZrQmcjGBn7n4aKLhng0VrWui4ocI-Tf7gIIeU8wLEZqfEU00lakVlW6-80byolLXaMEWe6LKyzINQ"/>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-mono text-label-mono px-2.5 py-1 rounded-md">
+              EX-TECH LEAD
+            </div>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary transition-colors">Radhika Putri</h3>
+<p class="font-label-mono text-label-mono text-secondary mt-1">Frontend Engineering Specialist</p>
+<p class="font-body-sm text-body-sm text-text-muted mt-3">
+                Mantan Principal Frontend di Unicorn Indonesia. Ahli dalam optimalisasi web performance, React, Next.js, dan arsitektur Design System berskala jutaan MAU.
+              </p>
+</div>
+<div class="pt-5 mt-4 border-t border-surface-border/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<a aria-label="GitHub" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">code</span>
+</a>
+<a aria-label="Portfolio" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">link</span>
+</a>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">React / Next.js / Tailwind</span>
+</div>
+</div>
+</div>
+<!-- Mentor 3: Backend & Cloud Engineer -->
+<div class="bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
+<div class="relative h-64 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of an experienced male backend software architect in a calm minimalist room with terminal code screens glowing in the background, sharp professional look, dark aesthetic with soft teal accent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmAb-3CInqwLsAF1so2ItdWHwcXEGei2AYM52h_VofDCOaVJ_b3aTlcj5cicUKBsmoWq68qCGZjNS6xEmoTz_uy7FoGeh5ybAUp9XSOKh6YEDTtyuwBEPX0im0AXdE1J9Ukb9G9zYIn13bcra4PlRGZ28WTQDKR_x0j0Jsh7PRSAKUrg5XWw6ZM2YoB9lH3mdpm6an0LiqnfrgxoQ4GI66rMJOh6e2aP92kTO0g_2wasXPl5E2Z46KRQ"/>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md text-tertiary font-label-mono text-label-mono px-2.5 py-1 rounded-md">
+              CLOUD ARCHITECT
+            </div>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary transition-colors">Fajar Ardiansyah</h3>
+<p class="font-label-mono text-label-mono text-tertiary mt-1">Backend &amp; DevOps Engineer</p>
+<p class="font-body-sm text-body-sm text-text-muted mt-3">
+                Berpengalaman membangun microservices berkapasitas ribuan QPS menggunakan Go, Node.js, Docker, dan infrastruktur cloud di perbankan digital.
+              </p>
+</div>
+<div class="pt-5 mt-4 border-t border-surface-border/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<a aria-label="GitHub" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">terminal</span>
+</a>
+<a aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">share</span>
+</a>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">Go / Docker / AWS</span>
+</div>
+</div>
+</div>
+<!-- Mentor 4: Career Coach & Tech Recruiter -->
+<div class="bg-surface-container rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col group">
+<div class="relative h-64 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Portrait of an energetic friendly Indonesian female tech recruiter and talent strategist in modern corporate workspace, professional demeanor, natural smile, soft slate background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDulXx-SFCLQZST9YJM3imdo1O-rZdtiaGlpAeo5AzY33RNCYhPjMt1ShTXPI5bniOUk8RlTUhW-1nWkwlXxTg82N3dl-VsleVtr78rXocTxRBIXitL2MnEogXFh0hZiNaf-lk11gZmK9BK8e9HPJoJ8bNq7nfGPy3DJj1koDe_HcOMDNzLwvij1ik3nlTJ5s-P2vNW_Rj77-t-onn9SLkRsCN1U7Kbx7QuSPS_lrsIe8e2M0WYiH4NVg"/>
+<div class="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md text-status-active font-label-mono text-label-mono px-2.5 py-1 rounded-md">
+              TALENT LEAD
+            </div>
+</div>
+<div class="p-6 flex flex-col flex-1 justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary group-hover:text-primary transition-colors">Nadya Safira</h3>
+<p class="font-label-mono text-label-mono text-status-active mt-1">Career Coach &amp; Tech Recruiter</p>
+<p class="font-body-sm text-body-sm text-text-muted mt-3">
+                Telah me-review ribuan CV developer dan membimbing ratusan career switcher menembus interview teknis di start-up terkemuka serta remote global companies.
+              </p>
+</div>
+<div class="pt-5 mt-4 border-t border-surface-border/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<a aria-label="LinkedIn" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">badge</span>
+</a>
+<a aria-label="Mentorship" class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-primary hover:text-on-primary text-on-surface-variant flex items-center justify-center transition-colors" href="#">
+<span class="material-symbols-outlined text-base">chat</span>
+</a>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">CV / Mock Interview</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Visi Masa Depan & Ajakan Bergabung -->
+<section class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin pb-20 pt-8">
+<div class="relative rounded-3xl bg-gradient-to-br from-surface-container-low via-surface-container to-surface-container-high p-8 lg:p-16 overflow-hidden shadow-2xl">
+<!-- Accent Glow Blob -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+<div class="lg:col-span-8 flex flex-col gap-5">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary w-fit font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+<span>Visi Masa Depan 2025+ &amp; Revolusi AI</span>
+</div>
+<h2 class="font-display-hero text-display-hero-mobile lg:text-headline-lg text-text-primary leading-tight">
+              Mempersiapkan Generasi Coder yang Tidak Tergantikan oleh AI.
+            </h2>
+<p class="font-body-lg text-body-lg text-text-muted leading-relaxed">
+              Dunia coding bertransformasi cepat dengan hadirnya kecerdasan buatan. Di WPU Course, kami tidak gentar. Kami mengintegrasikan literasi AI ke dalam alur kerja rekayasa perangkat lunak modern: mengasah kemampuan arsitektural, pemecahan masalah kritis, dan intuisi desain sistem yang mendalam.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+<div class="flex items-start gap-3 bg-surface-container-lowest/60 p-4 rounded-xl">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5">neurology</span>
+<div>
+<h4 class="font-label-ui text-label-ui text-text-primary">Kurikulum Adaptif AI</h4>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Belajar memanfaatkan LLM sebagai asisten produktif, bukan sekadar peniru kode.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 bg-surface-container-lowest/60 p-4 rounded-xl">
+<span class="material-symbols-outlined text-tertiary text-xl mt-0.5">verified_user</span>
+<div>
+<h4 class="font-label-ui text-label-ui text-text-primary">Standar Karir Global</h4>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Mempersiapkanmu bersaing di bursa kerja internasional dengan portofolio teruji.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Box Column -->
+<div class="lg:col-span-4 flex flex-col gap-4 bg-surface-container-lowest p-6 rounded-2xl shadow-xl">
+<span class="font-label-mono text-label-mono text-primary uppercase tracking-wider">Mulai Hari Ini</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Siap Naik Kelas Bersama Ribuan Rekan Seperjuangan?</h3>
+<p class="font-body-sm text-body-sm text-text-muted">
+              Dapatkan akses langsung ke katalog kursus terstruktur, modul interaktif, dan server Discord VIP WPU Course.
+            </p>
+<div class="flex flex-col gap-2.5 pt-2">
+<a class="w-full text-center px-6 py-3 rounded-lg bg-primary text-on-primary font-label-ui text-label-ui shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all" data-path="katalog-kursus" href="#">
+                Lihat Katalog Kursus
+              </a>
+<a class="w-full text-center px-6 py-3 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-label-ui text-label-ui transition-colors" data-path="bootcamp-intensif" href="#">
+                Daftar Bootcamp Intensif
+              </a>
+</div>
+<div class="pt-3 border-t border-surface-border/50 text-center">
+<span class="font-label-mono text-label-mono text-text-muted flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-status-active">lock</span>
+                Akses Fleksibel • Garansi Materi Terkini
+              </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div></main><footer class="w-full bg-surface-container-low border-t border-surface-border mt-auto"><div class="max-w-[1280px] mx-auto px-margin-mobile lg:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-lg mb-space-xl"><div class="lg:col-span-2 flex flex-col gap-space-sm"><div class="flex items-center gap-space-sm"><img alt="WPU Course Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U6rJ0EjmMYhprEkxpF_RIgxfiEMmU9jLb50evA_7y995OSlGP1HemeGJtk-voTiv9iW2_2Ap6ak8qL7B8kOZrQ5qhkzo4Zk2Tf_8W167sCuC4zBkj-0ZTLSNFBZ9iQfe0kVdV0Q7GqzATwqEbwvyhtxT5su9qmEslhPPasPcciaVgEY2s0M4GjlrC9emc0JVMN1RbKwTENaoX2sVZinBF0qfCpU8su7fzFrvWITiT0hmL8ifUfLrYDPjnw"/><span class="font-headline-sm text-headline-sm text-text-primary font-bold">WPU<span class="text-primary">Course</span></span></div><p class="font-body-md text-body-md text-text-muted max-w-sm">Platform edukasi pemrograman web berbahasa Indonesia terlengkap dari Web Programming UNPAS. Dirancang hening, minim distorsi, dan fokus membangun fondasi software engineer yang tangguh.</p><div class="flex items-center gap-3 pt-space-xs"><a aria-label="YouTube" class="w-9 h-9 rounded-lg bg-surface-elevated border border-surface-border flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/50 transition-colors" href="#"><span class="material-symbols-outlined text-lg">play_circle</span></a><a aria-label="Discord Community" class="w-9 h-9 rounded-lg bg-surface-elevated border border-surface-border flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/50 transition-colors" href="#"><span class="material-symbols-outlined text-lg">forum</span></a><a aria-label="GitHub Repo" class="w-9 h-9 rounded-lg bg-surface-elevated border border-surface-border flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/50 transition-colors" href="#"><span class="material-symbols-outlined text-lg">terminal</span></a><a aria-label="Instagram" class="w-9 h-9 rounded-lg bg-surface-elevated border border-surface-border flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/50 transition-colors" href="#"><span class="material-symbols-outlined text-lg">share</span></a></div></div><div class="flex flex-col gap-space-sm"><span class="font-label-ui text-label-ui text-text-primary uppercase tracking-wider">Kategori Belajar</span><ul class="flex flex-col gap-2 font-body-sm text-body-sm text-text-muted"><li class="hover:text-primary transition-colors"><a href="#">Frontend Development</a></li><li class="hover:text-primary transition-colors"><a href="#">Backend Architecture</a></li><li class="hover:text-primary transition-colors"><a href="#">Full-Stack JavaScript</a></li><li class="hover:text-primary transition-colors"><a href="#">DevOps &amp; Linux Studio</a></li><li class="hover:text-primary transition-colors"><a href="#">Modern PHP &amp; Laravel</a></li></ul></div><div class="flex flex-col gap-space-sm"><span class="font-label-ui text-label-ui text-text-primary uppercase tracking-wider">Bootcamp &amp; Karir</span><ul class="flex flex-col gap-2 font-body-sm text-body-sm text-text-muted"><li class="hover:text-primary transition-colors"><a href="#">Batch Terbuka 2025</a></li><li class="hover:text-primary transition-colors"><a href="#">Kurikulum Industri</a></li><li class="hover:text-primary transition-colors"><a href="#">Penyaluran Kerja</a></li><li class="hover:text-primary transition-colors"><a href="#">Portofolio &amp; Review</a></li><li class="hover:text-primary transition-colors"><a href="#">Sertifikasi Resmi WPU</a></li></ul></div><div class="flex flex-col gap-space-sm"><span class="font-label-ui text-label-ui text-text-primary uppercase tracking-wider">Dukungan &amp; Info</span><ul class="flex flex-col gap-2 font-body-sm text-body-sm text-text-muted"><li class="hover:text-primary transition-colors"><a href="#">Pusat Bantuan / FAQ</a></li><li class="hover:text-primary transition-colors"><a href="#">Ketentuan Layanan</a></li><li class="hover:text-primary transition-colors"><a href="#">Kebijakan Privasi</a></li><li class="hover:text-primary transition-colors"><a href="#">Hubungi Mentor</a></li><li class="hover:text-primary transition-colors"><a href="#">Status Server LMS</a></li></ul></div></div><div class="pt-space-lg border-t border-surface-border/60 flex flex-col sm:flex-row items-center justify-between gap-space-sm"><span class="font-body-sm text-body-sm text-text-muted">© 2025 Web Programming UNPAS (WPU Course). Seluruh hak cipta dilindungi.</span><div class="flex items-center gap-space-md"><span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-status-active"></span>BANDUNG, INDONESIA</span><span class="font-label-mono text-label-mono text-text-muted">v2.4.0-PRO</span></div></div></div></footer></body></html>

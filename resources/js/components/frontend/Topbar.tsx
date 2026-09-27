@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 export default function Topbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProgramMenuOpen, setIsProgramMenuOpen] = useState(false);
     const [isKomunitasMenuOpen, setIsKomunitasMenuOpen] = useState(false);
+
+    const { url } = usePage();
+    const isHomePage = url === '/';
+    const isAboutPage = url.startsWith('/tentang-kami');
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/60">
@@ -48,16 +52,24 @@ export default function Topbar() {
                 <nav className="hidden lg:flex items-center gap-6">
                     <Link
                         href="/"
-                        className="py-1 text-teal-600 font-semibold border-b-2 border-teal-600 text-sm transition-colors"
+                        className={`py-1 text-sm font-medium transition-colors ${
+                            isHomePage
+                                ? 'text-teal-600 font-semibold border-b-2 border-teal-600'
+                                : 'text-slate-600 hover:text-slate-900'
+                        }`}
                     >
                         Beranda
                     </Link>
-                    <a
-                        href="/#tentang-kami"
-                        className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors py-1"
+                    <Link
+                        href="/tentang-kami"
+                        className={`py-1 text-sm font-medium transition-colors ${
+                            isAboutPage
+                                ? 'text-teal-600 font-semibold border-b-2 border-teal-600'
+                                : 'text-slate-600 hover:text-slate-900'
+                        }`}
                     >
                         Tentang Kami
-                    </a>
+                    </Link>
 
                     {/* Program Megamenu Trigger */}
                     <div className="relative group py-2">
@@ -309,17 +321,25 @@ export default function Topbar() {
                         <Link
                             href="/"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-3 py-2 rounded-lg bg-teal-50 text-teal-700 font-semibold text-sm"
+                            className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                                isHomePage
+                                    ? 'bg-teal-50 text-teal-700'
+                                    : 'text-slate-700 hover:bg-slate-50'
+                            }`}
                         >
                             Beranda
                         </Link>
-                        <a
-                            href="/#tentang-kami"
+                        <Link
+                            href="/tentang-kami"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 font-medium text-sm"
+                            className={`px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                                isAboutPage
+                                    ? 'bg-teal-50 text-teal-700'
+                                    : 'text-slate-700 hover:bg-slate-50'
+                            }`}
                         >
                             Tentang Kami
-                        </a>
+                        </Link>
 
                         {/* Program Mobile Toggle */}
                         <div>
