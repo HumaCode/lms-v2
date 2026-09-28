@@ -63,4 +63,12 @@ class Menu extends Model
     {
         return $this->hasMany(Menu::class, 'main_menu_id')->orderBy('orders');
     }
+
+    /**
+     * Permissions associated with this menu.
+     */
+    public function permissions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(\App\Models\Shield\Permission::class, 'menu_permission');
+    }
 }

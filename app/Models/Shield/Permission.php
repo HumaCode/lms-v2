@@ -35,4 +35,12 @@ class Permission extends SpatiePermission
             'is_active' => 'boolean',
         ];
     }
+
+    /**
+     * Menus associated with this permission.
+     */
+    public function menus(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(\App\Models\Menu::class, 'menu_permission');
+    }
 }
