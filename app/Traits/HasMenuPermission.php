@@ -38,8 +38,10 @@ trait HasMenuPermission
             }
 
             if (! empty($slugs)) {
-                $foundBySlug = Role::whereIn('slug', $slugs)->get();
-                $resolvedRoles = $foundBySlug->merge($roleModels);
+                $foundRoles = Role::whereIn('slug', $slugs)
+                    ->orWhereIn('name', $slugs)
+                    ->get();
+                $resolvedRoles = $foundRoles->merge($roleModels);
             } else {
                 $resolvedRoles = collect($roleModels);
             }
