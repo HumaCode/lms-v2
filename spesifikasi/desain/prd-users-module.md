@@ -71,7 +71,6 @@ CREATE TABLE users (
     name               VARCHAR(150) NOT NULL,
     email              VARCHAR(255) NOT NULL UNIQUE,
     password           VARCHAR(255) NOT NULL,
-    avatar             VARCHAR(500) NULL,
     phone              VARCHAR(20)  NULL,
     bio                TEXT         NULL,
     status             ENUM('active','inactive','banned','suspended')
@@ -88,7 +87,7 @@ CREATE TABLE users (
 
 Catatan kolom:
 - id — ULID 26 karakter, lexicographically sortable by time
-- avatar — nullable; jika null generate via DiceBear Avatars dari name
+- avatar — dikelola via **Spatie Media Library** (collection `'avatar'`, single file; fallback otomatis jika null via DiceBear / ui-avatars)
 - status — banned = permanen diblokir, suspended = sementara dinonaktifkan
 - last_login_ip — dicatat setiap login berhasil untuk audit trail
 - Soft delete agar histori transaksi/enrollment tidak orphan
