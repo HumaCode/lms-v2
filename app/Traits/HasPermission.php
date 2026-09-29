@@ -34,7 +34,7 @@ trait HasPermission
             return parent::callAction($method, $parameters);
         }
 
-        $urlMenu = urlMenu();
+        $urlMenu = \urlMenu();
         $staticPath = trim($staticPath, '/');
 
         if (! in_array($staticPath, $urlMenu)) {
