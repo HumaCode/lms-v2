@@ -1,0 +1,134 @@
+/* ==========================================================================
+   GLOBAL.CSS - Premium Human-Crafted SaaS Design System Tokens & Base Layout
+   ========================================================================== */
+
+:root {
+    /* Brand & Accent: Clean slate & deep emerald/teal accent */
+    --primary: #0f766e;               /* deep modern teal */
+    --primary-hover: #115e59;
+    --primary-container: #134e4a;
+    --primary-subtle: #f0fdfa;         /* soft mint background */
+    --primary-border: #ccfbf1;
+    --on-primary: #ffffff;
+
+    /* Secondary / Accent */
+    --secondary: #0284c7;             /* subtle ocean blue */
+    --secondary-subtle: #f0f9ff;
+    --secondary-border: #e0f2fe;
+
+    /* Neutral Base (Human-designed Slate / Zinc) */
+    --surface: #f8fafc;               /* subtle warm canvas */
+    --surface-card: #ffffff;          /* pristine card background */
+    --surface-subtle: #f1f5f9;        /* soft nested element background */
+    --surface-hover: #e2e8f0;
+
+    /* Typography */
+    --on-surface: #0f172a;            /* rich charcoal slate */
+    --on-surface-muted: #475569;      /* readable subtitle slate */
+    --on-surface-subtle: #94a3b8;     /* placeholder / tertiary slate */
+
+    /* Borders & Shadows */
+    --border-subtle: #e2e8f0;         /* crisp hairline border */
+    --border-card: #f1f5f9;           /* ultra soft border for cards */
+    --card-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+    --card-shadow-hover: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+
+    /* Feedback Colors */
+    --success: #16a34a;
+    --success-subtle: #f0fdf4;
+    --warning: #d97706;
+    --warning-subtle: #fffbeb;
+    --error: #dc2626;
+    --error-subtle: #fef2f2;
+
+    --sidebar-width: 17.5rem;
+    --topbar-height: 4rem;
+}
+
+.dark {
+    --primary: #14b8a6;
+    --primary-hover: #2dd4bf;
+    --primary-container: #0f766e;
+    --primary-subtle: #134e4a33;
+    --primary-border: #134e4a;
+    --on-primary: #ffffff;
+
+    --surface: #0b1120;
+    --surface-card: #111827;
+    --surface-subtle: #1e293b;
+    --surface-hover: #334155;
+
+    --on-surface: #f8fafc;
+    --on-surface-muted: #94a3b8;
+    --on-surface-subtle: #64748b;
+
+    --border-subtle: #1e293b;
+    --border-card: #1f2937;
+    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Base Body Setup */
+body {
+    background-color: var(--surface);
+    color: var(--on-surface);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.011em;
+}
+
+/* Material Symbols icon helper */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 450, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+}
+
+/* Human-like custom scrollbars */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.35);
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.6);
+}
+
+/* Reusable Natural Card Primitive */
+.human-card {
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.875rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s ease;
+}
+
+.human-card-interactive:hover {
+    transform: translateY(-1.5px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(15, 118, 110, 0.25);
+}
+
+/* Subtle Badge */
+.human-badge-success {
+    background-color: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.human-badge-primary {
+    background-color: #f0fdfa;
+    color: #0f766e;
+    border: 1px solid #ccfbf1;
+}
+
+.human-badge-neutral {
+    background-color: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}

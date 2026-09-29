@@ -1,0 +1,43 @@
+/* ==========================================================================
+   DASHBOARD.CSS - Specific refined micro-interactions and chart styles
+   ========================================================================== */
+
+/* Natural hover subtle lift */
+.dash-card-hover {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dash-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -3px rgba(15, 23, 42, 0.05), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
+    border-color: rgba(15, 118, 110, 0.2);
+}
+
+/* Custom Table Row interaction */
+.dash-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.dash-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.dark .dash-table tbody tr:hover {
+    background-color: #1e293b;
+}
+
+/* Subtle glow for server optimal dot */
+@keyframes softPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.15);
+    }
+}
+
+.dot-pulse {
+    animation: softPulse 2.5s infinite ease-in-out;
+}
