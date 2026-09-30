@@ -65,17 +65,17 @@ export function toggleDarkMode(): boolean {
 }
 
 /**
- * Initialize theme preference from localStorage (defaults to light)
+ * Initialize theme preference (strictly Light mode)
  */
 export function initTheme(): boolean {
     const savedTheme = localStorage.getItem('theme');
-    // Default to light unless user explicitly chose dark
     const isDark = savedTheme === 'dark';
 
     if (isDark) {
         document.documentElement.classList.add('dark');
     } else {
         document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
     }
 
     return isDark;

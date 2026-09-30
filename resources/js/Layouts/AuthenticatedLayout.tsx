@@ -22,7 +22,7 @@ export default function AuthenticatedLayout({
     }, []);
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 antialiased flex flex-col selection:bg-teal-100 selection:text-teal-900">
+        <div className="min-h-screen bg-surface font-sans text-on-surface antialiased flex flex-col">
             {/* Sidebar Navigation */}
             <Sidebar
                 isOpenMobile={isMobileSidebarOpen}
@@ -30,17 +30,15 @@ export default function AuthenticatedLayout({
             />
 
             {/* Main Content Area */}
-            <div className="flex-1 flex flex-col lg:pl-70 w-full min-w-0 transition-all">
+            <div className="flex-1 flex flex-col lg:pl-72 w-full min-w-0 transition-all">
                 <Topbar
                     onToggleMobileSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
                     breadcrumbParent={breadcrumbParent}
                     breadcrumbCurrent={breadcrumbCurrent}
                 />
 
-                <main className="flex-1 pt-16 w-full">
-                    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                        {children}
-                    </div>
+                <main className="flex-1 pt-16 w-full px-5 sm:px-6 lg:px-8 py-6">
+                    {children}
                 </main>
 
                 <Footer />

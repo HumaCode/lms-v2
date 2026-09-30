@@ -1,7 +1,9 @@
 import Dropdown from '@/components/Dropdown';
+import LogoutConfirmModal from '@/components/LogoutConfirmModal';
 import { toggleDarkMode } from '@/global';
 import { PageProps } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 interface TopbarProps {
     onToggleMobileSidebar: () => void;
@@ -11,113 +13,165 @@ interface TopbarProps {
 
 export default function Topbar({
     onToggleMobileSidebar,
-    breadcrumbParent = 'Admin Console',
-    breadcrumbCurrent = 'Dashboard Utama',
+    breadcrumbParent = 'ADMIN CONSOLE',
+    breadcrumbCurrent = 'DASHBOARD UTAMA',
 }: TopbarProps) {
     const user = usePage<PageProps>().props.auth.user;
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
     return (
-        <header className="fixed top-0 left-0 lg:left-70 right-0 h-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md z-40 border-b border-slate-200/80 dark:border-slate-800 shadow-[0_1px_2px_rgba(0,0,0,0.02)] transition-all">
-            <div className="w-full max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+        <>
+            <header className="fixed top-0 left-0 lg:left-72 right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 border-b border-surface-container-high shadow-[0_1px_8px_rgba(0,0,0,0.04)] px-5 sm:px-6 lg:px-8 flex items-center justify-between gap-4 transition-all">
                 {/* Left: Mobile Toggle & Breadcrumbs */}
                 <div className="flex items-center gap-3">
-                <button
-                    type="button"
-                    onClick={onToggleMobileSidebar}
-                    className="p-1.5 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden"
-                    aria-label="Toggle menu"
-                >
-                    <span className="material-symbols-outlined text-[22px]">menu</span>
-                </button>
+                    <button
+                        type="button"
+                        onClick={onToggleMobileSidebar}
+                        className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container lg:hidden"
+                        aria-label="Toggle menu"
+                    >
+                        <span className="material-symbols-outlined text-[24px]">menu</span>
+                    </button>
 
-                <div className="hidden sm:flex items-center gap-2 text-[0.8125rem] text-slate-500 dark:text-slate-400 font-medium">
-                    <span className="text-slate-400 dark:text-slate-500">{breadcrumbParent}</span>
-                    <span className="text-slate-300 dark:text-slate-600">/</span>
-                    <span className="text-slate-900 dark:text-slate-200 font-semibold">{breadcrumbCurrent}</span>
+                    <div className="hidden sm:flex items-center gap-2 text-[0.75rem] font-medium tracking-wide">
+                        <span className="font-semibold text-outline">{breadcrumbParent}</span>
+                        <span className="text-outline">/</span>
+                        <span className="font-semibold text-primary">{breadcrumbCurrent}</span>
+                    </div>
                 </div>
-            </div>
 
-            {/* Center: Search Field */}
-            <div className="flex-1 max-w-md mx-2 sm:mx-4">
-                <div className="relative flex items-center w-full">
-                    <span className="material-symbols-outlined absolute left-3 text-[18px] text-slate-400 pointer-events-none">
-                        search
-                    </span>
-                    <input
-                        type="text"
-                        placeholder="Cari metrik, transaksi, kursus..."
-                        className="w-full pl-9 pr-4 py-1.5 bg-slate-50 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 placeholder:text-slate-400 rounded-lg text-[0.8125rem] border border-slate-200 dark:border-slate-700/80 focus:outline-none focus:ring-1 focus:ring-teal-600 focus:border-teal-600 transition-all shadow-2xs"
-                    />
+                {/* Center: Search Field */}
+                <div className="flex-1 max-w-md mx-2 sm:mx-4">
+                    <div className="relative flex items-center w-full">
+                        <span className="material-symbols-outlined absolute left-3 text-[18px] text-outline pointer-events-none">
+                            search
+                        </span>
+                        <input
+                            type="text"
+                            placeholder="Cari metrik, pengguna, transaksi, kursus..."
+                            className="w-full pl-9 pr-4 py-2 bg-surface-container-lowest text-on-surface placeholder:text-outline rounded-lg text-[0.8125rem] focus:outline-none focus:ring-2 focus:ring-primary shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all border border-surface-container"
+                        />
+                    </div>
                 </div>
-            </div>
 
-            {/* Right: Quick actions & Profile */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5">
-                <button
-                    type="button"
-                    onClick={toggleDarkMode}
-                    className="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    title="Ganti Tema"
-                >
-                    <span className="material-symbols-outlined text-[20px]">light_mode</span>
-                </button>
+                {/* Right: Quick actions & Profile */}
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <button
+                        type="button"
+                        onClick={toggleDarkMode}
+                        className="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                        title="Ganti Tema"
+                    >
+                        <span className="material-symbols-outlined text-[20px]">light_mode</span>
+                    </button>
 
-                <button
-                    type="button"
-                    className="relative p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    title="Notifikasi"
-                >
-                    <span className="material-symbols-outlined text-[20px]">notifications</span>
-                    <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-rose-500 ring-2 ring-white dark:ring-slate-900"></span>
-                </button>
+                    <button
+                        type="button"
+                        className="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors"
+                        title="Notifikasi"
+                    >
+                        <span className="material-symbols-outlined text-[20px]">notifications</span>
+                        <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-error ring-2 ring-surface"></span>
+                    </button>
 
-                <div className="hidden sm:block h-5 w-px bg-slate-200 dark:bg-slate-800 mx-1"></div>
+                    <div className="hidden sm:block h-6 w-px bg-outline-variant/30 mx-1"></div>
 
-                {/* Profile menu dropdown */}
-                <Dropdown>
-                    <Dropdown.Trigger>
-                        <button
-                            type="button"
-                            className="flex items-center gap-2.5 pl-1.5 pr-2 py-1 rounded-lg hover:bg-slate-100/80 dark:hover:bg-slate-800/70 transition-colors text-left"
-                        >
-                            {user.avatar_url ? (
-                                <img
-                                    src={user.avatar_url}
-                                    alt={user.name}
-                                    className="h-8 w-8 rounded-full object-cover ring-1 ring-slate-200 dark:ring-slate-700 shrink-0"
-                                />
-                            ) : (
-                                <div className="h-8 w-8 rounded-full bg-teal-700 flex items-center justify-center text-white text-xs font-semibold shrink-0">
-                                    {user.name.charAt(0).toUpperCase()}
+                    {/* Profile menu dropdown */}
+                    <Dropdown>
+                        <Dropdown.Trigger>
+                            <button
+                                type="button"
+                                className="flex items-center gap-2.5 pl-1.5 pr-2 py-1 rounded-lg hover:bg-surface-container-low transition-colors text-left group"
+                            >
+                                {user.avatar_url ? (
+                                    <img
+                                        src={user.avatar_url}
+                                        alt={user.name}
+                                        className="h-8.5 w-8.5 rounded-full object-cover ring-2 ring-primary/20 shrink-0"
+                                    />
+                                ) : (
+                                    <div className="h-8.5 w-8.5 rounded-full bg-primary flex items-center justify-center text-on-primary font-semibold text-xs shrink-0 shadow-xs">
+                                        {user.name.charAt(0).toUpperCase()}
+                                    </div>
+                                )}
+
+                                <div className="hidden md:block">
+                                    <span className="block text-[0.8125rem] font-semibold text-on-surface leading-tight truncate max-w-[120px]">
+                                        {user.name}
+                                    </span>
+                                    <span className="block text-[0.6875rem] text-on-surface-variant capitalize truncate">
+                                        {user.role || 'Superadmin'}
+                                    </span>
                                 </div>
-                            )}
 
-                            <div className="hidden md:block">
-                                <span className="block text-[0.8125rem] font-semibold text-slate-800 dark:text-slate-200 leading-tight truncate max-w-[120px]">
+                                <span className="material-symbols-outlined text-[18px] text-outline group-hover:text-on-surface transition-colors hidden md:block">
+                                    expand_more
+                                </span>
+                            </button>
+                        </Dropdown.Trigger>
+
+                        <Dropdown.Content align="right" width="64" contentClasses="p-1.5 bg-white divide-y divide-surface-container">
+                            {/* User Header Summary */}
+                            <div className="px-3 py-2.5 mb-1 bg-surface-container-low/50 rounded-lg">
+                                <p className="text-[0.8125rem] font-bold text-on-surface truncate">
                                     {user.name}
-                                </span>
-                                <span className="block text-[0.6875rem] text-slate-500 dark:text-slate-400 capitalize truncate">
-                                    {user.role || 'Superadmin'}
-                                </span>
+                                </p>
+                                <p className="text-[0.6875rem] text-on-surface-variant truncate">
+                                    {user.email}
+                                </p>
+                                <div className="mt-1.5 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-secondary-container/60 text-on-secondary-container text-[0.6875rem] font-semibold">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                    <span className="capitalize">{user.role || 'Superadmin'}</span>
+                                </div>
                             </div>
 
-                            <span className="material-symbols-outlined text-[16px] text-slate-400 hidden md:block">
-                                expand_more
-                            </span>
-                        </button>
-                    </Dropdown.Trigger>
+                            {/* Main Navigation Items */}
+                            <div className="py-1 space-y-0.5">
+                                <Dropdown.Link
+                                    href={route('profile.edit')}
+                                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[0.8125rem] font-medium text-on-surface hover:bg-surface-container-low hover:text-primary transition-colors group"
+                                >
+                                    <span className="material-symbols-outlined text-[19px] text-outline group-hover:text-primary transition-colors">
+                                        person
+                                    </span>
+                                    <span>Profil Akun</span>
+                                </Dropdown.Link>
 
-                    <Dropdown.Content align="right" width="48">
-                        <Dropdown.Link href={route('profile.edit')}>
-                            Profil Akun
-                        </Dropdown.Link>
-                        <Dropdown.Link href={route('logout')} method="post" as="button">
-                            Keluar
-                        </Dropdown.Link>
-                    </Dropdown.Content>
-                </Dropdown>
-            </div>
-            </div>
-        </header>
+                                <Dropdown.Link
+                                    href="#"
+                                    onClick={(e) => e.preventDefault()}
+                                    className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[0.8125rem] font-medium text-on-surface hover:bg-surface-container-low hover:text-primary transition-colors group"
+                                >
+                                    <span className="material-symbols-outlined text-[19px] text-outline group-hover:text-primary transition-colors">
+                                        settings
+                                    </span>
+                                    <span>Pengaturan</span>
+                                </Dropdown.Link>
+                            </div>
+
+                            {/* Logout Action */}
+                            <div className="pt-1 mt-1">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowLogoutConfirm(true)}
+                                    className="flex w-full items-center gap-2.5 px-3 py-2 rounded-lg text-[0.8125rem] font-medium text-error hover:bg-error-container/40 transition-colors group text-left"
+                                >
+                                    <span className="material-symbols-outlined text-[19px] text-error">
+                                        logout
+                                    </span>
+                                    <span>Keluar</span>
+                                </button>
+                            </div>
+                        </Dropdown.Content>
+                    </Dropdown>
+                </div>
+            </header>
+
+            {/* Interactive Logout Confirm Modal */}
+            <LogoutConfirmModal
+                show={showLogoutConfirm}
+                onClose={() => setShowLogoutConfirm(false)}
+            />
+        </>
     );
 }

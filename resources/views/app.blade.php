@@ -17,11 +17,15 @@
         @routes
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+        <script>
+            // Ensure strictly light mode on load
+            document.documentElement.classList.remove('dark');
+        </script>
         <x-inertia::head>
             <title>{{ config('app.name', 'Laravel') }}</title>
         </x-inertia::head>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-[#f8f9ff] text-[#0b1c30]">
         <x-inertia::app />
     </body>
 </html>

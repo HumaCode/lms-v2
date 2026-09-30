@@ -13,41 +13,41 @@ export default function Dashboard() {
 
     return (
         <AuthenticatedLayout
-            breadcrumbParent="Admin Console"
-            breadcrumbCurrent="Dashboard Utama"
+            breadcrumbParent="ADMIN CONSOLE"
+            breadcrumbCurrent="DASHBOARD UTAMA"
         >
             <Head title="Dashboard - Admin Console" />
 
             <div className="flex flex-col w-full pb-8 space-y-6">
-                {/* 1. Header Banner / Welcome Card */}
-                <section className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-xl p-5 sm:p-6 shadow-xs flex flex-col xl:flex-row xl:items-center justify-between gap-5">
-                    <div className="flex flex-col gap-1.5">
+                {/* 1. Top Welcome & System Status Bar */}
+                <section className="bg-surface-container-lowest rounded-xl p-5 sm:p-6 shadow-sm border border-surface-container flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+                    <div className="flex flex-col gap-1">
                         <div className="flex flex-wrap items-center gap-3">
-                            <h1 className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight">
+                            <h1 className="font-heading text-xl sm:text-2xl font-semibold text-on-surface tracking-tight">
                                 Selamat Datang kembali, {user.name}!
                             </h1>
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 text-[0.75rem] font-semibold border border-emerald-200/80 dark:border-emerald-800/60">
-                                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 dot-pulse"></span>
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[0.75rem] font-semibold">
+                                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
                                 99.98% Server Optimal
                             </span>
                         </div>
-                        <p className="text-[0.8125rem] text-slate-500 dark:text-slate-400 flex items-center gap-2">
-                            <span className="material-symbols-outlined text-[17px] text-slate-400">
+                        <p className="text-[0.875rem] text-on-surface-variant flex items-center gap-2">
+                            <span className="material-symbols-outlined text-[18px] text-outline">
                                 calendar_today
                             </span>
                             <span>{getFormattedCurrentDate()}</span>
-                            <span className="text-slate-300 dark:text-slate-700">•</span>
-                            <span>Infrastruktur CDN &amp; video berjalan normal.</span>
+                            <span>•</span>
+                            <span>Semua server CDN &amp; streaming video berjalan lancar tanpa kendala.</span>
                         </p>
                     </div>
 
-                    {/* Quick Action Buttons */}
-                    <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                    {/* Quick Action Cluster */}
+                    <div className="flex flex-wrap items-center gap-2.5">
                         <button
                             type="button"
-                            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 transition-colors text-[0.8125rem] font-medium border border-slate-200 dark:border-slate-700 shadow-2xs"
+                            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-all text-[0.875rem] font-medium shadow-sm border border-surface-container"
                         >
-                            <span className="material-symbols-outlined text-[17px] text-teal-700 dark:text-teal-400">
+                            <span className="material-symbols-outlined text-[18px] text-primary">
                                 group
                             </span>
                             <span>Kelola Pengguna</span>
@@ -55,9 +55,9 @@ export default function Dashboard() {
 
                         <button
                             type="button"
-                            className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 transition-colors text-[0.8125rem] font-medium border border-slate-200 dark:border-slate-700 shadow-2xs"
+                            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container transition-all text-[0.875rem] font-medium shadow-sm border border-surface-container"
                         >
-                            <span className="material-symbols-outlined text-[17px] text-teal-700 dark:text-teal-400">
+                            <span className="material-symbols-outlined text-[18px] text-primary">
                                 download
                             </span>
                             <span>Unduh Laporan</span>
@@ -65,123 +65,123 @@ export default function Dashboard() {
 
                         <button
                             type="button"
-                            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-teal-700 hover:bg-teal-800 text-white transition-all text-[0.8125rem] font-semibold shadow-xs active:scale-98"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-all text-[0.875rem] font-semibold shadow-sm active:scale-95"
                         >
-                            <span className="material-symbols-outlined text-[17px]">add_circle</span>
+                            <span className="material-symbols-outlined text-[18px]">add_circle</span>
                             <span>+ Tambah Kursus Baru</span>
                         </button>
                     </div>
                 </section>
 
-                {/* 2. 4 Modern KPI Cards */}
+                {/* 2. 4 KPI Summary Cards */}
                 <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* Revenue Card */}
-                    <div className="dash-card-hover bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 rounded-xl shadow-xs flex flex-col justify-between">
+                    <div className="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between border border-surface-container">
                         <div className="flex items-center justify-between mb-3">
-                            <span className="text-[0.75rem] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                            <span className="text-[0.75rem] uppercase tracking-wider text-outline font-semibold">
                                 Total Pendapatan Kotor
                             </span>
-                            <div className="h-9 w-9 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 flex items-center justify-center border border-teal-100 dark:border-teal-900">
+                            <div className="h-9 w-9 rounded-lg bg-secondary-container/60 text-primary flex items-center justify-center">
                                 <span className="material-symbols-outlined text-[20px]">payments</span>
                             </div>
                         </div>
                         <div>
-                            <div className="font-heading text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                            <div className="font-heading text-2xl font-bold text-on-surface tracking-tight">
                                 {formatRupiah(kpi.totalRevenue)}
                             </div>
                             <div className="flex items-center gap-1.5 mt-2">
-                                <span className="inline-flex items-center gap-0.5 text-emerald-600 dark:text-emerald-400 text-[0.75rem] font-semibold">
-                                    <span className="material-symbols-outlined text-[15px]">trending_up</span>
+                                <span className="inline-flex items-center text-primary text-[0.75rem] font-semibold">
+                                    <span className="material-symbols-outlined text-[16px]">trending_up</span>
                                     +{kpi.revenueMoMGrowth}%
                                 </span>
-                                <span className="text-[0.75rem] text-slate-400">vs bulan lalu</span>
+                                <span className="text-[0.8125rem] text-outline">vs bulan lalu (MoM)</span>
                             </div>
                         </div>
-                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                            <div className="bg-teal-600 h-full rounded-full" style={{ width: '78%' }}></div>
+                        <div className="w-full bg-surface-container-high h-1 rounded-full mt-4 overflow-hidden">
+                            <div className="bg-primary h-full rounded-full" style={{ width: '78%' }}></div>
                         </div>
                     </div>
 
                     {/* Active Students Card */}
-                    <div className="dash-card-hover bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 rounded-xl shadow-xs flex flex-col justify-between">
+                    <div className="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between border border-surface-container">
                         <div className="flex items-center justify-between mb-3">
-                            <span className="text-[0.75rem] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                            <span className="text-[0.75rem] uppercase tracking-wider text-outline font-semibold">
                                 Total Siswa Aktif
                             </span>
-                            <div className="h-9 w-9 rounded-lg bg-sky-50 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center border border-sky-100 dark:border-sky-900">
+                            <div className="h-9 w-9 rounded-lg bg-tertiary-fixed/60 text-tertiary flex items-center justify-center">
                                 <span className="material-symbols-outlined text-[20px]">school</span>
                             </div>
                         </div>
                         <div>
-                            <div className="font-heading text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                            <div className="font-heading text-2xl font-bold text-on-surface tracking-tight">
                                 {formatNumber(kpi.activeStudents)}
                             </div>
                             <div className="flex items-center gap-1.5 mt-2">
-                                <span className="inline-flex items-center gap-0.5 text-teal-700 dark:text-teal-400 text-[0.75rem] font-semibold">
-                                    <span className="material-symbols-outlined text-[15px]">person_add</span>
+                                <span className="inline-flex items-center text-primary text-[0.75rem] font-semibold">
+                                    <span className="material-symbols-outlined text-[16px]">person_add</span>
                                     +{formatNumber(kpi.weeklyNewStudents)}
                                 </span>
-                                <span className="text-[0.75rem] text-slate-400">minggu ini</span>
+                                <span className="text-[0.8125rem] text-outline">pendaftar minggu ini</span>
                             </div>
                         </div>
-                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                            <div className="bg-sky-600 h-full rounded-full" style={{ width: '65%' }}></div>
+                        <div className="w-full bg-surface-container-high h-1 rounded-full mt-4 overflow-hidden">
+                            <div className="bg-tertiary h-full rounded-full" style={{ width: '65%' }}></div>
                         </div>
                     </div>
 
-                    {/* Courses Card */}
-                    <div className="dash-card-hover bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 rounded-xl shadow-xs flex flex-col justify-between">
+                    {/* Courses & Modules Card */}
+                    <div className="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between border border-surface-container">
                         <div className="flex items-center justify-between mb-3">
-                            <span className="text-[0.75rem] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                            <span className="text-[0.75rem] uppercase tracking-wider text-outline font-semibold">
                                 Kursus &amp; Modul
                             </span>
-                            <div className="h-9 w-9 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center border border-slate-200/60 dark:border-slate-700">
+                            <div className="h-9 w-9 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center">
                                 <span className="material-symbols-outlined text-[20px]">video_library</span>
                             </div>
                         </div>
                         <div>
-                            <div className="font-heading text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                            <div className="font-heading text-2xl font-bold text-on-surface tracking-tight">
                                 {kpi.totalCourses}{' '}
-                                <span className="text-sm font-normal text-slate-400">Kursus</span>
+                                <span className="text-base font-normal text-outline">Kursus</span>
                             </div>
                             <div className="flex items-center gap-2 mt-2">
-                                <span className="text-[0.75rem] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium">
+                                <span className="text-[0.75rem] px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-medium">
                                     {kpi.publishedCourses} Terbit
                                 </span>
-                                <span className="text-[0.75rem] px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 font-semibold border border-amber-200/60 dark:border-amber-900/60">
+                                <span className="text-[0.75rem] px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">
                                     {kpi.reviewCourses} Review
                                 </span>
                             </div>
                         </div>
-                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                            <div className="bg-slate-500 h-full rounded-full" style={{ width: '85%' }}></div>
+                        <div className="w-full bg-surface-container-high h-1 rounded-full mt-4 overflow-hidden">
+                            <div className="bg-secondary h-full rounded-full" style={{ width: '90%' }}></div>
                         </div>
                     </div>
 
-                    {/* Completion Rate Card */}
-                    <div className="dash-card-hover bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 rounded-xl shadow-xs flex flex-col justify-between">
+                    {/* Graduation Rate Card */}
+                    <div className="bg-surface-container-lowest p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between border border-surface-container">
                         <div className="flex items-center justify-between mb-3">
-                            <span className="text-[0.75rem] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                            <span className="text-[0.75rem] uppercase tracking-wider text-outline font-semibold">
                                 Tingkat Kelulusan
                             </span>
-                            <div className="h-9 w-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-900">
+                            <div className="h-9 w-9 rounded-lg bg-secondary-container/60 text-primary flex items-center justify-center">
                                 <span className="material-symbols-outlined text-[20px]">verified</span>
                             </div>
                         </div>
                         <div>
-                            <div className="font-heading text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                            <div className="font-heading text-2xl font-bold text-on-surface tracking-tight">
                                 {kpi.completionRate}%
                             </div>
                             <div className="flex items-center gap-1.5 mt-2">
-                                <span className="text-[0.75rem] text-slate-500 dark:text-slate-400">
-                                    {formatNumber(kpi.certifiedStudents)} Sertifikat
+                                <span className="text-[0.8125rem] text-on-surface-variant">
+                                    {formatNumber(kpi.certifiedStudents)} Sertifikat Terbit
                                 </span>
-                                <span className="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-700"></span>
-                                <span className="text-[0.75rem] text-emerald-700 dark:text-emerald-400 font-semibold">Tinggi</span>
+                                <span className="h-1 w-1 rounded-full bg-outline"></span>
+                                <span className="text-[0.75rem] text-primary font-medium">Tinggi</span>
                             </div>
                         </div>
-                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
-                            <div className="bg-emerald-600 h-full rounded-full" style={{ width: `${kpi.completionRate}%` }}></div>
+                        <div className="w-full bg-surface-container-high h-1 rounded-full mt-4 overflow-hidden">
+                            <div className="bg-primary h-full rounded-full" style={{ width: `${kpi.completionRate}%` }}></div>
                         </div>
                     </div>
                 </section>
@@ -191,33 +191,33 @@ export default function Dashboard() {
                     {/* Left 8-col: Chart + Transactions Table */}
                     <div className="lg:col-span-8 flex flex-col gap-6">
                         {/* Chart Card */}
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 rounded-xl shadow-xs">
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+                        <div className="bg-surface-container-lowest p-5 sm:p-6 rounded-xl shadow-sm border border-surface-container">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                                 <div>
                                     <div className="flex items-center gap-2">
-                                        <h2 className="font-heading text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100">
+                                        <h2 className="font-heading text-lg font-semibold text-on-surface">
                                             Tren Pendapatan &amp; Pendaftaran Baru
                                         </h2>
-                                        <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium">
+                                        <span className="text-[0.75rem] px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-medium">
                                             Tahun 2026
                                         </span>
                                     </div>
-                                    <p className="text-[0.8125rem] text-slate-500 dark:text-slate-400 mt-0.5">
+                                    <p className="text-[0.8125rem] text-on-surface-variant mt-0.5">
                                         Analisis performa finansial dan laju konversi siswa setiap semester
                                     </p>
                                 </div>
 
                                 {/* Filter Controls */}
-                                <div className="flex items-center bg-slate-100 dark:bg-slate-800/80 p-0.5 rounded-lg border border-slate-200/80 dark:border-slate-700/80 self-start sm:self-auto">
+                                <div className="flex items-center bg-surface-container-low p-1 rounded-lg border border-surface-container self-start sm:self-auto">
                                     {(['Bulanan', 'Kuartal', 'Tahunan'] as const).map((t) => (
                                         <button
                                             key={t}
                                             type="button"
                                             onClick={() => setTimeframe(t)}
-                                            className={`px-3 py-1 text-[0.75rem] rounded-md font-medium transition-all ${
+                                            className={`px-3 py-1 text-[0.75rem] rounded-md transition-all ${
                                                 timeframe === t
-                                                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 font-semibold shadow-2xs'
-                                                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                                                    ? 'bg-surface-container-lowest text-on-surface font-semibold shadow-xs'
+                                                    : 'text-on-surface-variant hover:text-on-surface'
                                             }`}
                                         >
                                             {t}
@@ -227,16 +227,16 @@ export default function Dashboard() {
                             </div>
 
                             {/* Legend */}
-                            <div className="flex items-center gap-5 mb-4">
+                            <div className="flex items-center gap-6 mb-4 pb-2">
                                 <div className="flex items-center gap-2">
-                                    <div className="h-2.5 w-2.5 rounded-full bg-teal-700"></div>
-                                    <span className="text-[0.75rem] text-slate-600 dark:text-slate-400 font-medium">
+                                    <div className="h-3 w-3 rounded-full bg-primary"></div>
+                                    <span className="text-[0.8125rem] text-on-surface-variant">
                                         Pendapatan Bersih (Juta Rp)
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <div className="h-2.5 w-2.5 rounded-full bg-sky-600"></div>
-                                    <span className="text-[0.75rem] text-slate-600 dark:text-slate-400 font-medium">
+                                    <div className="h-3 w-3 rounded-full bg-tertiary"></div>
+                                    <span className="text-[0.8125rem] text-on-surface-variant">
                                         Siswa Baru Terdaftar
                                     </span>
                                 </div>
@@ -251,53 +251,53 @@ export default function Dashboard() {
                                     viewBox="0 0 700 240"
                                 >
                                     <defs>
-                                        <linearGradient id="naturalTealArea" x1="0" x2="0" y1="0" y2="1">
-                                            <stop offset="0%" stopColor="#0f766e" stopOpacity="0.18"></stop>
-                                            <stop offset="100%" stopColor="#0f766e" stopOpacity="0.0"></stop>
+                                        <linearGradient id="primaryAreaGrad" x1="0" x2="0" y1="0" y2="1">
+                                            <stop offset="0%" stopColor="#00685f" stopOpacity="0.22"></stop>
+                                            <stop offset="100%" stopColor="#00685f" stopOpacity="0.0"></stop>
                                         </linearGradient>
-                                        <linearGradient id="naturalSkyLine" x1="0" x2="1" y1="0" y2="0">
-                                            <stop offset="0%" stopColor="#0284c7"></stop>
-                                            <stop offset="100%" stopColor="#38bdf8"></stop>
+                                        <linearGradient id="tertiaryLineGrad" x1="0" x2="1" y1="0" y2="0">
+                                            <stop offset="0%" stopColor="#006194"></stop>
+                                            <stop offset="100%" stopColor="#007bb9"></stop>
                                         </linearGradient>
                                     </defs>
 
-                                    {/* Subtle Guidelines */}
-                                    <line stroke="#f1f5f9" strokeDasharray="3 3" strokeWidth="1" x1="0" x2="700" y1="40" y2="40"></line>
-                                    <line stroke="#f1f5f9" strokeDasharray="3 3" strokeWidth="1" x1="0" x2="700" y1="100" y2="100"></line>
-                                    <line stroke="#f1f5f9" strokeDasharray="3 3" strokeWidth="1" x1="0" x2="700" y1="160" y2="160"></line>
-                                    <line stroke="#e2e8f0" strokeWidth="1" x1="0" x2="700" y1="220" y2="220"></line>
+                                    {/* Horizontal Guidelines */}
+                                    <line stroke="#eff4ff" strokeDasharray="4 4" strokeWidth="1.5" x1="0" x2="700" y1="40" y2="40"></line>
+                                    <line stroke="#eff4ff" strokeDasharray="4 4" strokeWidth="1.5" x1="0" x2="700" y1="100" y2="100"></line>
+                                    <line stroke="#eff4ff" strokeDasharray="4 4" strokeWidth="1.5" x1="0" x2="700" y1="160" y2="160"></line>
+                                    <line stroke="#eff4ff" strokeWidth="1.5" x1="0" x2="700" y1="220" y2="220"></line>
 
                                     {/* Area Fill */}
                                     <path
                                         d="M 0,180 Q 75,140 150,150 T 300,105 T 450,80 T 600,45 L 700,30 L 700,220 L 0,220 Z"
-                                        fill="url(#naturalTealArea)"
+                                        fill="url(#primaryAreaGrad)"
                                     ></path>
 
                                     {/* Primary Curve */}
                                     <path
                                         d="M 0,180 Q 75,140 150,150 T 300,105 T 450,80 T 600,45 L 700,30"
-                                        stroke="#0f766e"
+                                        stroke="#00685f"
                                         strokeLinecap="round"
-                                        strokeWidth="2.5"
+                                        strokeWidth="3"
                                     ></path>
 
                                     {/* Secondary Trend Curve */}
                                     <path
                                         d="M 0,205 Q 75,185 150,170 T 300,140 T 450,120 T 600,90 L 700,70"
-                                        stroke="url(#naturalSkyLine)"
-                                        strokeDasharray="5 3"
+                                        stroke="url(#tertiaryLineGrad)"
+                                        strokeDasharray="6 4"
                                         strokeLinecap="round"
-                                        strokeWidth="2"
+                                        strokeWidth="2.5"
                                     ></path>
 
                                     {/* Anchor Points */}
-                                    <circle cx="600" cy="45" fill="#ffffff" r="4.5" stroke="#0f766e" strokeWidth="2.5"></circle>
-                                    <circle cx="600" cy="90" fill="#ffffff" r="4" stroke="#0284c7" strokeWidth="2"></circle>
+                                    <circle cx="600" cy="45" fill="#ffffff" r="4.5" stroke="#00685f" strokeWidth="3"></circle>
+                                    <circle cx="600" cy="90" fill="#ffffff" r="4.5" stroke="#006194" strokeWidth="2.5"></circle>
                                 </svg>
                             </div>
 
                             {/* X-Axis Month Labels */}
-                            <div className="flex justify-between items-center pt-3 px-1 text-slate-500 dark:text-slate-400 text-[0.75rem]">
+                            <div className="flex justify-between items-center pt-3 px-1 text-on-surface-variant text-[0.75rem]">
                                 <span>Jan</span>
                                 <span>Feb</span>
                                 <span>Mar</span>
@@ -306,89 +306,89 @@ export default function Dashboard() {
                                 <span>Jun</span>
                                 <span>Jul</span>
                                 <span>Agu</span>
-                                <span className="font-semibold text-teal-700 dark:text-teal-400">Sep (Aktif)</span>
+                                <span className="font-semibold text-primary">Sep (Aktif)</span>
                             </div>
                         </div>
 
                         {/* Recent Transactions Table */}
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 rounded-xl shadow-xs">
+                        <div className="bg-surface-container-lowest p-5 sm:p-6 rounded-xl shadow-sm border border-surface-container">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                                 <div>
-                                    <h2 className="font-heading text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100">
+                                    <h2 className="font-heading text-lg font-semibold text-on-surface">
                                         Transaksi Pembelian Kursus Terbaru
                                     </h2>
-                                    <p className="text-[0.8125rem] text-slate-500 dark:text-slate-400 mt-0.5">
+                                    <p className="text-[0.8125rem] text-on-surface-variant mt-0.5">
                                         Pantauan data real-time pembayaran dari berbagai payment channel
                                     </p>
                                 </div>
                                 <button
                                     type="button"
-                                    className="inline-flex items-center gap-1 text-[0.8125rem] text-teal-700 dark:text-teal-400 font-semibold hover:underline self-start sm:self-auto"
+                                    className="inline-flex items-center gap-1 text-[0.8125rem] text-primary font-semibold hover:underline self-start sm:self-auto"
                                 >
                                     <span>Lihat Semua Transaksi</span>
-                                    <span className="material-symbols-outlined text-[15px]">arrow_forward</span>
+                                    <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                                 </button>
                             </div>
 
                             <div className="overflow-x-auto">
-                                <table className="dash-table w-full text-left">
+                                <table className="w-full text-left">
                                     <thead>
-                                        <tr className="border-b border-slate-100 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-[0.75rem] uppercase tracking-wider font-semibold">
-                                            <th className="py-2.5 px-3">ID &amp; Siswa</th>
-                                            <th className="py-2.5 px-3">Kursus</th>
-                                            <th className="py-2.5 px-3">Metode</th>
-                                            <th className="py-2.5 px-3">Nominal</th>
-                                            <th className="py-2.5 px-3">Status</th>
-                                            <th className="py-2.5 px-3 text-right">Waktu</th>
+                                        <tr className="bg-surface-container-low text-on-surface-variant text-[0.75rem] uppercase tracking-wider font-semibold">
+                                            <th className="py-3 px-4 rounded-l-lg">ID &amp; Siswa</th>
+                                            <th className="py-3 px-4">Kursus Yang Dibeli</th>
+                                            <th className="py-3 px-4">Metode Bayar</th>
+                                            <th className="py-3 px-4">Nominal</th>
+                                            <th className="py-3 px-4">Status</th>
+                                            <th className="py-3 px-4 rounded-r-lg text-right">Waktu</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80 text-[0.8125rem]">
+                                    <tbody className="divide-y-0 text-[0.875rem]">
                                         {transactions.map((trx) => (
-                                            <tr key={trx.id} className="group">
-                                                <td className="py-3 px-3">
+                                            <tr key={trx.id} className="hover:bg-surface-container-low transition-colors group">
+                                                <td className="py-3.5 px-4">
                                                     <div className="flex items-center gap-2.5">
-                                                        <div className="h-8 w-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center text-[0.75rem] font-bold shrink-0">
+                                                        <div className="h-8 w-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-[0.75rem] font-bold shrink-0">
                                                             {trx.studentInitials}
                                                         </div>
                                                         <div className="min-w-0">
-                                                            <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                                                            <p className="text-[0.8125rem] font-semibold text-on-surface truncate">
                                                                 {trx.studentName}
                                                             </p>
-                                                            <span className="text-[0.6875rem] text-slate-400">
+                                                            <span className="text-[0.6875rem] text-outline">
                                                                 {trx.id}
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </td>
 
-                                                <td className="py-3 px-3">
-                                                    <div className="text-slate-800 dark:text-slate-200 font-medium line-clamp-1">
+                                                <td className="py-3.5 px-4">
+                                                    <div className="text-[0.8125rem] text-on-surface font-medium line-clamp-1">
                                                         {trx.courseTitle}
                                                     </div>
-                                                    <span className="text-[0.6875rem] text-slate-400">
+                                                    <span className="text-[0.6875rem] text-outline">
                                                         {trx.batchType}
                                                     </span>
                                                 </td>
 
-                                                <td className="py-3 px-3">
-                                                    <div className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
-                                                        <span className="h-1.5 w-1.5 rounded-full bg-teal-600"></span>
+                                                <td className="py-3.5 px-4">
+                                                    <div className="inline-flex items-center gap-1.5 text-[0.8125rem] text-on-surface-variant">
+                                                        <span className="h-2 w-2 rounded-full bg-primary"></span>
                                                         <span>{trx.paymentMethod}</span>
                                                     </div>
                                                 </td>
 
-                                                <td className="py-3 px-3 font-semibold text-slate-900 dark:text-slate-100">
+                                                <td className="py-3.5 px-4 text-[0.8125rem] font-bold text-on-surface">
                                                     {formatRupiah(trx.amount)}
                                                 </td>
 
-                                                <td className="py-3 px-3">
-                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 text-[0.6875rem] font-semibold border border-emerald-200/80 dark:border-emerald-800/60">
-                                                        <span className="material-symbols-outlined text-[13px]">check</span>
+                                                <td className="py-3.5 px-4">
+                                                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[0.6875rem] font-semibold">
+                                                        <span className="material-symbols-outlined text-[14px]">check</span>
                                                         {trx.status}
                                                     </span>
                                                 </td>
 
-                                                <td className="py-3 px-3 text-right text-[0.75rem] text-slate-400 whitespace-nowrap">
+                                                <td className="py-3.5 px-4 text-right text-[0.75rem] text-outline whitespace-nowrap">
                                                     {trx.timeAgo}
                                                 </td>
                                             </tr>
@@ -402,12 +402,12 @@ export default function Dashboard() {
                     {/* Right 4-col: Category Distribution, Action Approvals, Activity */}
                     <div className="lg:col-span-4 flex flex-col gap-6">
                         {/* Category Distribution */}
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 rounded-xl shadow-xs">
+                        <div className="bg-surface-container-lowest p-5 sm:p-6 rounded-xl shadow-sm border border-surface-container">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="font-heading text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100">
+                                <h2 className="font-heading text-lg font-semibold text-on-surface">
                                     Distribusi Kategori
                                 </h2>
-                                <span className="material-symbols-outlined text-slate-400 text-[19px]">
+                                <span className="material-symbols-outlined text-outline text-[20px]">
                                     pie_chart
                                 </span>
                             </div>
@@ -416,16 +416,16 @@ export default function Dashboard() {
                                 {categories.map((cat) => (
                                     <div key={cat.name}>
                                         <div className="flex justify-between items-center text-[0.8125rem] mb-1.5">
-                                            <span className="text-slate-700 dark:text-slate-300 font-medium truncate pr-2">
+                                            <span className="text-on-surface font-medium truncate pr-2">
                                                 {cat.name}
                                             </span>
-                                            <span className="font-semibold text-slate-800 dark:text-slate-200">
+                                            <span className={`font-bold ${cat.colorClass}`}>
                                                 {cat.percentage}%
                                             </span>
                                         </div>
-                                        <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                                        <div className="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
                                             <div
-                                                className="bg-teal-600 h-full rounded-full transition-all duration-500"
+                                                className={`${cat.barColorClass} h-full rounded-full transition-all duration-500`}
                                                 style={{ width: `${cat.percentage}%` }}
                                             ></div>
                                         </div>
@@ -433,54 +433,62 @@ export default function Dashboard() {
                                 ))}
                             </div>
 
-                            <div className="mt-5 p-3 bg-slate-50 dark:bg-slate-800/60 rounded-lg flex items-center justify-between border border-slate-200/60 dark:border-slate-700/60">
-                                <span className="text-[0.75rem] text-slate-500 dark:text-slate-400 font-medium">
+                            <div className="mt-5 p-3 bg-surface-container-low rounded-lg flex items-center justify-between border border-surface-container">
+                                <span className="text-[0.75rem] text-on-surface-variant font-medium">
                                     Total Siswa Terdaftar
                                 </span>
-                                <span className="text-[0.8125rem] font-bold text-slate-800 dark:text-slate-200">
+                                <span className="text-[0.875rem] font-bold text-on-surface">
                                     {formatNumber(kpi.activeStudents)} Siswa
                                 </span>
                             </div>
                         </div>
 
                         {/* Pending Approvals */}
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 rounded-xl shadow-xs">
+                        <div className="bg-surface-container-lowest p-5 sm:p-6 rounded-xl shadow-sm border border-surface-container">
                             <div className="flex items-center justify-between mb-1">
                                 <div className="flex items-center gap-2">
-                                    <h2 className="font-heading text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100">
+                                    <h2 className="font-heading text-lg font-semibold text-on-surface">
                                         Menunggu Persetujuan
                                     </h2>
-                                    <span className="h-1.5 w-1.5 rounded-full bg-rose-500"></span>
+                                    <span className="h-2 w-2 rounded-full bg-error"></span>
                                 </div>
-                                <span className="text-[0.75rem] text-slate-400 font-medium">
-                                    3 Kategori
+                                <span className="text-[0.75rem] text-outline font-medium">
+                                    3 Kategori Tugas
                                 </span>
                             </div>
-                            <p className="text-[0.8125rem] text-slate-500 dark:text-slate-400 mb-4">
-                                Antrean moderasi tindakan admin/instruktur
+                            <p className="text-[0.8125rem] text-on-surface-variant mb-4">
+                                Antrean moderasi yang membutuhkan tindakan admin/instruktur utama
                             </p>
 
                             <div className="space-y-2.5">
                                 {pendingActions.map((action) => (
                                     <div
                                         key={action.id}
-                                        className="p-3 bg-slate-50/70 hover:bg-slate-100/80 dark:bg-slate-800/40 dark:hover:bg-slate-800/80 rounded-lg flex items-start gap-3 transition-colors border border-slate-200/50 dark:border-slate-700/40"
+                                        className="p-3 bg-surface-container-low hover:bg-surface-container rounded-lg flex items-start gap-3 transition-colors border border-surface-container"
                                     >
-                                        <div className="p-2 rounded-lg bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-400 shrink-0 border border-teal-100 dark:border-teal-900">
-                                            <span className="material-symbols-outlined text-[17px]">
+                                        <div className={`p-2 rounded-lg ${action.iconBgColor} ${action.iconTextColor} shrink-0`}>
+                                            <span className="material-symbols-outlined text-[18px]">
                                                 {action.icon}
                                             </span>
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between gap-1">
-                                                <span className="text-[0.8125rem] font-semibold text-slate-800 dark:text-slate-200 truncate">
+                                                <span className="text-[0.8125rem] font-semibold text-on-surface truncate">
                                                     {action.title}
                                                 </span>
-                                                <span className="text-[0.6875rem] font-medium text-teal-700 dark:text-teal-400 shrink-0">
+                                                <span
+                                                    className={`text-[0.6875rem] font-medium shrink-0 ${
+                                                        action.badgeType === 'error'
+                                                            ? 'text-error'
+                                                            : action.badgeType === 'primary'
+                                                            ? 'text-primary'
+                                                            : 'text-outline'
+                                                    }`}
+                                                >
                                                     {action.badgeText}
                                                 </span>
                                             </div>
-                                            <p className="text-[0.75rem] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
+                                            <p className="text-[0.75rem] text-on-surface-variant mt-0.5 line-clamp-1">
                                                 {action.description}
                                             </p>
                                         </div>
@@ -490,25 +498,25 @@ export default function Dashboard() {
                         </div>
 
                         {/* System Activity */}
-                        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 rounded-xl shadow-xs">
+                        <div className="bg-surface-container-lowest p-5 sm:p-6 rounded-xl shadow-sm border border-surface-container">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="font-heading text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100">
+                                <h2 className="font-heading text-lg font-semibold text-on-surface">
                                     Log Aktivitas Sistem
                                 </h2>
-                                <span className="material-symbols-outlined text-slate-400 text-[19px]">
+                                <span className="material-symbols-outlined text-outline text-[20px]">
                                     security
                                 </span>
                             </div>
 
-                            <div className="space-y-3.5">
+                            <div className="space-y-4">
                                 {activityLogs.map((log) => (
                                     <div key={log.id} className="flex items-start gap-3">
-                                        <div className="h-2 w-2 rounded-full bg-teal-600 mt-1.5 shrink-0"></div>
+                                        <div className={`h-2 w-2 rounded-full ${log.dotColorClass} mt-1.5 shrink-0`}></div>
                                         <div className="min-w-0 flex-1">
-                                            <p className="text-[0.8125rem] text-slate-800 dark:text-slate-200 font-medium leading-snug">
+                                            <p className="text-[0.8125rem] text-on-surface font-medium leading-snug">
                                                 {log.message}
                                             </p>
-                                            <span className="text-[0.6875rem] text-slate-400">
+                                            <span className="text-[0.6875rem] text-outline">
                                                 {log.meta}
                                             </span>
                                         </div>
@@ -518,7 +526,7 @@ export default function Dashboard() {
 
                             <button
                                 type="button"
-                                className="w-full mt-4 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 text-[0.8125rem] font-semibold transition-colors text-center border border-slate-200/80 dark:border-slate-700"
+                                className="w-full mt-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-[0.8125rem] font-semibold transition-colors text-center border border-surface-container"
                             >
                                 Buka Audit Trail Lengkap
                             </button>
