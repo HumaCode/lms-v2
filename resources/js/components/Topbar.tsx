@@ -16,7 +16,7 @@ export default function Topbar({
     breadcrumbParent = 'ADMIN CONSOLE',
     breadcrumbCurrent = 'DASHBOARD UTAMA',
 }: TopbarProps) {
-    const user = usePage<PageProps>().props.auth.user;
+    const user = usePage<PageProps>().props?.auth?.user ?? {};
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
     return (

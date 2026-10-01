@@ -1,1 +1,2 @@
-export type * from './auth';
+export type * from './course';
+export * from './index.d';

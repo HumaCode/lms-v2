@@ -39,7 +39,11 @@ class HandleInertiaRequests extends Middleware
                     'role' => $user->roles->first()?->slug ?? $user->roles->first()?->name ?? 'User',
                 ]) : null,
             ],
-            'menus' => fn () => auth()->check() ? filteredMenus() : [],
+            'menus' => fn () => auth()->check() ? filteredMenus() : (object) [],
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ],
         ];
     }
 }

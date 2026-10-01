@@ -9,8 +9,10 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
-    const { auth, menus = {} } = usePage<PageProps>().props;
-    const user = auth.user;
+    const rawMenus = usePage<PageProps>().props?.menus;
+    const menus = (rawMenus && typeof rawMenus === 'object') ? rawMenus : {};
+    const { auth } = usePage<PageProps>().props;
+    const user = auth?.user ?? {};
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
     // Helper to format or resolve URL path
@@ -43,12 +45,14 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
     const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>(() => {
         const initialOpen: Record<string, boolean> = {};
         if (menus && typeof menus === 'object') {
-            Object.values(menus).forEach((items) => {
-                const list = Array.isArray(items) ? items : Object.values(items);
+            Object.values(menus).forEach((rawItems) => {
+                if (!rawItems) return;
+                const list = (Array.isArray(rawItems) ? rawItems : (typeof rawItems === 'object' ? Object.values(rawItems) : [])) as MenuItem[];
                 list.forEach((item: MenuItem) => {
+                    if (!item) return;
                     const children = item.subMenus || item.sub_menus || [];
                     if (children.length > 0) {
-                        const hasActiveChild = children.some((child) => isCurrentRoute(child.url));
+                        const hasActiveChild = children.some((child) => isCurrentRoute(child?.url));
                         if (hasActiveChild) {
                             initialOpen[item.name] = true;
                         }
@@ -69,9 +73,9 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
     // Transform menus object/collection into structured categories
     const menuSections = useMemo(() => {
         if (!menus || typeof menus !== 'object') return [];
-        return Object.entries(menus).map(([category, items]) => ({
+        return Object.entries(menus).map(([category, rawItems]) => ({
             category,
-            items: Array.isArray(items) ? items : Object.values(items),
+            items: (Array.isArray(rawItems) ? rawItems : (rawItems && typeof rawItems === 'object' ? Object.values(rawItems) : [])) as MenuItem[],
         }));
     }, [menus]);
 
