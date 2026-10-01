@@ -1,109 +1,7 @@
 import LogoutConfirmModal from '@/components/LogoutConfirmModal';
-import { PageProps } from '@/types';
+import { MenuItem, PageProps } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
-
-interface SidebarMenuChild {
-    name: string;
-    path: string;
-}
-
-interface SidebarMenuItem {
-    name: string;
-    path: string;
-    icon: string;
-    badge?: string;
-    children?: SidebarMenuChild[];
-}
-
-interface SidebarSection {
-    title: string;
-    items: SidebarMenuItem[];
-}
-
-const MENU_SECTIONS: SidebarSection[] = [
-    {
-        title: 'MAIN MENU',
-        items: [
-            {
-                name: 'Dashboard',
-                path: 'dashboard',
-                icon: 'grid_view',
-            },
-            {
-                name: 'Pengguna',
-                path: 'pengguna',
-                icon: 'group',
-            },
-            {
-                name: 'Kursus & Modul',
-                path: 'kursus',
-                icon: 'school',
-                children: [
-                    { name: 'Semua Kursus', path: 'kursus.index' },
-                    { name: 'Buat Kursus Baru', path: 'kursus.create' },
-                    { name: 'Kategori & Silabus', path: 'kursus.kategori' },
-                ],
-            },
-            {
-                name: 'Bootcamp',
-                path: 'bootcamp',
-                icon: 'code_blocks',
-            },
-            {
-                name: 'E-Book',
-                path: 'ebook',
-                icon: 'menu_book',
-            },
-            {
-                name: 'Blog & Artikel',
-                path: 'blog',
-                icon: 'article',
-                children: [
-                    { name: 'Semua Artikel', path: 'blog.index' },
-                    { name: 'Tulis Artikel Baru', path: 'blog.create' },
-                    { name: 'Kategori & Tag', path: 'blog.kategori' },
-                    { name: 'Komentar & Diskusi', path: 'blog.komentar' },
-                ],
-            },
-            {
-                name: 'Tugas & Review Code',
-                path: 'tugas',
-                icon: 'terminal',
-            },
-            {
-                name: 'Transaksi',
-                path: 'transaksi',
-                icon: 'payments',
-            },
-            {
-                name: 'Sertifikat',
-                path: 'sertifikat',
-                icon: 'verified',
-            },
-        ],
-    },
-    {
-        title: 'ADMINISTRASI',
-        items: [
-            {
-                name: 'Manajemen Menu',
-                path: 'admin.menus',
-                icon: 'view_list',
-            },
-            {
-                name: 'Role & Permission',
-                path: 'admin.roles',
-                icon: 'shield_person',
-            },
-            {
-                name: 'Pengaturan',
-                path: 'admin.settings',
-                icon: 'settings',
-            },
-        ],
-    },
-];
+import { useMemo, useState } from 'react';
 
 interface SidebarProps {
     isOpenMobile: boolean;
@@ -111,11 +9,54 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
-    const user = usePage<PageProps>().props.auth.user;
+    const { auth, menus = {} } = usePage<PageProps>().props;
+    const user = auth.user;
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-    const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({
-        'Kursus & Modul': true,
-        'Blog & Artikel': false,
+
+    // Helper to format or resolve URL path
+    const resolveHref = (url?: string) => {
+        if (!url || url === '#') return '#';
+        if (url.startsWith('http://') || url.startsWith('https://')) return url;
+        if (url === 'dashboard') {
+            try {
+                return route('dashboard');
+            } catch {
+                return '/dashboard';
+            }
+        }
+        return url.startsWith('/') ? url : `/${url}`;
+    };
+
+    const isCurrentRoute = (url?: string) => {
+        if (!url) return false;
+        try {
+            if (url === 'dashboard' && route().current('dashboard')) return true;
+            const currentPath = window.location.pathname.replace(/^\/|\/$/g, '');
+            const cleanUrl = url.replace(/^\/|\/$/g, '');
+            return currentPath === cleanUrl || (cleanUrl !== '' && currentPath.startsWith(cleanUrl));
+        } catch {
+            return false;
+        }
+    };
+
+    // State for open submenus: only open by default if one of child routes is active
+    const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>(() => {
+        const initialOpen: Record<string, boolean> = {};
+        if (menus && typeof menus === 'object') {
+            Object.values(menus).forEach((items) => {
+                const list = Array.isArray(items) ? items : Object.values(items);
+                list.forEach((item: MenuItem) => {
+                    const children = item.subMenus || item.sub_menus || [];
+                    if (children.length > 0) {
+                        const hasActiveChild = children.some((child) => isCurrentRoute(child.url));
+                        if (hasActiveChild) {
+                            initialOpen[item.name] = true;
+                        }
+                    }
+                });
+            });
+        }
+        return initialOpen;
     });
 
     const toggleSubmenu = (title: string) => {
@@ -125,13 +66,14 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
         }));
     };
 
-    const isCurrentRoute = (path: string) => {
-        try {
-            return route().current(path) || (path === 'dashboard' && route().current('dashboard'));
-        } catch {
-            return path === 'dashboard';
-        }
-    };
+    // Transform menus object/collection into structured categories
+    const menuSections = useMemo(() => {
+        if (!menus || typeof menus !== 'object') return [];
+        return Object.entries(menus).map(([category, items]) => ({
+            category,
+            items: Array.isArray(items) ? items : Object.values(items),
+        }));
+    }, [menus]);
 
     return (
         <>
@@ -166,32 +108,43 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
                 {/* Navigation Links */}
                 <div className="sidebar-scroll flex-1 overflow-y-auto px-4 py-3 space-y-4">
                     <nav className="space-y-1">
-                        {MENU_SECTIONS.map((section) => (
-                            <div key={section.title} className="space-y-1">
+                        {menuSections.map((section) => (
+                            <div key={section.category} className="space-y-1">
                                 <div className="px-2 pt-3 pb-1">
                                     <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-outline">
-                                        {section.title}
+                                        {section.category}
                                     </span>
                                 </div>
 
-                                {section.items.map((item) => {
-                                    const hasChildren = item.children && item.children.length > 0;
-                                    const isActive = isCurrentRoute(item.path);
-                                    const isSubmenuOpen = openSubmenus[item.name];
+                                {section.items.map((item: MenuItem) => {
+                                    const children = item.subMenus || item.sub_menus || [];
+                                    const hasChildren = children.length > 0;
+                                    const href = resolveHref(item.url);
+                                    const hasActiveChild = children.some((child) => isCurrentRoute(child.url));
+                                    const isActive = isCurrentRoute(item.url) || hasActiveChild;
+                                    const isSubmenuOpen = !!openSubmenus[item.name];
 
                                     if (hasChildren) {
                                         return (
-                                            <div key={item.name} className="space-y-1">
+                                            <div key={item.id || item.name} className="space-y-1">
                                                 <button
                                                     type="button"
                                                     onClick={() => toggleSubmenu(item.name)}
-                                                    className="flex w-full items-center justify-between px-2.5 py-2 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors text-[0.875rem]"
+                                                    className={`group flex w-full items-center justify-between px-2.5 py-2 rounded-lg transition-colors text-[0.875rem] ${
+                                                        isActive
+                                                            ? 'text-primary font-semibold bg-surface-container-low'
+                                                            : 'text-on-surface hover:bg-surface-container-low'
+                                                    }`}
                                                 >
                                                     <div className="flex items-center gap-2.5">
-                                                        <span className="material-symbols-outlined text-[20px] text-primary">
-                                                            {item.icon}
+                                                        <span
+                                                            className={`material-symbols-outlined text-[20px] ${
+                                                                isActive ? 'text-primary' : 'text-outline group-hover:text-primary'
+                                                            } transition-colors`}
+                                                        >
+                                                            {item.icon || 'folder'}
                                                         </span>
-                                                        <span className="font-semibold">{item.name}</span>
+                                                        <span>{item.name}</span>
                                                     </div>
                                                     <span
                                                         className={`material-symbols-outlined text-[18px] text-outline transition-transform duration-200 ${
@@ -204,16 +157,24 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
 
                                                 {isSubmenuOpen && (
                                                     <div className="space-y-1 pl-8 pr-1 pt-0.5">
-                                                        {item.children?.map((child) => (
-                                                            <a
-                                                                key={child.name}
-                                                                href="#"
-                                                                onClick={(e) => e.preventDefault()}
-                                                                className="block px-2.5 py-1.5 rounded-lg text-[0.8125rem] text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
-                                                            >
-                                                                {child.name}
-                                                            </a>
-                                                        ))}
+                                                        {children.map((child: MenuItem) => {
+                                                            const childHref = resolveHref(child.url);
+                                                            const isChildActive = isCurrentRoute(child.url);
+
+                                                            return (
+                                                                <Link
+                                                                    key={child.id || child.name}
+                                                                    href={childHref}
+                                                                    className={`block px-2.5 py-1.5 rounded-lg text-[0.8125rem] transition-colors ${
+                                                                        isChildActive
+                                                                            ? 'bg-primary-container/60 text-primary font-semibold'
+                                                                            : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'
+                                                                    }`}
+                                                                >
+                                                                    {child.name}
+                                                                </Link>
+                                                            );
+                                                        })}
                                                     </div>
                                                 )}
                                             </div>
@@ -222,8 +183,8 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
 
                                     return (
                                         <Link
-                                            key={item.name}
-                                            href={item.path === 'dashboard' ? route('dashboard') : '#'}
+                                            key={item.id || item.name}
+                                            href={href}
                                             className={`group flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[0.875rem] transition-all ${
                                                 isActive
                                                     ? 'bg-primary-container text-on-primary font-semibold shadow-xs'
@@ -237,7 +198,7 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
                                                         : 'text-outline group-hover:text-primary'
                                                 } transition-colors`}
                                             >
-                                                {item.icon}
+                                                {item.icon || 'circle'}
                                             </span>
                                             <span>{item.name}</span>
                                         </Link>
