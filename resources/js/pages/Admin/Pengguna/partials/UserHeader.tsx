@@ -7,11 +7,6 @@ export default function UserHeader({ canCreate, onAddUser }: UserHeaderProps) {
     return (
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-outline font-semibold">
-                    <span>Admin Area</span>
-                    <span className="material-symbols-outlined text-[14px]">chevron_right</span>
-                    <span className="text-primary">Manajemen Pengguna</span>
-                </div>
                 <h1 className="font-heading text-2xl sm:text-3xl font-bold text-on-surface tracking-tight">
                     Daftar Pengguna &amp; Anggota
                 </h1>

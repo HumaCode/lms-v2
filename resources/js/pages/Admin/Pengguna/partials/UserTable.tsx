@@ -79,12 +79,19 @@ export default function UserTable({
                     ) : (
                         users.map((u) => {
                             const isSelected = selectedIds.includes(u.id);
+                            const isSuspended = u.status === 'suspended';
 
                             return (
                                 <tr
                                     key={u.id}
-                                    className={`transition-colors hover:bg-surface ${
-                                        isSelected ? 'bg-secondary-container/15' : ''
+                                    className={`transition-colors ${
+                                        isSelected
+                                            ? isSuspended
+                                                ? 'bg-slate-200/80 hover:bg-slate-200'
+                                                : 'bg-secondary-container/20 hover:bg-secondary-container/30'
+                                            : isSuspended
+                                            ? 'bg-slate-100/90 hover:bg-slate-200/70'
+                                            : 'hover:bg-surface'
                                     }`}
                                 >
                                     <td className="py-3.5 px-6">
@@ -100,9 +107,12 @@ export default function UserTable({
                                     <td className="py-3.5 px-3">
                                         <div className="flex items-center gap-3">
                                             <img
+                                                key={u.avatar_url}
                                                 src={u.avatar_url}
                                                 alt={u.name}
-                                                className="w-10 h-10 rounded-full object-cover shrink-0 shadow-2xs border border-surface-container"
+                                                className={`w-10 h-10 rounded-full object-cover shrink-0 shadow-2xs border border-surface-container ${
+                                                    isSuspended ? 'opacity-85' : ''
+                                                }`}
                                             />
                                             <div className="flex flex-col min-w-0">
                                                 <div className="flex items-center gap-1.5">
@@ -148,11 +158,11 @@ export default function UserTable({
                                     {/* Status */}
                                     <td className="py-3.5 px-3">
                                         <span
-                                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${
+                                            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${
                                                 u.status === 'active'
                                                     ? 'bg-secondary-container/40 text-on-secondary-container'
                                                     : u.status === 'suspended'
-                                                    ? 'bg-error-container/40 text-on-error-container'
+                                                    ? 'bg-rose-50 text-rose-700 border border-rose-200/80 shadow-2xs'
                                                     : 'bg-surface-container text-on-surface-variant'
                                             }`}
                                         >
@@ -161,7 +171,7 @@ export default function UserTable({
                                                     u.status === 'active'
                                                         ? 'bg-primary'
                                                         : u.status === 'suspended'
-                                                        ? 'bg-error'
+                                                        ? 'bg-rose-600'
                                                         : 'bg-outline'
                                                 }`}
                                             ></span>
@@ -177,6 +187,21 @@ export default function UserTable({
                                     {/* Action Buttons */}
                                     <td className="py-3.5 px-6 text-right">
                                         <div className="flex items-center justify-end gap-1.5">
+                                            {/* 1. Detail / View Profile */}
+                                            <Tooltip content="Lihat Profil Lengkap" variant="blue" position="top">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => onView(u)}
+                                                    className="w-8 h-8 rounded-lg flex items-center justify-center bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-200 transition-all duration-200 cursor-pointer shadow-2xs"
+                                                    aria-label="Lihat Profil Lengkap"
+                                                >
+                                                    <span className="material-symbols-outlined text-[17px]">
+                                                        visibility
+                                                    </span>
+                                                </button>
+                                            </Tooltip>
+
+                                            {/* 2. Edit User */}
                                             {can.update && (
                                                 <Tooltip content="Ubah Data Akun" variant="emerald" position="top">
                                                     <button
@@ -192,19 +217,7 @@ export default function UserTable({
                                                 </Tooltip>
                                             )}
 
-                                            <Tooltip content="Lihat Profil Lengkap" variant="blue" position="top">
-                                                <button
-                                                    type="button"
-                                                    onClick={() => onView(u)}
-                                                    className="w-8 h-8 rounded-lg flex items-center justify-center bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-200 transition-all duration-200 cursor-pointer shadow-2xs"
-                                                    aria-label="Lihat Profil Lengkap"
-                                                >
-                                                    <span className="material-symbols-outlined text-[17px]">
-                                                        visibility
-                                                    </span>
-                                                </button>
-                                            </Tooltip>
-
+                                            {/* 3. Delete User */}
                                             {can.delete && (
                                                 <Tooltip content="Hapus Pengguna" variant="rose" position="top" align="right">
                                                     <button

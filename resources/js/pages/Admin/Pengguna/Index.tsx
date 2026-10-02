@@ -1,3 +1,6 @@
+import ActionConfirmModal from '@/components/ActionConfirmModal';
+import AppToast from '@/components/AppToast';
+import DeleteConfirmModal from '@/components/DeleteConfirmModal';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PaginatedData, PageProps, UserData, UserMetrics, UserRole } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react';
@@ -83,14 +86,28 @@ export default function PenggunaIndex(rawProps: Props) {
     };
 
     const [users, setUsers] = useState(safeUsers);
+    const [metrics, setMetrics] = useState<UserMetrics>(safeMetrics);
     const [isLoading, setIsLoading] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [pageToast, setPageToast] = useState<{
+        show: boolean;
+        type: 'success' | 'danger' | 'warning' | 'info';
+        title?: string;
+        message?: string;
+    }>({
+        show: false,
+        type: 'success',
+    });
 
-    // Keep users state in sync if Inertia reloads page props
+    // Keep users & metrics state in sync if Inertia reloads page props
     useEffect(() => {
         setUsers(safeUsers);
     }, [rawProps?.users]);
 
-    const metrics = safeMetrics;
+    useEffect(() => {
+        setMetrics(safeMetrics);
+    }, [rawProps?.metrics]);
+
     const roles = safeRoles;
     const can = safeCan;
 
@@ -111,6 +128,10 @@ export default function PenggunaIndex(rawProps: Props) {
     const [editingUser, setEditingUser] = useState<UserData | null>(null);
     const [viewingUser, setViewingUser] = useState<UserData | null>(null);
     const [userToDelete, setUserToDelete] = useState<UserData | null>(null);
+    const [showBulkDeleteModal, setShowBulkDeleteModal] = useState(false);
+    const [isBulkDeleting, setIsBulkDeleting] = useState(false);
+    const [statusActionPending, setStatusActionPending] = useState<'active' | 'suspended' | null>(null);
+    const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
 
     // Apply filters & pagination via AJAX without changing browser URL
     const applyFilters = async (overrides: Record<string, string> = {}) => {
@@ -145,7 +166,7 @@ export default function PenggunaIndex(rawProps: Props) {
             const result = await res.json();
 
             if (result && result.success && result.data) {
-                const responseData = result.data;
+                const responseData = result.data.users ? result.data.users : result.data;
                 const meta = responseData.meta || {};
                 setUsers({
                     data: Array.isArray(responseData.data) ? responseData.data : [],
@@ -162,6 +183,9 @@ export default function PenggunaIndex(rawProps: Props) {
                     to: meta.to ?? 0,
                     total: meta.total ?? 0,
                 });
+                if (result.data.metrics) {
+                    setMetrics(result.data.metrics);
+                }
                 setSelectedIds([]);
             }
         } catch (err) {
@@ -196,42 +220,183 @@ export default function PenggunaIndex(rawProps: Props) {
         );
     };
 
-    // Bulk actions
-    const handleBulkStatus = (status: string) => {
+    // Bulk status actions with confirmation modal
+    const handleOpenBulkStatus = (status: string) => {
         if (selectedIds.length === 0) return;
+        if (status === 'active' || status === 'suspended') {
+            setStatusActionPending(status);
+        }
+    };
+
+    const handleConfirmBulkStatus = () => {
+        if (selectedIds.length === 0 || !statusActionPending || isUpdatingStatus) return;
+        const targetStatus = statusActionPending;
+        const idsToUpdate = [...selectedIds];
+        setIsUpdatingStatus(true);
+
         router.post(
             route('pengguna.bulk-status'),
-            { ids: selectedIds, status },
+            { ids: idsToUpdate, status: targetStatus },
             {
+                preserveScroll: true,
                 onSuccess: () => {
+                    setIsUpdatingStatus(false);
+                    setStatusActionPending(null);
                     setSelectedIds([]);
+
+                    // Optimistic UI update
+                    setUsers((prev) => ({
+                        ...prev,
+                        data: prev.data.map((u) =>
+                            idsToUpdate.includes(u.id) ? { ...u, status: targetStatus } : u
+                        ),
+                    }));
+                    applyFilters();
+
+                    setPageToast({
+                        show: true,
+                        type: targetStatus === 'active' ? 'success' : 'warning',
+                        title: targetStatus === 'active' ? 'Status Berhasil Diaktifkan' : 'Status Ditangguhkan',
+                        message: `${idsToUpdate.length} pengguna terpilih telah berhasil ${
+                            targetStatus === 'active' ? 'diaktifkan' : 'ditangguhkan'
+                        }.`,
+                    });
+                },
+                onError: (err) => {
+                    setIsUpdatingStatus(false);
+                    const firstErrorKey = Object.keys(err)[0];
+                    const firstErrorMsg = firstErrorKey
+                        ? err[firstErrorKey]
+                        : 'Gagal memperbarui status pengguna terpilih. Silakan coba lagi.';
+
+                    setPageToast({
+                        show: true,
+                        type: 'danger',
+                        title: 'Gagal Memperbarui Status',
+                        message: String(firstErrorMsg),
+                    });
                     applyFilters();
                 },
             }
         );
     };
 
-    const handleBulkDelete = () => {
+    const handleOpenBulkDelete = () => {
         if (selectedIds.length === 0) return;
-        if (confirm(`Yakin ingin menghapus ${selectedIds.length} pengguna terpilih?`)) {
-            router.delete(route('pengguna.bulk-destroy'), {
-                data: { ids: selectedIds },
-                onSuccess: () => {
-                    setSelectedIds([]);
-                    applyFilters();
-                },
-            });
-        }
+        setShowBulkDeleteModal(true);
     };
 
-    const handleDeleteSingle = () => {
-        if (!userToDelete) return;
-        router.delete(route('pengguna.destroy', userToDelete.id), {
+    const handleConfirmBulkDelete = () => {
+        if (selectedIds.length === 0 || isBulkDeleting) return;
+        const idsToDelete = [...selectedIds];
+        setIsBulkDeleting(true);
+
+        router.delete(route('pengguna.bulk-destroy'), {
+            data: { ids: idsToDelete },
+            preserveScroll: true,
             onSuccess: () => {
-                setUserToDelete(null);
+                setIsBulkDeleting(false);
+                setShowBulkDeleteModal(false);
+                setSelectedIds([]);
+
+                // Optimistic UI update: Remove rows immediately without page reload
+                setUsers((prev) => ({
+                    ...prev,
+                    data: prev.data.filter((u) => !idsToDelete.includes(u.id)),
+                    total: Math.max(0, (prev.total || idsToDelete.length) - idsToDelete.length),
+                }));
+                setMetrics((prev) => ({
+                    ...prev,
+                    total_users: Math.max(0, prev.total_users - idsToDelete.length),
+                }));
+                applyFilters();
+
+                setPageToast({
+                    show: true,
+                    type: 'success',
+                    title: 'Berhasil Dihapus',
+                    message: `${idsToDelete.length} pengguna terpilih telah berhasil dihapus dari sistem.`,
+                });
+            },
+            onError: (err) => {
+                setIsBulkDeleting(false);
+                const firstErrorKey = Object.keys(err)[0];
+                const firstErrorMsg = firstErrorKey
+                    ? err[firstErrorKey]
+                    : 'Gagal menghapus beberapa pengguna terpilih. Silakan coba lagi.';
+
+                setPageToast({
+                    show: true,
+                    type: 'danger',
+                    title: 'Gagal Menghapus',
+                    message: String(firstErrorMsg),
+                });
                 applyFilters();
             },
         });
+    };
+
+    const handleDeleteSingle = () => {
+        if (!userToDelete || isDeleting) return;
+        const targetUser = userToDelete;
+        setIsDeleting(true);
+
+        router.delete(route('pengguna.destroy', targetUser.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                setIsDeleting(false);
+                setUserToDelete(null);
+
+                // Optimistic UI update: Remove row immediately from table so it feels instant
+                setUsers((prev) => ({
+                    ...prev,
+                    data: prev.data.filter((u) => u.id !== targetUser.id),
+                    total: Math.max(0, (prev.total || 1) - 1),
+                }));
+                setMetrics((prev) => ({
+                    ...prev,
+                    total_users: Math.max(0, prev.total_users - 1),
+                }));
+                applyFilters();
+
+                setPageToast({
+                    show: true,
+                    type: 'success',
+                    title: 'Berhasil Dihapus',
+                    message: `Pengguna ${targetUser.name} telah berhasil dihapus dari sistem.`,
+                });
+            },
+            onError: (err) => {
+                setIsDeleting(false);
+                const firstErrorKey = Object.keys(err)[0];
+                const firstErrorMsg = firstErrorKey
+                    ? err[firstErrorKey]
+                    : 'Gagal menghapus pengguna. Terjadi kesalahan pada server.';
+
+                setPageToast({
+                    show: true,
+                    type: 'danger',
+                    title: 'Gagal Menghapus',
+                    message: String(firstErrorMsg),
+                });
+            },
+        });
+    };
+
+    const handleFormSuccess = (updatedData?: Partial<UserData>) => {
+        if (updatedData && updatedData.id) {
+            // Optimistic update for edited user
+            setUsers((prev) => ({
+                ...prev,
+                data: prev.data.map((u) =>
+                    u.id === updatedData.id ? { ...u, ...updatedData } : u
+                ),
+            }));
+            applyFilters();
+        } else {
+            // Fresh user added: refresh first page so the new user appears at the top
+            applyFilters({ page: '1' });
+        }
     };
 
     const allSelected = users.data.length > 0 && selectedIds.length === users.data.length;
@@ -241,16 +406,6 @@ export default function PenggunaIndex(rawProps: Props) {
             <Head title="Manajemen Pengguna - Admin Console" />
 
             <div className="flex flex-col w-full pb-8 space-y-6">
-                {/* Flash Success / Error Toast */}
-                {flash?.success && (
-                    <div className="flex items-center gap-2.5 p-4 rounded-xl bg-secondary-container/40 text-on-secondary-container border border-primary/20 text-sm font-medium shadow-xs">
-                        <span className="material-symbols-outlined text-primary text-[20px]">
-                            check_circle
-                        </span>
-                        <span>{flash.success}</span>
-                    </div>
-                )}
-
                 {/* 1. Header & Actions Row */}
                 <UserHeader
                     canCreate={can.create}
@@ -318,8 +473,8 @@ export default function PenggunaIndex(rawProps: Props) {
                     <UserBatchActionBar
                         selectedCount={selectedIds.length}
                         canDelete={can.delete}
-                        onBulkStatus={handleBulkStatus}
-                        onBulkDelete={handleBulkDelete}
+                        onBulkStatus={handleOpenBulkStatus}
+                        onBulkDelete={handleOpenBulkDelete}
                     />
 
                     {/* User Data Table Component */}
@@ -368,6 +523,7 @@ export default function PenggunaIndex(rawProps: Props) {
                     setIsFormOpen(false);
                     setEditingUser(null);
                 }}
+                onSuccess={handleFormSuccess}
                 user={editingUser}
                 roles={roles}
             />
@@ -376,13 +532,99 @@ export default function PenggunaIndex(rawProps: Props) {
                 show={!!viewingUser}
                 onClose={() => setViewingUser(null)}
                 user={viewingUser}
+                onEdit={(u) => {
+                    setViewingUser(null);
+                    setEditingUser(u);
+                    setIsFormOpen(true);
+                }}
             />
 
-            {/* Delete Confirmation Modal */}
+            {/* Single Delete Confirmation Modal */}
             <UserDeleteModal
                 user={userToDelete}
-                onClose={() => setUserToDelete(null)}
+                onClose={() => {
+                    if (!isDeleting) setUserToDelete(null);
+                }}
                 onConfirm={handleDeleteSingle}
+                isDeleting={isDeleting}
+            />
+
+            {/* Bulk Delete Confirmation Modal */}
+            <DeleteConfirmModal
+                show={showBulkDeleteModal}
+                onClose={() => {
+                    if (!isBulkDeleting) setShowBulkDeleteModal(false);
+                }}
+                onConfirm={handleConfirmBulkDelete}
+                title={`Hapus ${selectedIds.length} Pengguna Terpilih?`}
+                subtitle="Tindakan ini permanen dan tidak dapat dibatalkan."
+                itemName={`${selectedIds.length} Pengguna Terpilih`}
+                itemSubtext={
+                    users.data
+                        .filter((u) => selectedIds.includes(u.id))
+                        .slice(0, 3)
+                        .map((u) => u.name)
+                        .join(', ') +
+                    (selectedIds.length > 3 ? ` dan ${selectedIds.length - 3} lainnya` : '')
+                }
+                warningMessage={`Seluruh data akun, peran akses, riwayat aktivitas, dan berkas foto avatar dari ${selectedIds.length} pengguna terpilih ini akan dihapus secara permanen dari server.`}
+                confirmLabel={`Ya, Hapus Semua (${selectedIds.length})`}
+                cancelLabel="Batal"
+                loadingLabel="Sedang proses..."
+                isDeleting={isBulkDeleting}
+            />
+
+            {/* Status Change (Aktifkan / Tangguhkan) Confirmation Modal */}
+            <ActionConfirmModal
+                show={statusActionPending !== null}
+                onClose={() => {
+                    if (!isUpdatingStatus) setStatusActionPending(null);
+                }}
+                onConfirm={handleConfirmBulkStatus}
+                variant={statusActionPending === 'active' ? 'success' : 'warning'}
+                icon={statusActionPending === 'active' ? 'how_to_reg' : 'block'}
+                title={
+                    statusActionPending === 'active'
+                        ? `Aktifkan ${selectedIds.length} Pengguna Terpilih?`
+                        : `Tangguhkan ${selectedIds.length} Pengguna Terpilih?`
+                }
+                subtitle={
+                    statusActionPending === 'active'
+                        ? 'Pengguna yang diaktifkan akan dapat kembali masuk dan mengakses platform pembelajaran.'
+                        : 'Akses akun untuk pengguna terpilih akan dibekukan sementara.'
+                }
+                itemName={`${selectedIds.length} Pengguna Terpilih`}
+                itemBadge={statusActionPending === 'active' ? 'Akan Diaktifkan' : 'Akan Ditangguhkan'}
+                itemSubtext={
+                    users.data
+                        .filter((u) => selectedIds.includes(u.id))
+                        .slice(0, 3)
+                        .map((u) => u.name)
+                        .join(', ') +
+                    (selectedIds.length > 3 ? ` dan ${selectedIds.length - 3} lainnya` : '')
+                }
+                calloutMessage={
+                    statusActionPending === 'active'
+                        ? 'Pengguna aktif memiliki hak akses penuh ke modul dan materi pembelajaran sesuai dengan role peran masing-masing.'
+                        : 'Pengguna yang ditangguhkan tidak akan dapat login atau beraktivitas sampai statusnya diaktifkan kembali oleh Administrator.'
+                }
+                confirmLabel={
+                    statusActionPending === 'active'
+                        ? `Ya, Aktifkan (${selectedIds.length})`
+                        : `Ya, Tangguhkan (${selectedIds.length})`
+                }
+                cancelLabel="Batal"
+                loadingLabel="Sedang proses..."
+                isProcessing={isUpdatingStatus}
+            />
+
+            {/* Dynamic Toast for Page Actions */}
+            <AppToast
+                show={pageToast.show}
+                type={pageToast.type}
+                title={pageToast.title}
+                message={pageToast.message}
+                onClose={() => setPageToast((prev) => ({ ...prev, show: false }))}
             />
         </AuthenticatedLayout>
     );

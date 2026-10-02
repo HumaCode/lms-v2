@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['nullable', 'string', 'max:50', 'alpha_dash', 'unique:users,username'],
+            'username' => ['nullable', 'string', 'max:50', 'regex:/^[a-zA-Z0-9._-]+$/', 'unique:users,username'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['nullable', 'string', 'min:6'],
             'phone' => ['nullable', 'string', 'max:20'],
@@ -32,6 +32,27 @@ class StoreUserRequest extends FormRequest
             'status' => ['required', 'string', 'in:active,inactive,suspended'],
             'role' => ['nullable', 'string'],
             'email_verified' => ['nullable', 'boolean'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'username.regex' => 'Username hanya boleh berisi huruf, angka, titik, strip (-), dan garis bawah (_).',
+            'username.unique' => 'Username ini sudah digunakan pengguna lain.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'email.unique' => 'Alamat email sudah terdaftar di sistem.',
+            'password.min' => 'Password minimal harus 6 karakter.',
+            'avatar.max' => 'Ukuran avatar maksimal 5MB.',
+            'avatar.mimes' => 'Format avatar harus JPEG, PNG, JPG, atau WEBP.',
         ];
     }
 }

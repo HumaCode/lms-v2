@@ -67,17 +67,19 @@ class UserRepository implements UserRepositoryInterface
     public function getUserMetrics(): array
     {
         $totalUsers = User::count();
-        $activeStudents = User::role('user')->where('status', 'active')->count();
-        $instructorsCount = User::role(['instructor', 'dev', 'admin'])->count();
+        $activeStudents = User::whereHas('roles', fn ($q) => $q->where('slug', 'student')->orWhere('name', 'user'))
+            ->where('status', 'active')
+            ->count();
+        $instructorsCount = User::whereHas('roles', fn ($q) => $q->whereIn('slug', ['instructor', 'developer', 'administrator'])->orWhereIn('name', ['instructor', 'dev', 'admin']))->count();
         $unverifiedCount = User::whereNull('email_verified_at')->count();
 
         // Role counts for tab pills
         $roleCounts = [
             'all' => $totalUsers,
-            'student' => User::role('user')->count(),
-            'instructor' => User::role('instructor')->count(),
-            'admin' => User::role('admin')->count(),
-            'developer' => User::role('dev')->count(),
+            'student' => User::whereHas('roles', fn ($q) => $q->where('slug', 'student')->orWhere('name', 'user'))->count(),
+            'instructor' => User::whereHas('roles', fn ($q) => $q->where('slug', 'instructor')->orWhere('name', 'instructor'))->count(),
+            'administrator' => User::whereHas('roles', fn ($q) => $q->where('slug', 'administrator')->orWhere('name', 'admin'))->count(),
+            'developer' => User::whereHas('roles', fn ($q) => $q->where('slug', 'developer')->orWhere('name', 'dev'))->count(),
         ];
 
         return [
@@ -96,13 +98,16 @@ class UserRepository implements UserRepositoryInterface
 
     public function create(array $data): User
     {
-        $role = $data['role'] ?? null;
+        $roleInput = $data['role'] ?? null;
         unset($data['role']);
 
         $user = User::create($data);
 
-        if ($role) {
-            $user->assignRole($role);
+        if ($roleInput) {
+            $roleModel = $this->resolveRole($roleInput);
+            if ($roleModel) {
+                $user->assignRole($roleModel);
+            }
         }
 
         return $user;
@@ -111,11 +116,37 @@ class UserRepository implements UserRepositoryInterface
     public function update(User $user, array $data): bool
     {
         if (isset($data['role'])) {
-            $user->syncRoles([$data['role']]);
+            $roleInput = $data['role'];
             unset($data['role']);
+
+            $roleModel = $this->resolveRole($roleInput);
+            if ($roleModel) {
+                $user->syncRoles([$roleModel]);
+            } else {
+                $user->syncRoles([]);
+            }
         }
 
         return $user->update($data);
+    }
+
+    /**
+     * Resolve a role by slug first, then fallback to name or ID.
+     */
+    protected function resolveRole(mixed $roleInput): ?Role
+    {
+        if ($roleInput instanceof Role) {
+            return $roleInput;
+        }
+
+        if (empty($roleInput)) {
+            return null;
+        }
+
+        return Role::where('slug', $roleInput)
+            ->orWhere('name', $roleInput)
+            ->orWhere('id', $roleInput)
+            ->first();
     }
 
     public function delete(User $user): bool

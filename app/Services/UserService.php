@@ -5,11 +5,14 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Services\Contracts\UserServiceInterface;
+use App\Traits\fileUploadTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserService implements UserServiceInterface
 {
+    use fileUploadTrait;
+
     public function __construct(
         protected UserRepositoryInterface $userRepository
     ) {}
@@ -28,6 +31,9 @@ class UserService implements UserServiceInterface
     public function createUser(array $data): User
     {
         return DB::transaction(function () use ($data) {
+            $avatar = $data['avatar'] ?? null;
+            unset($data['avatar']);
+
             if (! empty($data['password'])) {
                 $data['password'] = Hash::make($data['password']);
             } else {
@@ -40,13 +46,22 @@ class UserService implements UserServiceInterface
 
             unset($data['email_verified']);
 
-            return $this->userRepository->create($data);
+            $user = $this->userRepository->create($data);
+
+            if ($avatar instanceof \Illuminate\Http\UploadedFile) {
+                $this->fileUpload($user, $avatar, 'avatar', '5120');
+            }
+
+            return $user;
         });
     }
 
     public function updateUser(User $user, array $data): bool
     {
         return DB::transaction(function () use ($user, $data) {
+            $avatar = $data['avatar'] ?? null;
+            unset($data['avatar']);
+
             if (! empty($data['password'])) {
                 $data['password'] = Hash::make($data['password']);
             } else {
@@ -58,12 +73,21 @@ class UserService implements UserServiceInterface
                 unset($data['email_verified']);
             }
 
-            return $this->userRepository->update($user, $data);
+            $updated = $this->userRepository->update($user, $data);
+
+            if ($avatar instanceof \Illuminate\Http\UploadedFile) {
+                $this->fileUpload($user, $avatar, 'avatar', '5120');
+            }
+
+            return $updated;
         });
     }
 
     public function deleteUser(User $user): bool
     {
+        // Cek apakah ada avatar, jika ada maka unlink gambarnya dari filesystem
+        $this->removeMedia($user, 'avatar');
+
         return $this->userRepository->delete($user);
     }
 
@@ -74,6 +98,12 @@ class UserService implements UserServiceInterface
 
     public function bulkDeleteUsers(array $ids): int
     {
+        $users = User::whereIn('id', $ids)->get();
+        foreach ($users as $user) {
+            // Cek apakah ada avatar, jika ada maka unlink gambarnya dari filesystem
+            $this->removeMedia($user, 'avatar');
+        }
+
         return $this->userRepository->bulkDelete($ids);
     }
 }

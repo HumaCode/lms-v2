@@ -65,11 +65,39 @@ class User extends Authenticatable implements HasMedia
     }
 
     /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::deleting(function (User $user) {
+            if ($user->hasMedia('avatar')) {
+                foreach ($user->getMedia('avatar') as $media) {
+                    $filePath = $media->getPath();
+                    if (! empty($filePath) && file_exists($filePath)) {
+                        @unlink($filePath);
+
+                        $dir = dirname($filePath);
+                        if (is_dir($dir)) {
+                            $remainingFiles = array_diff(scandir($dir) ?: [], ['.', '..']);
+                            if (empty($remainingFiles)) {
+                                @rmdir($dir);
+                            }
+                        }
+                    }
+
+                    $media->delete();
+                }
+            }
+        });
+    }
+
+    /**
      * Register Spatie Media collections.
      */
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatar')
+            ->useDisk('local')
             ->singleFile();
     }
 
@@ -78,6 +106,14 @@ class User extends Authenticatable implements HasMedia
      */
     public function getAvatarUrlAttribute(): string
     {
-        return $this->getFirstMediaUrl('avatar') ?: 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        $media = $this->getFirstMedia('avatar');
+
+        if (! $media) {
+            return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        }
+
+        $version = $media->updated_at?->timestamp ?? $media->id;
+
+        return route('pengguna.avatar', $this->id).'?v='.$version;
     }
 }

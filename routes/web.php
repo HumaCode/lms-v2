@@ -15,6 +15,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pengguna/getAllPagination', [UserController::class, 'getAllPaginated'])->name('pengguna.allPagination');
+    Route::get('/pengguna/{pengguna}/avatar', [UserController::class, 'avatar'])->name('pengguna.avatar');
     Route::post('/pengguna/bulk-status', [UserController::class, 'bulkStatus'])->name('pengguna.bulk-status');
     Route::delete('/pengguna/bulk-destroy', [UserController::class, 'bulkDestroy'])->name('pengguna.bulk-destroy');
     Route::resource('pengguna', UserController::class)->parameters(['pengguna' => 'pengguna']);

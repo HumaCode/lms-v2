@@ -42,7 +42,10 @@ class UserController extends Controller
             return ResponseHelper::jsonResponse(
                 true,
                 'Data pengguna berhasil dimuat.',
-                new PaginateResource($result['users'], UserResource::class),
+                [
+                    'users' => new PaginateResource($result['users'], UserResource::class),
+                    'metrics' => $result['metrics'],
+                ],
                 200
             );
         } catch (\Throwable $e) {
@@ -103,6 +106,23 @@ class UserController extends Controller
         $this->userService->updateUser($pengguna, $request->validated());
 
         return back()->with('success', 'Data pengguna berhasil diperbarui.');
+    }
+
+    /**
+     * Display or stream user avatar from private storage.
+     */
+    public function avatar(User $pengguna)
+    {
+        $media = $pengguna->getFirstMedia('avatar');
+
+        if (! $media || ! file_exists($media->getPath())) {
+            return redirect('https://ui-avatars.com/api/?name='.urlencode($pengguna->name).'&color=7F9CF5&background=EBF4FF');
+        }
+
+        return response()->file($media->getPath(), [
+            'Content-Type' => $media->mime_type ?? 'image/webp',
+            'Cache-Control' => 'no-cache, private, must-revalidate',
+        ]);
     }
 
     /**
