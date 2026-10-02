@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,6 +14,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/pengguna/getAllPagination', [UserController::class, 'getAllPaginated'])->name('pengguna.allPagination');
     Route::post('/pengguna/bulk-status', [UserController::class, 'bulkStatus'])->name('pengguna.bulk-status');
     Route::delete('/pengguna/bulk-destroy', [UserController::class, 'bulkDestroy'])->name('pengguna.bulk-destroy');
     Route::resource('pengguna', UserController::class)->parameters(['pengguna' => 'pengguna']);

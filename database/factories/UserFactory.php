@@ -29,9 +29,30 @@ class UserFactory extends Factory
             'username' => fake()->unique()->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('123'),
+            'status' => 'active',
             'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Indicate that the user has the student / user role.
+     */
+    public function student(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole('user');
+        });
+    }
+
+    /**
+     * Indicate that the user has a specific role.
+     */
+    public function withRole(string $role): static
+    {
+        return $this->afterCreating(function (User $user) use ($role) {
+            $user->assignRole($role);
+        });
     }
 
     /**

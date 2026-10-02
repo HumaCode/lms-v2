@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\PaginateResource;
 use App\Http\Resources\UserResource;
 use App\Models\Shield\Role;
 use App\Models\User;
 use App\Services\Contracts\UserServiceInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -19,6 +22,38 @@ class UserController extends Controller
     public function __construct(
         protected UserServiceInterface $userService
     ) {}
+
+    /**
+     * Display a paginated listing of users in JSON format.
+     */
+    public function getAllPaginated(Request $request): JsonResponse
+    {
+        Gate::authorize('viewAny', User::class);
+
+        try {
+            $filters = $request->only(['search', 'role', 'status', 'sort']);
+            $perPage = (int) $request->input('per_page', 10);
+            if (! in_array($perPage, [10, 25, 50, 100], true)) {
+                $perPage = 10;
+            }
+
+            $result = $this->userService->getListWithMetrics($filters, $perPage);
+
+            return ResponseHelper::jsonResponse(
+                true,
+                'Data pengguna berhasil dimuat.',
+                new PaginateResource($result['users'], UserResource::class),
+                200
+            );
+        } catch (\Throwable $e) {
+            return ResponseHelper::jsonResponse(
+                false,
+                'Terjadi kesalahan pada server.',
+                null,
+                500
+            );
+        }
+    }
 
     /**
      * Display a listing of the users.
@@ -38,7 +73,7 @@ class UserController extends Controller
         $roles = Role::select(['id', 'name', 'slug'])->get();
 
         return Inertia::render('Admin/Pengguna/Index', [
-            'users' => UserResource::collection($result['users']),
+            'users' => new PaginateResource($result['users'], UserResource::class),
             'metrics' => $result['metrics'],
             'filters' => (object) $filters,
             'roles' => $roles,

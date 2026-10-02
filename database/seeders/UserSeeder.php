@@ -20,17 +20,17 @@ class UserSeeder extends Seeder
 
         $default = [
             'email_verified_at' => now(),
-            'password'          => Hash::make('123'),
-            'remember_token'    => Str::random(20),
-            'status'            => 'active',
+            'password' => Hash::make('123'),
+            'remember_token' => Str::random(20),
+            'status' => 'active',
         ];
 
         foreach ($roles as $role) {
             $user = User::firstOrCreate(
-                ['email' => $role->slug . '@gmail.com'],
+                ['email' => $role->slug.'@gmail.com'],
                 [
                     ...$default,
-                    'name'     => ucwords(str_replace('-', ' ', $role->slug)),
+                    'name' => ucwords(str_replace('-', ' ', $role->slug)),
                     'username' => strtolower($role->slug),
                 ]
             );
@@ -39,6 +39,17 @@ class UserSeeder extends Seeder
             if (! $user->hasRole($role)) {
                 $user->assignRole($role);
             }
+        }
+
+        // Generate 1000 users with student (user) role
+        $studentRole = Role::where('slug', 'student')->orWhere('name', 'user')->first();
+        if ($studentRole) {
+            User::factory()
+                ->count(1000)
+                ->create()
+                ->each(function (User $user) use ($studentRole) {
+                    $user->assignRole($studentRole);
+                });
         }
     }
 }
