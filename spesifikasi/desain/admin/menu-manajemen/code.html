@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Riwayat Transaksi - WPU Course Member Area</title>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with forms and container queries plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config" id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            surface: {
+              subtle: '#f8fafc',
+              card: '#ffffff',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Typography & Micro-adjustments -->
+<style data-purpose="typography">
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<!-- Custom UI Styles -->
+<style data-purpose="custom-ui">
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col">
+<div class="flex min-h-screen overflow-hidden">
+<!-- BEGIN: PersistentSidebar -->
+<aside class="w-64 bg-white border-r border-slate-200 hidden lg:flex flex-col flex-shrink-0 z-30 transition-all duration-300">
+<!-- Sidebar Brand Header -->
+<div class="h-18 px-6 py-5 flex items-center justify-between border-b border-slate-100">
+<a class="flex items-center gap-3 group" href="#">
+<!-- WPU Course Logo Icon (Mortarboard SVG) -->
+<div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-brand-600 transition-transform group-hover:scale-105">
+<svg class="w-6 h-6 text-brand-600" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+<path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-extrabold text-xl tracking-tight text-slate-900 flex items-center leading-none">
+              ★WPU★
+            </span>
+<span class="text-[11px] tracking-widest text-slate-400 font-bold uppercase mt-1">Course Member</span>
+</div>
+</a>
+</div>
+<!-- Navigation Links -->
+<nav aria-label="Menu Utama" class="flex-1 px-4 py-5 space-y-1.5 overflow-y-auto custom-scrollbar">
+<!-- Dashboard Link -->
+<a class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<rect height="7" width="7" x="3" y="3"></rect>
+<rect height="7" width="7" x="14" y="3"></rect>
+<rect height="7" width="7" x="14" y="14"></rect>
+<rect height="7" width="7" x="3" y="14"></rect>
+</svg>
+<span>Dashboard</span>
+</a>
+<!-- Bootcamp Link -->
+<a class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+</svg>
+<span>Bootcamp</span>
+</a>
+<!-- Course / Modul Belajar -->
+<a class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<polygon points="23 7 16 12 23 17 23 7"></polygon>
+<rect height="14" rx="2" ry="2" width="15" x="1" y="5"></rect>
+</svg>
+<span>Course</span>
+</a>
+<!-- E-Book Link -->
+<a class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+</svg>
+<span>E-Book</span>
+</a>
+<!-- AI Guru Link with New Badge -->
+<a class="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<div class="flex items-center gap-3.5">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"></path>
+<path d="M16 14v1a4 4 0 0 1-8 0v-1"></path>
+<line x1="12" x2="12" y1="19" y2="22"></line>
+<line x1="8" x2="16" y1="22" y2="22"></line>
+</svg>
+<span>AI Guru</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-wider bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full">Baru</span>
+</a>
+<!-- Sertifikat Link -->
+<a class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="8" r="6"></circle>
+<path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+</svg>
+<span>Sertifikat</span>
+</a>
+<!-- Transaksi (ACTIVE STATE) -->
+<a class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+<polyline points="14 2 14 8 20 8"></polyline>
+<line x1="16" x2="8" y1="13" y2="13"></line>
+<line x1="16" x2="8" y1="17" y2="17"></line>
+<polyline points="10 9 9 9 8 9"></polyline>
+</svg>
+<span>Transaksi</span>
+</a>
+<!-- Pengaturan Link -->
+<a class="flex items-center gap-3.5 px-3.5 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium text-sm transition-colors" href="#">
+<svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</svg>
+<span>Pengaturan</span>
+</a>
+</nav>
+<!-- Sidebar Footer / Quick Support Widget -->
+<div class="p-4 border-t border-slate-100">
+<a class="flex items-center gap-3 w-full p-2.5 rounded-xl bg-teal-800 text-white shadow-sm hover:bg-teal-900 transition-colors" href="#support-modal">
+<div class="w-8 h-8 rounded-full bg-teal-700/80 flex items-center justify-center shrink-0">
+<svg class="w-4 h-4 text-emerald-300" fill="currentColor" viewbox="0 0 24 24">
+<path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+</svg>
+</div>
+<div class="text-left leading-tight overflow-hidden">
+<div class="font-bold text-xs">Kang APIP Support</div>
+<div class="text-[11px] text-teal-200 truncate">Bantuan Cepat 24/7</div>
+</div>
+</a>
+</div>
+</aside>
+<!-- END: PersistentSidebar -->
+<!-- Main Container -->
+<div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+<!-- BEGIN: TopNavigationBarChrome -->
+<header class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-20 shadow-xs">
+<!-- Left: Sidebar Collapse & Quick Search -->
+<div class="flex items-center gap-3 sm:gap-4 flex-1 max-w-xl">
+<!-- Toggle Sidebar Icon Button -->
+<button aria-label="Perkecil Sidebar" class="w-8 h-8 rounded-full border border-slate-200 hover:bg-slate-100 flex items-center justify-center text-slate-500 transition-colors" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+</button>
+<!-- Search Bar -->
+<div class="relative w-full hidden sm:block">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+</span>
+<input class="w-full pl-9 pr-4 py-1.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white text-slate-700 placeholder-slate-400 transition-all" placeholder="Cari nomor invoice, nama produk, atau ID transaksi..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions & User Profile -->
+<div class="flex items-center gap-3 sm:gap-4">
+<!-- Dark/Light Mode Toggle -->
+<button aria-label="Ganti Tema Tampilan" class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="5"></circle>
+<line x1="12" x2="12" y1="1" y2="3"></line>
+<line x1="12" x2="12" y1="21" y2="23"></line>
+<line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+<line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+<line x1="1" x2="3" y1="12" y2="12"></line>
+<line x1="21" x2="23" y1="12" y2="12"></line>
+<line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+<line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+</svg>
+</button>
+<!-- Notification Bell -->
+<button aria-label="Notifikasi" class="relative p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+</button>
+<!-- Divider -->
+<div class="h-6 w-px bg-slate-200"></div>
+<!-- User Profile Profile Details -->
+<div class="flex items-center gap-3 cursor-pointer pl-1">
+<div class="w-9 h-9 rounded-full bg-teal-100 text-teal-800 border-2 border-teal-500/30 flex items-center justify-center font-bold text-sm overflow-hidden">
+<svg class="w-7 h-7 text-teal-700 mt-1" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+</svg>
+</div>
+<div class="hidden md:flex flex-col text-left">
+<span class="text-xs font-bold text-slate-800 leading-none">Humaidi Zakaria</span>
+<span class="text-[11px] text-slate-400 mt-1">Instructor &amp; Member</span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: TopNavigationBarChrome -->
+<!-- Main Content Area -->
+<main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6"><div class="flex flex-col w-full">
+<!-- Top Breadcrumb & Page Header -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Admin Area</span>
+<span class="material-symbols-outlined text-outline text-xs">chevron_right</span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-semibold">Manajemen Menu</span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div>
+<h1 class="font-display text-display text-on-surface tracking-tight">Manajemen Menu &amp; Navigasi Dinamis</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1.5 max-w-3xl">
+          Kelola struktur navigasi website, megamenu dropdown, sidebar member, hak akses peran (Role-based Access), dan urutan hirarki menu secara visual dan terpusat.
+        </p>
+</div>
+<div class="flex items-center gap-3 self-start lg:self-center shrink-0">
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors shadow-sm font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-base">visibility</span>
+<span>Lihat Pratinjau Live</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors shadow-sm font-label-md text-label-md" id="btn-tambah-menu" type="button">
+<span class="material-symbols-outlined text-base">add</span>
+<span>Tambah Menu Baru</span>
+</button>
+</div>
+</div>
+<!-- Soft Notice / Informational Alert Box -->
+<div class="bg-surface-container-low rounded-xl p-4 shadow-sm flex items-start justify-between gap-4">
+<div class="flex items-start gap-3.5">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed-dim/40 text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-lg">lightbulb</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block mb-0.5">Tips Konfigurasi Menu &amp; Megamenu</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+            Anda dapat mengatur tata letak multi-level (induk &amp; anak menu), deskripsi visual megamenu berkategori, serta isolasi hak akses peran (Publik, Member, Mentor, Superadmin) secara real-time tanpa perlu deployment ulang kode frontend.
+          </p>
+<button class="inline-flex items-center gap-1.5 mt-2 font-label-sm text-label-sm text-primary hover:text-primary-container font-semibold transition-colors" type="button">
+<span>Panduan Struktur Navigasi Dinamis</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<button aria-label="Tutup pemberitahuan" class="text-outline hover:text-on-surface transition-colors p-1" type="button">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+</div>
+<!-- Main 2-Column Responsive Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Tree & Hierarchy (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Location Selector Tabs & Navigation Area -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col gap-3">
+<div class="flex flex-wrap items-center gap-2">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">web</span>
+<span>Topbar Utama (Megamenu)</span>
+<span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded-full font-label-sm text-label-sm">12</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-base">dashboard_customize</span>
+<span>Sidebar Member</span>
+<span class="bg-surface-container-high text-on-surface px-2 py-0.5 rounded-full font-label-sm text-label-sm">8</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-base">admin_panel_settings</span>
+<span>Sidebar Admin</span>
+<span class="bg-surface-container-high text-on-surface px-2 py-0.5 rounded-full font-label-sm text-label-sm">6</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-base">dock_to_bottom</span>
+<span>Footer Link</span>
+<span class="bg-surface-container-high text-on-surface px-2 py-0.5 rounded-full font-label-sm text-label-sm">14</span>
+</button>
+</div>
+<!-- Filter Bar & Tree Controls -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+<div class="relative w-full sm:w-80">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-base">search</span>
+</span>
+<input class="w-full pl-9 pr-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline text-body-sm font-body-sm focus:outline-none focus:bg-surface-container-lowest transition-all" placeholder="Cari label menu, route URL, permission..." type="text"/>
+</div>
+<div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+<button class="px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-label-sm text-label-sm transition-colors" type="button">
+              Ekspansi Semua
+            </button>
+<span class="text-outline text-xs">/</span>
+<button class="px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-label-sm text-label-sm transition-colors" type="button">
+              Ciutkan
+            </button>
+<button class="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-xs">swap_vert</span>
+<span>Simpan Urutan</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Tree Hierarchy Container -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm space-y-3">
+<!-- Level 1: Beranda -->
+<div class="group flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low transition-all shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-lg select-none">drag_indicator</span>
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg">home</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Beranda</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">/</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Tautan Utama Navigasi</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="bg-surface-container text-on-surface px-2.5 py-1 rounded-full font-label-sm text-label-sm">Semua Publik</span>
+<div class="w-9 h-5 bg-primary rounded-full relative p-0.5 cursor-pointer flex items-center justify-end">
+<div class="w-4 h-4 bg-on-primary rounded-full shadow-sm"></div>
+</div>
+<div class="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Tambah Submenu" type="button">
+<span class="material-symbols-outlined text-base">add_circle</span>
+</button>
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Edit Menu" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Level 1: Program (Mega Menu Parent) -->
+<div class="rounded-xl bg-surface-container-low p-4 shadow-sm space-y-3">
+<div class="group flex items-center justify-between">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-lg select-none">drag_indicator</span>
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">auto_stories</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold truncate">Program</span>
+<span class="bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full font-label-sm text-label-sm font-semibold">Mega Menu 2 Kolom</span>
+<span class="font-body-sm text-body-sm text-outline">#dropdown-program</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Dropdown multi-program edukasi WPU Course beserta sub-deskripsinya</p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2.5 py-1 rounded-full font-label-sm text-label-sm">Publik &amp; Member</span>
+<div class="w-9 h-5 bg-primary rounded-full relative p-0.5 cursor-pointer flex items-center justify-end">
+<div class="w-4 h-4 bg-on-primary rounded-full shadow-sm"></div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Tambah Submenu" type="button">
+<span class="material-symbols-outlined text-base">add_circle</span>
+</button>
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Edit Menu" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Nested Sub-items (Level 2) -->
+<div class="pl-6 space-y-2 relative">
+<div class="absolute left-3 top-0 bottom-3 w-0.5 bg-outline-variant/40 rounded-full"></div>
+<!-- Sub Item 1: Online Course -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-base select-none">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-base">videocam</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Online Course</span>
+<span class="text-outline font-label-sm text-label-sm">/course</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline truncate">Belajar melalui video, akses selamanya dan dapatkan sertifikat</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">Member &amp; Guest</span>
+<button class="p-1 text-outline hover:text-primary transition-colors" title="Edit" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1 text-outline hover:text-error transition-colors" title="Hapus" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</div>
+<!-- Sub Item 2: Bootcamp -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-base select-none">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-base">menu_book</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Bootcamp</span>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.2 rounded-full font-label-sm text-label-sm font-semibold">Populer</span>
+<span class="text-outline font-label-sm text-label-sm">/bootcamp</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline truncate">Belajar secara interaktif untuk tingkatkan kemampuan digital kamu</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">Semua Publik</span>
+<button class="p-1 text-outline hover:text-primary transition-colors" title="Edit" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1 text-outline hover:text-error transition-colors" title="Hapus" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</div>
+<!-- Sub Item 3: Partnership -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-base select-none">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-base">handshake</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Partnership</span>
+<span class="text-outline font-label-sm text-label-sm">/partnership</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline truncate">Kerjasama dengan perusahaan untuk branding dan promosi</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">Semua Publik</span>
+<button class="p-1 text-outline hover:text-primary transition-colors" title="Edit" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1 text-outline hover:text-error transition-colors" title="Hapus" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</div>
+<!-- Sub Item 4: Talks -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-base select-none">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-base">mic</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Talks</span>
+<span class="text-outline font-label-sm text-label-sm">/talks</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline truncate">Undang founder dan mentor untuk menjadi pembicara di event kamu</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">Semua Publik</span>
+<button class="p-1 text-outline hover:text-primary transition-colors" title="Edit" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1 text-outline hover:text-error transition-colors" title="Hapus" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</div>
+<!-- Sub Item 5: AI Guru (Segera Hadir) -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-base select-none">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-base">psychology</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">AI Guru</span>
+<span class="bg-surface-container-high text-outline px-2 py-0.2 rounded-full font-label-sm text-label-sm font-semibold">Segera Hadir</span>
+<span class="text-outline font-label-sm text-label-sm">/ai-guru</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline truncate">Belajar dengan mentor AI yang siap membantu kapan saja</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">Member Khusus</span>
+<button class="p-1 text-outline hover:text-primary transition-colors" title="Edit" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1 text-outline hover:text-error transition-colors" title="Hapus" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</div>
+<!-- Sub Item 6: Corporate Training -->
+<div class="group relative flex items-center justify-between p-3 rounded-lg bg-surface-container-lowest hover:bg-surface-container transition-all shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-base select-none">drag_indicator</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-base">domain</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Corporate Training</span>
+<span class="bg-surface-container-high text-outline px-2 py-0.2 rounded-full font-label-sm text-label-sm font-semibold">Segera Hadir</span>
+<span class="text-outline font-label-sm text-label-sm">/corporate</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline truncate">Tingkatkan kemampuan melalui pelatihan terstruktur untuk perusahaan</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">Publik &amp; HR</span>
+<button class="p-1 text-outline hover:text-primary transition-colors" title="Edit" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+<button class="p-1 text-outline hover:text-error transition-colors" title="Hapus" type="button">
+<span class="material-symbols-outlined text-base">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Level 1: Tentang Kami -->
+<div class="group flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low transition-all shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-lg select-none">drag_indicator</span>
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg">info</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Tentang Kami</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">/tentang-kami</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Profil pendiri, tim pengajar &amp; visi misi WPU</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="bg-surface-container text-on-surface px-2.5 py-1 rounded-full font-label-sm text-label-sm">Semua Publik</span>
+<div class="w-9 h-5 bg-primary rounded-full relative p-0.5 cursor-pointer flex items-center justify-end">
+<div class="w-4 h-4 bg-on-primary rounded-full shadow-sm"></div>
+</div>
+<div class="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Tambah Submenu" type="button">
+<span class="material-symbols-outlined text-base">add_circle</span>
+</button>
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Edit Menu" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Level 1: Komunitas -->
+<div class="group flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low transition-all shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-lg select-none">drag_indicator</span>
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg">forum</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Komunitas</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full font-label-sm text-label-sm">Dropdown Biasa</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Discord, Telegram group, dan kanal diskusi coding</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="bg-surface-container text-on-surface px-2.5 py-1 rounded-full font-label-sm text-label-sm">Semua Publik</span>
+<div class="w-9 h-5 bg-primary rounded-full relative p-0.5 cursor-pointer flex items-center justify-end">
+<div class="w-4 h-4 bg-on-primary rounded-full shadow-sm"></div>
+</div>
+<div class="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Tambah Submenu" type="button">
+<span class="material-symbols-outlined text-base">add_circle</span>
+</button>
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Edit Menu" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Level 1: Kontak -->
+<div class="group flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low transition-all shadow-sm">
+<div class="flex items-center gap-3 min-w-0">
+<span class="material-symbols-outlined text-outline cursor-grab active:cursor-grabbing text-lg select-none">drag_indicator</span>
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Kontak</span>
+<span class="bg-surface-container px-2 py-0.5 rounded text-on-surface font-label-sm text-label-sm">/kontak</span>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Pertanyaan umum, konsultasi bisnis, dan bantuan support</span>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<span class="bg-surface-container text-on-surface px-2.5 py-1 rounded-full font-label-sm text-label-sm">Semua Publik</span>
+<div class="w-9 h-5 bg-primary rounded-full relative p-0.5 cursor-pointer flex items-center justify-end">
+<div class="w-4 h-4 bg-on-primary rounded-full shadow-sm"></div>
+</div>
+<div class="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Tambah Submenu" type="button">
+<span class="material-symbols-outlined text-base">add_circle</span>
+</button>
+<button class="p-1.5 text-outline hover:text-primary transition-colors" title="Edit Menu" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Inspector / Quick Edit / Form (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col gap-5 sticky top-24">
+<div class="flex items-center justify-between pb-3 border-b-0">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Konfigurasi Item Menu</h2>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Edit atribut, tipe navigasi, dan hak akses</p>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2.5 py-1 rounded-full font-label-sm text-label-sm font-semibold">Mode Edit</span>
+</div>
+<form class="flex flex-col gap-4">
+<!-- Label Input -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Nama / Label Menu</label>
+<input class="w-full px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:bg-surface-container-lowest transition-all" type="text" value="Online Course"/>
+</div>
+<!-- Tipe Menu Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Tipe Navigasi</label>
+<div class="grid grid-cols-3 gap-1.5 p-1 bg-surface-container-low rounded-lg">
+<button class="py-1.5 rounded-md bg-surface-container-lowest text-primary shadow-xs font-label-sm text-label-sm font-semibold" type="button">Tautan Standar</button>
+<button class="py-1.5 rounded-md text-outline hover:text-on-surface font-label-sm text-label-sm" type="button">Megamenu</button>
+<button class="py-1.5 rounded-md text-outline hover:text-on-surface font-label-sm text-label-sm" type="button">Divider</button>
+</div>
+</div>
+<!-- Menu Induk Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Menu Induk (Parent)</label>
+<div class="relative">
+<select class="w-full px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface text-body-sm font-body-sm appearance-none focus:outline-none focus:bg-surface-container-lowest transition-all pr-8">
+<option value="none">Root (Tanpa Induk / Level 1)</option>
+<option selected="" value="program">Program (Induk Megamenu)</option>
+<option value="komunitas">Komunitas</option>
+</select>
+<span class="material-symbols-outlined text-outline pointer-events-none absolute right-2.5 top-2.5 text-base">expand_more</span>
+</div>
+</div>
+<!-- URL / Route Target -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">URL Target / Path</label>
+<div class="flex items-center rounded-lg bg-surface-container-low overflow-hidden">
+<span class="px-3 text-outline font-label-sm text-label-sm bg-surface-container">/</span>
+<input class="w-full px-3 py-2 bg-transparent text-on-surface text-body-sm font-body-sm focus:outline-none" type="text" value="course"/>
+</div>
+</div>
+<!-- Target Window -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Target Jendela</label>
+<div class="flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer font-body-sm text-body-sm text-on-surface">
+<input checked="" class="text-primary focus:ring-0" name="target_window" type="radio"/>
+<span>Tab yang Sama (_self)</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer font-body-sm text-body-sm text-on-surface">
+<input class="text-primary focus:ring-0" name="target_window" type="radio"/>
+<span>Tab Baru (_blank)</span>
+</label>
+</div>
+</div>
+<!-- Pilihan Ikon -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Ikon Representasi</label>
+<div class="grid grid-cols-6 gap-2">
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base">home</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary-fixed text-primary flex items-center justify-center shadow-xs" type="button">
+<span class="material-symbols-outlined text-base">videocam</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base">menu_book</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base">psychology</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base">handshake</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-base">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Badge Tambahan -->
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Label Badge (Opsional)</label>
+<input class="w-full px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:bg-surface-container-lowest transition-all" placeholder="e.g. BARU, POPULER" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Warna Badge</label>
+<div class="flex items-center gap-2 pt-1.5">
+<span class="w-6 h-6 rounded-full bg-secondary-fixed ring-2 ring-primary ring-offset-1 cursor-pointer"></span>
+<span class="w-6 h-6 rounded-full bg-surface-container-highest cursor-pointer"></span>
+<span class="w-6 h-6 rounded-full bg-error-container cursor-pointer"></span>
+<span class="w-6 h-6 rounded-full bg-tertiary-fixed cursor-pointer"></span>
+</div>
+</div>
+</div>
+<!-- Hak Akses (Role Permissions) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Hak Akses Tampilan (Role)</label>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low p-2.5 rounded-lg">
+<label class="flex items-center gap-2 cursor-pointer font-body-sm text-body-sm text-on-surface">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>Publik / Tamu</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer font-body-sm text-body-sm text-on-surface">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>Member Terdaftar</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer font-body-sm text-body-sm text-on-surface">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>Mentor</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer font-body-sm text-body-sm text-on-surface">
+<input checked="" class="rounded text-primary focus:ring-0" type="checkbox"/>
+<span>Superadmin</span>
+</label>
+</div>
+</div>
+<!-- Sub-deskripsi Menu (Khusus Mega Menu) -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-semibold mb-1.5">Deskripsi Ringkas (Mega Menu)</label>
+<textarea class="w-full px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface text-body-sm font-body-sm focus:outline-none focus:bg-surface-container-lowest transition-all resize-none" rows="2">Belajar melalui video, akses selamanya dan dapatkan sertifikat</textarea>
+</div>
+<!-- Form Actions -->
+<div class="flex items-center gap-3 pt-3">
+<button class="flex-1 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-colors shadow-sm font-label-md text-label-md" type="button">
+              Simpan Perubahan
+            </button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" type="button">
+              Reset
+            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Cache CDN Status & Deployment Sync -->
+<div class="mt-8 bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">cloud_sync</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Status Cache Navigasi Edge &amp; CDN</span>
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold">Tersinkronisasi</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">
+          Terakhir diperbarui 2 menit yang lalu oleh <strong class="text-on-surface font-semibold">Humaidi Zakaria (Superadmin)</strong>. Perubahan diterapkan ke seluruh server edge CDN.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Export JSON Schema</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed transition-colors font-label-md text-label-md shadow-xs" type="button">
+<span class="material-symbols-outlined text-base">bolt</span>
+<span>Bersihkan Cache Menu (Purge CDN)</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interaction for active toggle switches
+  document.querySelectorAll('.cursor-pointer').forEach(item => {
+    item.addEventListener('click', function(e) {
+      if (this.querySelector('div.bg-on-primary')) {
+        const thumb = this.querySelector('div.bg-on-primary');
+        const isRight = this.classList.contains('justify-end');
+        if (isRight) {
+          this.classList.remove('justify-end', 'bg-primary');
+          this.classList.add('justify-start', 'bg-surface-container-high');
+        } else {
+          this.classList.remove('justify-start', 'bg-surface-container-high');
+          this.classList.add('justify-end', 'bg-primary');
+        }
+      }
+    });
+  });
+</script></main>
+<!-- Footer Note -->
+<footer class="py-4 px-6 border-t border-slate-200 bg-white text-center text-xs text-slate-400">
+        © 2026 WPU Course (Web Programming UNPAS). Seluruh hak cipta dilindungi.
+      </footer>
+</div>
+</div>
+</body></html>

@@ -48,9 +48,9 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
             Object.values(menus).forEach((rawItems) => {
                 if (!rawItems) return;
                 const list = (Array.isArray(rawItems) ? rawItems : (typeof rawItems === 'object' ? Object.values(rawItems) : [])) as MenuItem[];
-                list.forEach((item: MenuItem) => {
+                list.filter(Boolean).forEach((item: MenuItem) => {
                     if (!item) return;
-                    const children = item.subMenus || item.sub_menus || [];
+                    const children = (item.subMenus || item.sub_menus || []).filter(Boolean);
                     if (children.length > 0) {
                         const hasActiveChild = children.some((child) => isCurrentRoute(child?.url));
                         if (hasActiveChild) {
@@ -72,11 +72,18 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
 
     // Transform menus object/collection into structured categories
     const menuSections = useMemo(() => {
-        if (!menus || typeof menus !== 'object') return [];
-        return Object.entries(menus).map(([category, rawItems]) => ({
-            category,
-            items: (Array.isArray(rawItems) ? rawItems : (rawItems && typeof rawItems === 'object' ? Object.values(rawItems) : [])) as MenuItem[],
-        }));
+        if (!menus || typeof menus !== 'object' || Array.isArray(menus)) return [];
+        return Object.entries(menus)
+            .filter(([category]) => isNaN(Number(category)))
+            .map(([category, rawItems]) => {
+                const rawList = Array.isArray(rawItems)
+                    ? rawItems
+                    : (rawItems && typeof rawItems === 'object' ? Object.values(rawItems) : []);
+                return {
+                    category,
+                    items: rawList.filter(Boolean) as MenuItem[],
+                };
+            });
     }, [menus]);
 
     return (
@@ -120,11 +127,12 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
                                     </span>
                                 </div>
 
-                                {section.items.map((item: MenuItem) => {
-                                    const children = item.subMenus || item.sub_menus || [];
+                                {section.items.filter(Boolean).map((item: MenuItem) => {
+                                    if (!item) return null;
+                                    const children = (item.subMenus || item.sub_menus || []).filter(Boolean);
                                     const hasChildren = children.length > 0;
                                     const href = resolveHref(item.url);
-                                    const hasActiveChild = children.some((child) => isCurrentRoute(child.url));
+                                    const hasActiveChild = children.some((child) => isCurrentRoute(child?.url));
                                     const isActive = isCurrentRoute(item.url) || hasActiveChild;
                                     const isSubmenuOpen = !!openSubmenus[item.name];
 
@@ -161,7 +169,8 @@ export default function Sidebar({ isOpenMobile, onCloseMobile }: SidebarProps) {
 
                                                 {isSubmenuOpen && (
                                                     <div className="space-y-1 pl-8 pr-1 pt-0.5">
-                                                        {children.map((child: MenuItem) => {
+                                                        {children.filter(Boolean).map((child: MenuItem) => {
+                                                            if (!child) return null;
                                                             const childHref = resolveHref(child.url);
                                                             const isChildActive = isCurrentRoute(child.url);
 

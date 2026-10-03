@@ -33,11 +33,17 @@ class Menu extends Model
     protected $fillable = [
         'name',
         'url',
+        'type',
+        'target',
         'category',
         'icon',
         'active',
         'orders',
         'main_menu_id',
+        'description',
+        'badge_label',
+        'badge_color',
+        'roles',
     ];
 
     protected function casts(): array
@@ -45,6 +51,7 @@ class Menu extends Model
         return [
             'active' => 'boolean',
             'orders' => 'integer',
+            'roles' => 'array',
         ];
     }
 

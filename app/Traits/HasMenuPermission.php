@@ -9,21 +9,38 @@ use App\Models\Shield\Role;
 trait HasMenuPermission
 {
     /**
-     * Attach CRUD permissions to a menu and optionally assign them to roles by slug.
-     *
-     * @param  array<int, string>|null  $permissions
-     * @param  array<int, string|Role>|null  $roles Array of role slugs or Role instances
+     * Abilities mapped from standard controller CRUD and HasPermission trait.
      */
-    public function attachMenupermission(Menu $menu, ?array $permissions = null, ?array $roles = null): void
+    protected array $defaultAbilities = [
+        'menu',
+        'read',
+        'create',
+        'update',
+        'delete',
+    ];
+
+    /**
+     * Attach or sync CRUD permissions for a menu and optionally assign them to roles.
+     *
+     * @param  array<int, string>|null  $permissions Array of abilities (e.g. ['read','create']) or full names (e.g. ['read pengguna'])
+     * @param  array<int, string|Role>|null  $roles Array of role slugs/names or Role instances
+     */
+    public function syncMenuPermissions(Menu $menu, ?array $permissions = null, ?array $roles = null): void
     {
-        if (! is_array($permissions) || empty($permissions)) {
-            $permissions = ['create', 'read', 'update', 'delete'];
+        if (empty($menu->url)) {
+            return;
         }
 
-        // Clean leading slash for uniform permission naming: e.g. "read settings/users"
-        $cleanUrl = ltrim($menu->url, '/');
+        if (! is_array($permissions) || empty($permissions)) {
+            $permissions = ['menu', 'read', 'create', 'update', 'delete'];
+        }
 
-        // Resolve roles by slug or instance
+        $cleanUrl = ltrim(trim($menu->url), '/');
+        if (empty($cleanUrl)) {
+            return;
+        }
+
+        // Resolve roles if provided
         $resolvedRoles = null;
         if (! empty($roles)) {
             $slugs = [];
@@ -32,7 +49,7 @@ trait HasMenuPermission
             foreach ($roles as $role) {
                 if ($role instanceof Role) {
                     $roleModels[] = $role;
-                } elseif (is_string($role)) {
+                } elseif (is_string($role) && ! empty($role)) {
                     $slugs[] = $role;
                 }
             }
@@ -47,20 +64,44 @@ trait HasMenuPermission
             }
         }
 
-        foreach ($permissions as $item) {
-            $permissionName = trim($item.' '.$cleanUrl);
-            $permission = Permission::firstOrCreate([
+        $permissionIds = [];
+
+        foreach ($permissions as $permission) {
+            $permission = trim($permission);
+            if (empty($permission)) {
+                continue;
+            }
+
+            // Generate name: e.g. "create {$menu->url}"
+            $permissionName = str_contains($permission, ' ')
+                ? $permission
+                : "{$permission} {$cleanUrl}";
+
+            $permModel = Permission::firstOrCreate([
                 'name' => $permissionName,
                 'guard_name' => 'web',
             ]);
 
-            if (! $permission->menus()->where('menu_id', $menu->id)->exists()) {
-                $permission->menus()->attach($menu->id);
-            }
+            $permissionIds[] = $permModel->id;
 
             if ($resolvedRoles && $resolvedRoles->isNotEmpty()) {
-                $permission->assignRole($resolvedRoles);
+                $permModel->assignRole($resolvedRoles);
             }
         }
+
+        // Sync with menu_permission pivot table
+        $menu->permissions()->sync($permissionIds);
+    }
+
+    /**
+     * Backward compatibility wrapper for attachMenupermission.
+     *
+     * @param  array<int, string>|null  $permissions
+     * @param  array<int, string|Role>|null  $roles
+     */
+    public function attachMenupermission(Menu $menu, ?array $permissions = null, ?array $roles = null): void
+    {
+        $this->syncMenuPermissions($menu, $permissions, $roles);
     }
 }
+

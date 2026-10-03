@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -68,3 +69,27 @@
         letter-spacing: -0.022em;
     }
 }
+
+@keyframes progress-indeterminate {
+    0% {
+        left: -40%;
+        width: 40%;
+    }
+    50% {
+        left: 25%;
+        width: 60%;
+    }
+    100% {
+        left: 100%;
+        width: 40%;
+    }
+}
+
+.animate-progress-indeterminate {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-radius: 9999px;
+    animation: progress-indeterminate 1.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+

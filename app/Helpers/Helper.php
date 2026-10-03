@@ -145,7 +145,7 @@ if (! function_exists('filteredMenus')) {
             });
 
             if ($allowedItems->isNotEmpty()) {
-                $filtered->put($category, $allowedItems);
+                $filtered->put($category, $allowedItems->values());
             }
         }
 

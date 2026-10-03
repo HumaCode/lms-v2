@@ -19,6 +19,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/pengguna/bulk-status', [UserController::class, 'bulkStatus'])->name('pengguna.bulk-status');
     Route::delete('/pengguna/bulk-destroy', [UserController::class, 'bulkDestroy'])->name('pengguna.bulk-destroy');
     Route::resource('pengguna', UserController::class)->parameters(['pengguna' => 'pengguna']);
+
+    // Manajemen Menu
+    Route::get('/manajemen-menu/getAll', [\App\Http\Controllers\MenuController::class, 'getAllPaginated'])->name('manajemen-menu.all');
+    Route::post('/manajemen-menu/reorder', [\App\Http\Controllers\MenuController::class, 'reorder'])->name('manajemen-menu.reorder');
+    Route::post('/manajemen-menu/purge-cache', [\App\Http\Controllers\MenuController::class, 'purgeCache'])->name('manajemen-menu.purge-cache');
+    Route::patch('/manajemen-menu/{menu}/toggle', [\App\Http\Controllers\MenuController::class, 'toggle'])->name('manajemen-menu.toggle');
+    Route::resource('manajemen-menu', \App\Http\Controllers\MenuController::class)->parameters(['manajemen-menu' => 'menu']);
 });
 
 Route::middleware('auth')->group(function () {

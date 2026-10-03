@@ -195,7 +195,7 @@ export default function UserTable({
                                                     className="w-8 h-8 rounded-lg flex items-center justify-center bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-200 transition-all duration-200 cursor-pointer shadow-2xs"
                                                     aria-label="Lihat Profil Lengkap"
                                                 >
-                                                    <span className="material-symbols-outlined text-[17px]">
+                                                    <span className="material-symbols-outlined text-[15px]">
                                                         visibility
                                                     </span>
                                                 </button>
@@ -210,7 +210,7 @@ export default function UserTable({
                                                         className="w-8 h-8 rounded-lg flex items-center justify-center bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-200 transition-all duration-200 cursor-pointer shadow-2xs"
                                                         aria-label="Ubah Data Akun"
                                                     >
-                                                        <span className="material-symbols-outlined text-[17px]">
+                                                        <span className="material-symbols-outlined text-[15px]">
                                                             edit
                                                         </span>
                                                     </button>
@@ -226,7 +226,7 @@ export default function UserTable({
                                                         className="w-8 h-8 rounded-lg flex items-center justify-center bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border border-rose-200 transition-all duration-200 cursor-pointer shadow-2xs"
                                                         aria-label="Hapus Pengguna"
                                                     >
-                                                        <span className="material-symbols-outlined text-[17px]">
+                                                        <span className="material-symbols-outlined text-[15px]">
                                                             delete
                                                         </span>
                                                     </button>

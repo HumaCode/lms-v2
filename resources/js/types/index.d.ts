@@ -20,8 +20,29 @@ export interface MenuItem {
     active?: boolean;
     orders?: number;
     main_menu_id?: string | null;
+    type?: 'standard' | 'megamenu' | 'divider' | string;
+    target?: '_self' | '_blank' | string;
+    description?: string | null;
+    badge_label?: string | null;
+    badge_color?: string | null;
+    roles?: string[];
+    permissions?: string[];
     sub_menus?: MenuItem[];
     subMenus?: MenuItem[];
+    created_at?: string;
+}
+
+export interface MenuMetrics {
+    all?: number;
+    topbar: number;
+    sidebar_member: number;
+    sidebar_admin: number;
+    footer: number;
+    total: number;
+    active_total: number;
+    category_counts?: Record<string, number>;
+    last_purged_at?: string;
+    last_purged_by?: string;
 }
 
 export interface UserRole {
